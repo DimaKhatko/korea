@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Korea 2027 — заявка, мобільний</title>
+<link rel="stylesheet" href="../css/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Kyiv Type Sans";src:url(../fonts/KyivTypeSans-VarGX.woff2) format("woff2-variations");font-weight:100 1000;font-display:swap}
+@font-face{font-family:"Black Han Sans";src:url(../fonts/BlackHanSans-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Caveat";src:url(../fonts/Caveat-Variable.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Archivo Black";src:url(../fonts/ArchivoBlack-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+:root{--paper:#eae5d8;--paper-light:#f7f4ec;--sticker:#ffffff;--ink:#121212;--ink-soft:#4a463f;--ink-line:#8a8170;--line:#cfc7b4;--lime:#c8f534;--on-lime:#121212;--marker:#e62e26;--marker-deep:#c4211b;--stamp:#cd282d;--sakura:#ffb0c8;--sakura-deep:#e15a8c;--sun:#ffd41e;--tape:rgba(214,210,196,.69);--ring:#121212;
+--font-kr:"Black Han Sans",sans-serif;--font-sans:"Kyiv Type Sans",system-ui,sans-serif;--font-hand:Caveat,cursive;--font-slogan:"Archivo Black","Kyiv Type Sans",sans-serif;
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-8:48px;--space-10:64px;--space-12:96px;
+--radius-sm:6px;--radius-pill:999px;--shadow-photo:7px 12px 10px rgba(18,18,18,.35);--shadow-sticker:4px 7px 6px rgba(18,18,18,.3);--shadow-hard:4px 4px 0 #121212}
+body{margin:0;font-family:var(--font-sans);color:var(--ink)}
+button,input,select,textarea{font-family:inherit}
+a{color:var(--ink)}a:hover{color:var(--ink-soft)}
+.pk-paper{background-image:url(../assets/paper-tile.jpg)}
+.pk-spray::before{background-image:url(../assets/spray-lime.png)}
+
+</style>
+</helmet>
+<section id="contact" class="pk-paper" style="width: 390px; box-sizing: border-box; padding: 64px 20px; display: flex; flex-direction: column; gap: 18px; border-top: 1px solid var(--line); overflow: hidden">
+  <p style="margin: 0; display: flex; gap: 10px; align-items: baseline; font-size: 14px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft)"><span lang="ko" style="font-family: var(--font-kr); font-weight: 400; font-size: 18px; letter-spacing: 0; color: var(--ink)">신청</span><span>Заявка</span></p>
+  <h2 style="margin: 0; font-size: 30px; line-height: 1.05; font-weight: 900; letter-spacing: -0.01em">Хочете поїхати з нами до Кореї?</h2>
+  <p style="margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink-soft)">Залиште заявку — і ми звʼяжемося з вами, розкажемо деталі й допоможемо з усім: від квитків до візи.</p>
+  <div class="m11-art" style="position: relative; height: 340px; margin: 4px 0">
+    <div class="pk-spray" style="position: absolute; left: -10px; top: 10px; width: 300px; height: 210px; box-sizing: border-box; padding: 30px 36px"><p class="pk-slogan" style="font-size: 64px; text-align: center">KOREA<br>'27</p></div>
+    <figure class="pk-photo" style="position: absolute; --tilt: 5deg; width: 120px; right: -6px; top: 150px; margin: 0"><span class="pk-photo__tape"></span><span class="pk-photo__paper"><img src="../assets/photo-seoul-sign-rooftop.jpg" alt="Напис SEOUL на даху на тлі хмарочосів" style="display: block; width: 100%"></span></figure>
+    <img class="pk-sticker" src="../assets/sticker-sakura.png" alt="" style="position: absolute; --size: 60px; --tilt: -10deg; right: 70px; top: 118px">
+    <span class="pk-note" style="position: absolute; left: 20px; top: 262px; --tilt: -5deg">до зустрічі!</span>
+    <img class="pk-mark" src="../assets/marker-arrow-red.svg" alt="" style="position: absolute; left: 170px; top: 262px; width: 76px; transform: rotate(60deg)">
+  </div>
+  <form id="form" class="pk-card" style="padding: 28px 24px; display: grid; gap: 16px">
+        <div class="pk-field"><label for="mn">Імʼя</label><input id="mn" placeholder="Олена" autocomplete="name"></div>
+        <div class="pk-field"><label for="mp">Телефон</label><input id="mp" placeholder="+380" inputmode="tel" autocomplete="tel"></div>
+        <div class="pk-field"><label for="me">E-mail</label><input id="me" placeholder="olena@gmail.com" inputmode="email" autocomplete="email"></div>
+        <div class="pk-field"><label for="mu">Інформація про учасника</label><input id="mu" placeholder="Імʼя та вік дитини"></div>
+        <label class="pk-check"><input type="checkbox" checked> Погоджуюсь на обробку персональних даних</label>
+        <button class="pk-btn pk-btn--ink" type="submit" style="width: 100%; min-height: 56px">Залишити заявку</button>
+      </form>
+</section>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Korea 2027 — шапка і hero, мобільний</title>
+<link rel="stylesheet" href="../css/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Kyiv Type Sans";src:url(../fonts/KyivTypeSans-VarGX.woff2) format("woff2-variations");font-weight:100 1000;font-display:swap}
+@font-face{font-family:"Black Han Sans";src:url(../fonts/BlackHanSans-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Caveat";src:url(../fonts/Caveat-Variable.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Archivo Black";src:url(../fonts/ArchivoBlack-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+:root{--paper:#eae5d8;--paper-light:#f7f4ec;--sticker:#ffffff;--ink:#121212;--ink-soft:#4a463f;--ink-line:#8a8170;--line:#cfc7b4;--lime:#c8f534;--on-lime:#121212;--marker:#e62e26;--marker-deep:#c4211b;--stamp:#cd282d;--sakura:#ffb0c8;--sakura-deep:#e15a8c;--sun:#ffd41e;--tape:rgba(214,210,196,.69);--ring:#121212;
+--font-kr:"Black Han Sans",sans-serif;--font-sans:"Kyiv Type Sans",system-ui,sans-serif;--font-hand:Caveat,cursive;--font-slogan:"Archivo Black","Kyiv Type Sans",sans-serif;
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-8:48px;--space-10:64px;--space-12:96px;
+--radius-sm:6px;--radius-pill:999px;--shadow-photo:7px 12px 10px rgba(18,18,18,.35);--shadow-sticker:4px 7px 6px rgba(18,18,18,.3);--shadow-hard:4px 4px 0 #121212}
+body{margin:0;font-family:var(--font-sans);color:var(--ink)}
+button,input,select,textarea{font-family:inherit}
+a{color:var(--ink)}a:hover{color:var(--ink-soft)}
+.pk-paper{background-image:url(../assets/paper-tile.jpg)}
+.pk-spray::before{background-image:url(../assets/spray-lime.png)}
+.m-art>*{position:absolute}
+</style>
+</helmet>
+<div class="pk-paper" style="width: 390px; box-sizing: border-box; overflow: hidden">
+  <header style="position: sticky; top: 0; z-index: 5; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--paper); border-bottom: 1px solid var(--line)">
+    <a href="#top" aria-label="PointCamp — на початок сторінки" style="display: block; line-height: 0">
+      <img src="../assets/logo-pointcamp-ink.png" alt="PointCamp" style="height: 36px; width: auto">
+    </a>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <a class="pk-btn pk-btn--ink" href="#form" style="min-height: 44px; padding: 0 16px; font-size: 15px">Заявка</a>
+      <button type="button" aria-label="Відкрити меню" style="width: 44px; height: 44px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 6px; background: var(--sticker); cursor: pointer">
+        <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M1 1h18M1 7h18M1 13h18" stroke="#121212" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <section id="top" style="padding: 24px 20px 64px; display: flex; flex-direction: column; gap: 16px">
+    <span class="pk-label" style="--tilt: -2deg; align-self: flex-start"><span style="font-size: 15px; padding: 8px 14px">Весняні канікули · березень 2027</span></span>
+    <p class="pk-kr" style="font-size: 88px" lang="ko">한국</p>
+    <h1 style="margin: 0; font-size: 36px; line-height: 1.05; font-weight: 900; letter-spacing: -0.02em">Весняні канікули в Південній Кореї</h1>
+    <p style="margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink-soft)">10 днів, 9 ночей: Сеул, Кенджу і Пусан. Перекладач Корейсько-українського центру весь час із групою, поруч троє дорослих PointCamp.</p>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap">
+      <span class="pk-tag">Сеул – Кенджу – Пусан – Сеул</span>
+      <span class="pk-tag">Група 1: [ДАТИ]</span>
+      <span class="pk-tag">Група 2: [ДАТИ]</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 4px">
+      <span style="font-size: 40px; line-height: 1; font-weight: 900; letter-spacing: -0.02em">3150 €</span>
+      <span style="font-size: 15px; line-height: 1.45; color: var(--ink-soft)">проживання, харчування, вхідні квитки й транспорт у Кореї включено; переліт і віза окремо</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 4px">
+      <a class="pk-btn" href="#form" style="width: 100%; box-sizing: border-box; min-height: 56px">Залишити заявку</a>
+      <a class="pk-btn pk-btn--ghost" href="#program" style="width: 100%; box-sizing: border-box">Програма по днях</a>
+    </div>
+
+    <div class="m-art" style="position: relative; height: 330px; margin-top: 16px">
+      <figure class="pk-photo" style="--tilt: -3deg; width: 300px; left: 4px; top: 24px; margin: 0">
+        <span class="pk-photo__tape"></span>
+        <span class="pk-photo__paper"><img src="../assets/photo-seoul-hanbok.jpg" alt="Дівчата в ханбоках біля палацу Gyeongbokgung"></span>
+      </figure>
+      <img class="pk-sticker" src="../assets/stamp-10-days.png" alt="10 днів, 9 ночей, 2027" style="--size: 112px; --tilt: 10deg; left: 236px; top: 0">
+      <img class="pk-mark" src="../assets/marker-arrow-red.svg" alt="" style="left: 65px; top: 169px; width: 100px; transform: rotate(-60deg)">
+      <span class="pk-note" style="left: 85px; top: 268px; --tilt: -6deg">ханбоки!</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+</body>
+</html>

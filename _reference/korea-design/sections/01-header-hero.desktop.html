@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Korea 2027 — шапка і hero</title>
+<link rel="stylesheet" href="../css/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Kyiv Type Sans";src:url(../fonts/KyivTypeSans-VarGX.woff2) format("woff2-variations");font-weight:100 1000;font-display:swap}
+@font-face{font-family:"Black Han Sans";src:url(../fonts/BlackHanSans-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Caveat";src:url(../fonts/Caveat-Variable.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Archivo Black";src:url(../fonts/ArchivoBlack-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+:root{--paper:#eae5d8;--paper-light:#f7f4ec;--sticker:#ffffff;--ink:#121212;--ink-soft:#4a463f;--ink-line:#8a8170;--line:#cfc7b4;--lime:#c8f534;--on-lime:#121212;--marker:#e62e26;--marker-deep:#c4211b;--stamp:#cd282d;--sakura:#ffb0c8;--sakura-deep:#e15a8c;--sun:#ffd41e;--tape:rgba(214,210,196,.69);--ring:#121212;
+--font-kr:"Black Han Sans",sans-serif;--font-sans:"Kyiv Type Sans",system-ui,sans-serif;--font-hand:Caveat,cursive;--font-slogan:"Archivo Black","Kyiv Type Sans",sans-serif;
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-8:48px;--space-10:64px;--space-12:96px;
+--radius-sm:6px;--radius-pill:999px;--shadow-photo:7px 12px 10px rgba(18,18,18,.35);--shadow-sticker:4px 7px 6px rgba(18,18,18,.3);--shadow-hard:4px 4px 0 #121212}
+body{margin:0;font-family:var(--font-sans);color:var(--ink)}
+button,input,select,textarea{font-family:inherit}
+a{color:var(--ink)}a:hover{color:var(--ink-soft)}
+.pk-paper{background-image:url(../assets/paper-tile.jpg)}
+.pk-spray::before{background-image:url(../assets/spray-lime.png)}
+.kh-nav a{text-decoration:none;font-weight:700;font-size:16px}
+.kh-nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.kh-art>*{position:absolute}
+@media (max-width:960px){
+.kh-hero{grid-template-columns:1fr !important;padding:24px 20px 64px !important}
+.kh-nav{display:none !important}
+.kh-art{height:400px !important}
+.kh-photo-b{display:none !important}
+.kh-h1{font-size:36px !important}
+.kh-kr{font-size:96px !important}
+}
+</style>
+</helmet>
+<div class="pk-paper" style="min-height: 880px; box-sizing: border-box">
+  <header style="max-width: 1280px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap">
+    <a href="#top" aria-label="PointCamp — на початок сторінки" style="display: block; line-height: 0">
+      <img src="../assets/logo-pointcamp-ink.png" alt="PointCamp" style="height: 44px; width: auto">
+    </a>
+    <nav class="kh-nav" aria-label="Розділи сторінки" style="display: flex; gap: 28px; flex-wrap: wrap">
+      <a href="#about">Про подорож</a>
+      <a href="#route">Маршрут</a>
+      <a href="#program">Програма</a>
+      <a href="#price">Вартість</a>
+      <a href="#reviews">Відгуки</a>
+    </nav>
+    <a class="pk-btn pk-btn--ink" href="#form" style="min-height: 48px">Залишити заявку</a>
+  </header>
+
+  <section class="kh-hero" id="top" style="max-width: 1280px; margin: 0 auto; padding: 32px 40px 96px; box-sizing: border-box; display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center">
+    <div style="display: flex; flex-direction: column; gap: 22px">
+      <span class="pk-label" style="--tilt: -2deg; align-self: flex-start"><span>Весняні канікули · березень 2027</span></span>
+      <p class="pk-kr kh-kr" style="font-size: 120px" lang="ko">한국</p>
+      <h1 class="kh-h1" style="margin: 0; font-size: 56px; line-height: 1.02; font-weight: 900; letter-spacing: -0.02em">Весняні канікули в Південній Кореї</h1>
+      <p style="margin: 0; font-size: 19px; line-height: 1.55; color: var(--ink-soft); max-width: 36ch">10 днів, 9 ночей: Сеул, Кенджу і Пусан. Перекладач Корейсько-українського центру весь час із групою, поруч троє дорослих PointCamp.</p>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap">
+        <span class="pk-tag">Сеул – Кенджу – Пусан – Сеул</span>
+        <span class="pk-tag">Група 1: [ДАТИ]</span>
+        <span class="pk-tag">Група 2: [ДАТИ]</span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 4px">
+        <span style="font-size: 44px; line-height: 1; font-weight: 900; letter-spacing: -0.02em">3150 €</span>
+        <span style="font-size: 15px; line-height: 1.45; color: var(--ink-soft)">проживання, харчування, вхідні квитки й транспорт у Кореї включено; переліт і віза окремо</span>
+      </div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap">
+        <a class="pk-btn" href="#form">Залишити заявку</a>
+        <a class="pk-btn pk-btn--ghost" href="#program">Програма по днях</a>
+      </div>
+    </div>
+
+    <div class="kh-art" style="position: relative; height: 640px">
+      <figure class="pk-photo" style="--tilt: -3deg; width: 400px; left: 10px; top: 30px; margin: 0">
+        <span class="pk-photo__tape"></span>
+        <span class="pk-photo__paper"><img src="../assets/photo-seoul-hanbok.jpg" alt="Дівчата в ханбоках біля палацу Gyeongbokgung"></span>
+      </figure>
+      <figure class="pk-photo pk-photo--b kh-photo-b" style="--tilt: 4deg; width: 300px; left: 280px; top: 270px; margin: 0">
+        <span class="pk-photo__tape"></span>
+        <span class="pk-photo__paper" style="height: 337px"><img src="../assets/photo-busan-haeundae.jpg" alt="Пляж Хеунде в Пусані і хмарочоси над ним"><span class="pk-photo__caption" style="text-align: center">Пусан, пляж Хеунде.&nbsp;</span></span>
+      </figure>
+      <img class="pk-mark" src="../assets/marker-arrow-red.svg" alt="" style="left: 87px; top: 232px; width: 140px; transform: rotate(-60deg)">
+      <span class="pk-note" style="left: 130px; top: 372px; --tilt: -6deg">ханбоки!</span>
+      <img class="pk-sticker" src="../assets/stamp-10-days.png" alt="10 днів, 9 ночей, 2027" style="--size: 150px; --tilt: 10deg; left: 390px; top: 0">
+    </div>
+  </section>
+</div>
+</x-dc>
+</body>
+</html>

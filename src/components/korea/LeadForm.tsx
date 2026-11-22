@@ -6,11 +6,18 @@ import { submitLead, type LeadData } from "@/lib/lead";
 /** Personal-data document (same link as in the footer reference). */
 const PRIVACY_URL = "https://drive.google.com/file/d/16D4I7OvCw2L4-G1QejjEtVx3G4P448ob/preview";
 
+/** Telegram chat offered when sending fails (same as «Telegram» in the footer). */
+const TELEGRAM_URL = "https://t.me/point_camp";
+
 const COPY = {
   submit: "Залишити заявку",
   submitting: "Надсилаємо…",
-  sendError: "Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте нам:",
-  phone: { href: "tel:+380662217373", label: "+38\u00a0066\u00a0221\u00a073\u00a073" },
+  sendError: {
+    title: "Не вдалося надіслати заявку",
+    text: "Спробуйте ще раз або напишіть нам у Telegram — відповімо швидко.",
+    telegram: "Написати в Telegram",
+    retry: "Спробувати ще раз",
+  },
   successTitle: "Дякуємо!",
   successText: "Ми звʼяжемося з вами найближчим часом.",
   errors: {
@@ -70,6 +77,9 @@ function validateField(field: FieldName, form: HTMLFormElement): string | undefi
  * field (aria-invalid + aria-describedby), focus on the first invalid field, honeypot
  * `website`, states idle → submitting → success | error. Sending goes through
  * submitLead() in src/lib/lead.ts.
+ * Error: the form stays mounted but hidden (so its values survive) and the error block
+ * takes its place; «Спробувати ще раз» shows the filled form again. The #form anchor sits
+ * on the wrapper, so it works in every state.
  * method="post" so that a submit before hydration never puts personal data into the URL.
  */
 export function LeadForm() {
@@ -77,6 +87,8 @@ export function LeadForm() {
   const [errors, setErrors] = useState<Errors>({});
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
+  const submitRef = useRef<HTMLButtonElement>(null);
 
   function revalidate(field: FieldName) {
     if (!errors[field] || !formRef.current) return;
@@ -118,7 +130,12 @@ export function LeadForm() {
     setStatus("submitting");
     const result = await submitLead(lead);
     setStatus(result.ok ? "success" : "error");
-    if (result.ok) requestAnimationFrame(() => successRef.current?.focus());
+    requestAnimationFrame(() => (result.ok ? successRef : errorRef).current?.focus());
+  }
+
+  function retry() {
+    setStatus("idle");
+    requestAnimationFrame(() => submitRef.current?.focus());
   }
 
   if (status === "success") {
@@ -149,116 +166,132 @@ export function LeadForm() {
     ) : null;
 
   return (
-    <form
-      id="form"
-      ref={formRef}
-      method="post"
-      noValidate
-      onSubmit={onSubmit}
-      className="pk-card grid gap-4 px-6 py-7"
-    >
-      <div className={fieldClass("name")}>
-        <label htmlFor={ID.name}>Імʼя</label>
-        <input
-          id={ID.name}
-          name="name"
-          placeholder="Олена"
-          autoComplete="name"
-          required
-          onInput={() => revalidate("name")}
-          {...a11y("name")}
-        />
-        {message("name")}
-      </div>
-
-      <div className={fieldClass("phone")}>
-        <label htmlFor={ID.phone}>Телефон</label>
-        <input
-          id={ID.phone}
-          name="phone"
-          type="tel"
-          placeholder="+380"
-          inputMode="tel"
-          autoComplete="tel"
-          required
-          onInput={() => revalidate("phone")}
-          {...a11y("phone")}
-        />
-        {message("phone")}
-      </div>
-
-      <div className={fieldClass("email")}>
-        <label htmlFor={ID.email}>E-mail</label>
-        <input
-          id={ID.email}
-          name="email"
-          type="email"
-          placeholder="olena@gmail.com"
-          inputMode="email"
-          autoComplete="email"
-          onInput={() => revalidate("email")}
-          {...a11y("email")}
-        />
-        {message("email")}
-      </div>
-
-      <div className="pk-field">
-        <label htmlFor={ID.participant}>Інформація про учасника</label>
-        <input id={ID.participant} name="participant" placeholder="Імʼя та вік дитини" />
-      </div>
-
-      {/* Honeypot: invisible to people, left empty by them; bots tend to fill it. */}
-      <div aria-hidden="true" className="absolute -left-[10000px] size-px overflow-hidden">
-        <label htmlFor={ID.website}>Website</label>
-        <input id={ID.website} name="website" type="text" tabIndex={-1} autoComplete="off" />
-      </div>
-
-      <div className="grid gap-1.5">
-        <label className="pk-check">
-          <input
-            id={ID.consent}
-            name="consent"
-            type="checkbox"
-            required
-            onChange={() => revalidate("consent")}
-            {...a11y("consent")}
-          />{" "}
-          <span>
-            Погоджуюсь на{" "}
-            <a
-              href={PRIVACY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-inherit underline underline-offset-2"
-            >
-              обробку персональних даних
-            </a>
-          </span>
-        </label>
-        {errors.consent && (
-          <span id={errorId("consent")} className="pk-field__msg text-marker-deep">
-            {errors.consent}
-          </span>
-        )}
-      </div>
-
+    <div id="form">
       {status === "error" && (
-        <p role="alert" className="m-0 text-[15px] leading-[1.45] font-semibold text-marker-deep">
-          {COPY.sendError}{" "}
-          <a href={COPY.phone.href} className="whitespace-nowrap text-inherit underline">
-            {COPY.phone.label}
+        <div ref={errorRef} tabIndex={-1} role="alert" className="pk-card grid gap-4 px-6 py-7">
+          <h3 className="m-0 text-[22px] leading-[1.25] font-black text-marker-deep">
+            {COPY.sendError.title}
+          </h3>
+          <p className="m-0 text-[17px] leading-[1.55] text-ink-soft">{COPY.sendError.text}</p>
+          <a
+            className="pk-btn pk-btn--ink box-border min-h-14 w-full px-4 text-center"
+            href={TELEGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {COPY.sendError.telegram}
           </a>
-          .
-        </p>
+          <button
+            type="button"
+            className="pk-btn pk-btn--ghost min-h-14 w-full px-4 text-center"
+            onClick={retry}
+          >
+            {COPY.sendError.retry}
+          </button>
+        </div>
       )}
-
-      <button
-        className="pk-btn pk-btn--ink min-h-14 w-full"
-        type="submit"
-        disabled={status === "submitting"}
+      <form
+        ref={formRef}
+        method="post"
+        noValidate
+        onSubmit={onSubmit}
+        hidden={status === "error"}
+        className="pk-card grid gap-4 px-6 py-7"
       >
-        {status === "submitting" ? COPY.submitting : COPY.submit}
-      </button>
-    </form>
+        <div className={fieldClass("name")}>
+          <label htmlFor={ID.name}>Імʼя</label>
+          <input
+            id={ID.name}
+            name="name"
+            placeholder="Олена"
+            autoComplete="name"
+            required
+            onInput={() => revalidate("name")}
+            {...a11y("name")}
+          />
+          {message("name")}
+        </div>
+
+        <div className={fieldClass("phone")}>
+          <label htmlFor={ID.phone}>Телефон</label>
+          <input
+            id={ID.phone}
+            name="phone"
+            type="tel"
+            placeholder="+380"
+            inputMode="tel"
+            autoComplete="tel"
+            required
+            onInput={() => revalidate("phone")}
+            {...a11y("phone")}
+          />
+          {message("phone")}
+        </div>
+
+        <div className={fieldClass("email")}>
+          <label htmlFor={ID.email}>E-mail</label>
+          <input
+            id={ID.email}
+            name="email"
+            type="email"
+            placeholder="olena@gmail.com"
+            inputMode="email"
+            autoComplete="email"
+            onInput={() => revalidate("email")}
+            {...a11y("email")}
+          />
+          {message("email")}
+        </div>
+
+        <div className="pk-field">
+          <label htmlFor={ID.participant}>Інформація про учасника</label>
+          <input id={ID.participant} name="participant" placeholder="Імʼя та вік дитини" />
+        </div>
+
+        {/* Honeypot: invisible to people, left empty by them; bots tend to fill it. */}
+        <div aria-hidden="true" className="absolute -left-[10000px] size-px overflow-hidden">
+          <label htmlFor={ID.website}>Website</label>
+          <input id={ID.website} name="website" type="text" tabIndex={-1} autoComplete="off" />
+        </div>
+
+        <div className="grid gap-1.5">
+          <label className="pk-check">
+            <input
+              id={ID.consent}
+              name="consent"
+              type="checkbox"
+              required
+              onChange={() => revalidate("consent")}
+              {...a11y("consent")}
+            />{" "}
+            <span>
+              Погоджуюсь на{" "}
+              <a
+                href={PRIVACY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-inherit underline underline-offset-2"
+              >
+                обробку персональних даних
+              </a>
+            </span>
+          </label>
+          {errors.consent && (
+            <span id={errorId("consent")} className="pk-field__msg text-marker-deep">
+              {errors.consent}
+            </span>
+          )}
+        </div>
+
+        <button
+          ref={submitRef}
+          className="pk-btn pk-btn--ink min-h-14 w-full"
+          type="submit"
+          disabled={status === "submitting"}
+        >
+          {status === "submitting" ? COPY.submitting : COPY.submit}
+        </button>
+      </form>
+    </div>
   );
 }

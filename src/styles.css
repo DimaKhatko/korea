@@ -278,3 +278,48 @@
     outline-offset: 3px;
   }
 }
+
+/* ---------- FAQ (src/components/korea/Faq.tsx): native <details> cards */
+@layer components {
+  .kr-faq > summary {
+    list-style: none;
+  }
+
+  .kr-faq > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* 30 px ink circle with a white plus (two 12 × 2.5 px bars); open: lime circle, ink ×. */
+  .kr-faq > summary::after {
+    content: "";
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    background:
+      linear-gradient(var(--sticker), var(--sticker)) center / 12px 2.5px no-repeat,
+      linear-gradient(var(--sticker), var(--sticker)) center / 2.5px 12px no-repeat,
+      var(--ink);
+    transition: transform 0.15s ease;
+  }
+
+  .kr-faq[open] > summary::after {
+    transform: rotate(45deg);
+    background:
+      linear-gradient(var(--ink), var(--ink)) center / 12px 2.5px no-repeat,
+      linear-gradient(var(--ink), var(--ink)) center / 2.5px 12px no-repeat,
+      var(--lime);
+  }
+
+  /* Inset: the card (pk-card) clips its overflow, an outer outline would be cut off. */
+  .kr-faq > summary:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: -3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kr-faq > summary::after {
+      transition: none;
+    }
+  }
+}

@@ -6,14 +6,19 @@ const MobileMenu = lazy(loadMenu);
 /** Start fetching the menu chunk as soon as the burger is hovered, touched or focused. */
 const preloadMenu = () => void loadMenu();
 
-/** Section anchors shown in the desktop nav and in the mobile menu. */
-const NAV_LINKS = [
+/**
+ * Section anchors shown in the desktop nav and in the mobile menu. `wideOnly`: in the
+ * desktop nav only from xl (1280 px); below that the inline row has no room for it (the
+ * mobile menu always lists it).
+ */
+const NAV_LINKS: readonly { href: string; label: string; wideOnly?: boolean }[] = [
   { href: "#about", label: "Про подорож" },
   { href: "#route", label: "Маршрут" },
   { href: "#program", label: "Програма" },
   { href: "#price", label: "Вартість" },
   { href: "#reviews", label: "Відгуки" },
-] as const;
+  { href: "#faq", label: "Питання", wideOnly: true },
+];
 
 /**
  * Site header from 01-header-hero.
@@ -67,7 +72,7 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-[16px] font-bold no-underline hover:underline hover:underline-offset-4"
+              className={`text-[16px] font-bold no-underline hover:underline hover:underline-offset-4 ${link.wideOnly ? "hidden xl:inline" : ""}`}
             >
               {link.label}
             </a>

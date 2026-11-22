@@ -6,6 +6,7 @@ import { About } from "@/components/korea/About";
 import { WhyUs } from "@/components/korea/WhyUs";
 import { Partner } from "@/components/korea/Partner";
 import { Route as RouteSection } from "@/components/korea/Route";
+import { FAQ, Faq } from "@/components/korea/Faq";
 
 /*
  * Code splitting (as in pointcamp-winter): sections below the first screens with heavier
@@ -46,11 +47,12 @@ const SITE_URL = "https://korea.pointcamp.com.ua/";
 const ORG_ID = "https://pointcamp.com.ua/#organization";
 const PAGE_ID = `${SITE_URL}#webpage`;
 const TRIP_ID = `${SITE_URL}#trip`;
+const FAQ_ID = `${SITE_URL}#faq`;
 
 const TITLE = "PointCamp Korea 2027 — весняні канікули в Південній Кореї";
 /** ≤ 160 characters; every fact is on the page (hero, About, Partner, Price). */
 const DESCRIPTION =
-  "Весняні канікули 2027 у Південній Кореї: підлітки 10 днів подорожують Сеулом, Кенджу і Пусаном з перекладачем і командою PointCamp. 3150 €.";
+  "Весняні канікули 2027 у Південній Кореї: підлітки 10 днів подорожують Сеулом, Кенджу і Пусаном із командою PointCamp. 3150 €.";
 
 /** 1200×630, rendered from the desktop hero (logo, 한국, h1, collage). */
 const OG_IMAGE = {
@@ -70,8 +72,8 @@ const ITINERARY = [
 
 /**
  * JSON-LD @graph: the brand (same @id on every Point Camp landing, so crawlers and AI
- * search merge them into one entity), this page and the trip (one group, 21–30.03.2027)
- * with its offer. Dates, age and group size are added only once src/lib/korea.ts holds
+ * search merge them into one entity), this page, the trip (one group, 21–30.03.2027)
+ * with its offer, and the FAQ (built from the same FAQ array as the visible section). Dates, age and group size are added only once src/lib/korea.ts holds
  * real values, never as placeholders. Everything here must match the visible page.
  */
 function structuredData() {
@@ -112,6 +114,7 @@ function structuredData() {
           height: OG_IMAGE.height,
         },
         about: { "@id": TRIP_ID },
+        hasPart: { "@id": FAQ_ID },
         publisher: { "@id": ORG_ID },
       },
       {
@@ -119,7 +122,7 @@ function structuredData() {
         "@id": TRIP_ID,
         name: "Весняні канікули в Південній Кореї 2027",
         description:
-          "10 днів, 9 ночей: Сеул, Кенджу і Пусан. Перекладач Корейсько-українського центру весь час із групою, поруч троє дорослих PointCamp.",
+          "10 днів, 9 ночей: Сеул, Кенджу і Пусан. Наша людина в Кореї весь час із групою, поруч троє дорослих PointCamp.",
         url: SITE_URL,
         image: OG_IMAGE.url,
         inLanguage: "uk",
@@ -164,6 +167,18 @@ function structuredData() {
             }
           : {}),
         ...(dates ? { departureTime: dates.start, arrivalTime: dates.end } : {}),
+      },
+      {
+        "@type": "FAQPage",
+        "@id": FAQ_ID,
+        url: `${SITE_URL}#faq`,
+        inLanguage: "uk",
+        isPartOf: { "@id": PAGE_ID },
+        mainEntity: FAQ.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
       },
     ],
   };
@@ -224,6 +239,7 @@ function Index() {
         <Deferred>
           <Price />
         </Deferred>
+        <Faq />
         <Deferred>
           <FinalCTA />
         </Deferred>

@@ -24,7 +24,7 @@
 
 ## Page structure (`src/routes/index.tsx`, components in `src/components/korea/`)
 Header · Hero `#top` · About `#about` · WhyUs `#why` · Reviews `#reviews` · WhyKorea `#why-korea` · Partner `#partner` · Route `#route` · Program `#program` · Price `#price` · FinalCTA `#contact` (form `#form`) · Footer.
-- Done: Header (sticky below lg with burger menu sheet, static inline nav from lg), Hero.
+- Done: Header (sticky below lg with burger menu sheet, static inline nav from lg), Hero, About.
 - Placeholders: all other sections.
 
 ## Standard v1 rules (S1–S6, concise)

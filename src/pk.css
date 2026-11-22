@@ -122,8 +122,9 @@
  * .pk-btn/.pk-tag, widths, fixed heights) is content-box there. Tailwind preflight makes
  * everything border-box; this restores the reference behaviour for pk-* elements only.
  * Zero specificity: where a reference element sets box-sizing:border-box, add `box-border`.
+ * <button> is left out: browsers make buttons border-box, and so does the reference.
  */
-:where([class^="pk-"], [class*=" pk-"]) {
+:where([class^="pk-"], [class*=" pk-"]):where(:not(button)) {
   box-sizing: content-box;
 }
 

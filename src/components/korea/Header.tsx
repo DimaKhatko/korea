@@ -79,8 +79,15 @@ export function Header() {
           ))}
         </nav>
 
-        <a className="pk-btn pk-btn--ink hidden min-h-12 lg:inline-flex" href="#form">
-          Залишити заявку
+        {/* Short label between lg and xl, where the full one would push the button onto a
+            second row; the accessible name is always the full label. */}
+        <a
+          className="pk-btn pk-btn--ink hidden min-h-12 lg:inline-flex"
+          href="#form"
+          aria-label="Залишити заявку"
+        >
+          <span className="xl:hidden">Заявка</span>
+          <span className="hidden xl:inline">Залишити заявку</span>
         </a>
 
         <div className="flex items-center gap-2.5 lg:hidden">

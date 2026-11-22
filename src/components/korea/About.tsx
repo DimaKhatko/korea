@@ -36,10 +36,10 @@ type Stop =
 
 const STOPS: Stop[] = [
   { name: "Приліт", when: "день 1, Сеул", marker: "plane", tilt: 90 },
-  { name: "Сеул", when: "дні 1–4", marker: "dot", filled: true },
-  { name: "Кенджу", when: "день 5", marker: "dot", filled: false },
-  { name: "Пусан", when: "дні 6–8", marker: "dot", filled: false },
-  { name: "Сеул", when: "день 9", marker: "dot", filled: true },
+  { name: "Сеул", when: "дні 1–5", marker: "dot", filled: true },
+  { name: "Кенджу", when: "день 6", marker: "dot", filled: false },
+  { name: "Пусан", when: "дні 7–8", marker: "dot", filled: false },
+  { name: "Сеул", when: "дні 9–10", marker: "dot", filled: true },
   { name: "Виліт", when: "день 10, до Європи", marker: "plane", tilt: 0 },
 ];
 

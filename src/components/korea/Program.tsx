@@ -12,8 +12,9 @@ import photoSeoulShop from "@/assets/korea/photo-seoul-shop.webp";
 
 /* ---------- Copy and data (edit here)
  * Programme for the single group 21–30.03.2027, day texts as supplied by the client.
- * Day 5 keeps the softened Lotte World text (no Magic Pass details, the rules changed in
- * 2026); the drone show on day 7 stays «якщо дозволить погода». */
+ * Softened facts, keep as written: day 5 Lotte World without Magic Pass details (rules
+ * changed in 2026); day 7 no cable car promise (Songdo may close for maintenance in March),
+ * «прогулянка узбережжям Songdo» instead; drone show «якщо дозволить погода». */
 
 type Photo = { src: string; width: number; height: number; alt: string };
 
@@ -129,7 +130,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     day: 7,
     kr: "일곱째 날",
     title: "Пусан — місто океану",
-    text: "Пляж Haeundae, океан зі 100-го поверху Busan X the Sky, кольорові вулички Gamcheon і канатка над морем. Увечері — пляж Gwangalli і шоу дронів над мостом, якщо дозволить погода.",
+    text: "Пляж Haeundae, океан зі 100-го поверху Busan X the Sky, кольорові вулички Gamcheon і прогулянка узбережжям Songdo. Увечері — пляж Gwangalli і шоу дронів над мостом, якщо дозволить погода.",
     tags: ["X the Sky", "Gamcheon", "Шоу дронів"],
     photo: {
       src: photoBusanDroneShow,

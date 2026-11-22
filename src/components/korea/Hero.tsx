@@ -39,8 +39,8 @@ export function Hero() {
           </h1>
 
           <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:max-w-[36ch] lg:text-[19px]">
-            10 днів, 9 ночей: Сеул, Кенджу і Пусан. Наша людина в Кореї весь час із групою, поруч
-            троє дорослих PointCamp.
+            10 днів, 9 ночей: Сеул, Кенджу і Пусан. Поруч щонайменше троє дорослих, серед них — наша
+            людина в Кореї.
           </p>
 
           <div className="flex flex-wrap gap-2 lg:gap-2.5">

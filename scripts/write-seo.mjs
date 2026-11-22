@@ -1,12 +1,13 @@
 // Runs before every `build` (see package.json), with --experimental-strip-types so it can
 // import src/lib/korea.ts directly (the same rule the page uses).
 // - Writes public/sitemap.xml: the page with today's <lastmod> (Europe/Kyiv), or an empty
-//   urlset while placeholders are left (the page is noindex then; a sitemap must not list it).
+//   urlset while the page is noindex (LAUNCHED = false or placeholders left; a sitemap must
+//   not list a noindex page).
 // - Prints a loud warning while noindex is on.
 // robots.txt is not touched: it keeps allowing crawling, otherwise crawlers could not see
 // the noindex.
 import { writeFileSync } from "node:fs";
-import { PENDING_PLACEHOLDERS, SEARCH_INDEXABLE } from "../src/lib/korea.ts";
+import { NOINDEX_REASONS, SEARCH_INDEXABLE } from "../src/lib/korea.ts";
 
 const SITE_URL = "https://korea.pointcamp.com.ua/";
 
@@ -31,7 +32,7 @@ function kyivToday() {
 const today = process.env.BUILD_DATE || kyivToday();
 const urls = SEARCH_INDEXABLE
   ? `  <url>\n    <loc>${SITE_URL}</loc>\n    <lastmod>${today}</lastmod>\n  </url>\n`
-  : `  <!-- Empty while src/lib/korea.ts still has placeholders (page is noindex). -->\n`;
+  : `  <!-- Empty while the page is noindex (see NOINDEX_REASONS in src/lib/korea.ts). -->\n`;
 
 writeFileSync(
   new URL("../public/sitemap.xml", import.meta.url),
@@ -45,9 +46,9 @@ if (SEARCH_INDEXABLE) {
   console.warn(
     `\n${line}\n` +
       `!! NOINDEX: the page is built with <meta name="robots" content="noindex, follow">\n` +
-      `!! and is left out of sitemap.xml, because src/lib/korea.ts still has placeholders:\n` +
-      PENDING_PLACEHOLDERS.map((p) => `!!   ${p}\n`).join("") +
-      `!! Fill them in and rebuild: both switch back automatically.\n` +
+      `!! and is left out of sitemap.xml. Reasons (src/lib/korea.ts):\n` +
+      NOINDEX_REASONS.map((r) => `!!   - ${r}\n`).join("") +
+      `!! Fix them and rebuild: indexing and the sitemap entry switch back automatically.\n` +
       `${line}\n`,
   );
 }

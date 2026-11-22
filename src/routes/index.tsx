@@ -52,7 +52,7 @@ const FAQ_ID = `${SITE_URL}#faq`;
 const TITLE = "PointCamp Korea 2027 — весняні канікули в Південній Кореї";
 /** ≤ 160 characters; every fact is on the page (hero, About, Partner, Price). */
 const DESCRIPTION =
-  "Весняні канікули 2027 у Південній Кореї: підлітки 10 днів подорожують Сеулом, Кенджу і Пусаном із командою PointCamp. 3150 €.";
+  "Весняні канікули 2027 у Південній Кореї: підлітки 10–20 років 10 днів подорожують Сеулом, Кенджу і Пусаном. Поруч щонайменше троє дорослих. 3150 €.";
 
 /** 1200×630, rendered from the desktop hero (logo, 한국, h1, collage). */
 const OG_IMAGE = {
@@ -122,7 +122,7 @@ function structuredData() {
         "@id": TRIP_ID,
         name: "Весняні канікули в Південній Кореї 2027",
         description:
-          "10 днів, 9 ночей: Сеул, Кенджу і Пусан. Наша людина в Кореї весь час із групою, поруч троє дорослих PointCamp.",
+          "10 днів, 9 ночей: Сеул, Кенджу і Пусан. Поруч щонайменше троє дорослих, серед них — наша людина в Кореї.",
         url: SITE_URL,
         image: OG_IMAGE.url,
         inLanguage: "uk",

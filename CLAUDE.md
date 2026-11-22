@@ -16,7 +16,7 @@
 - `sections/NN-*.mobile.html` (390 px, primary) and `sections/NN-*.desktop.html` (fluid, max content 1280 px): recreate them faithfully — same copy, order, spacing, assets. Do not redesign. Compare screenshots of the build with the reference files at 390×844 and 1440×900.
 - `tokens.json` → CSS variables with the same names in `src/styles.css` (`--paper`, `--ink`, `--lime`, `--space-*`, `--radius-sm`, `--shadow-hard`, `--tilt-*`, …) and Tailwind utilities (`bg-paper`, `text-ink-soft`, `p-space-5`, `rounded-sm`, `shadow-hard`, `font-kr`, `text-h2`, …).
 - `css/bundle.css` → `src/pk.css` (pk-* classes, verbatim, in `@layer components`, so utilities override them). `.pk-paper` uses `src/assets/korea/paper-tile.jpg`, `.pk-spray::before` uses `spray-lime.webp`.
-- Reference pages have **no box-sizing reset and default line-height**. To match them: `pk-*` elements are `content-box` (rule at the end of `src/pk.css`; add `box-border` where the reference sets `box-sizing:border-box`), plain elements are border-box (preflight), `<button>` is border-box in browsers anyway, `html` has `line-height: normal`, and `.pk-sticker` / `.pk-mark` have `max-width: none` (preflight caps images at 100%; stickers may overhang their box).
+- Reference pages have **no box-sizing reset and default line-height**. To match them: `pk-*` elements are `content-box` (rule at the end of `src/pk.css`; add `box-border` where the reference sets `box-sizing:border-box`), plain elements are border-box (preflight), `<button>` is border-box in browsers anyway, `html` has `line-height: normal`, `.pk-sticker` / `.pk-mark` have `max-width: none` (preflight caps images at 100%; stickers may overhang their box), and the bundle's unclassed bordered boxes (`.pk-list li::before`, `.pk-field input/select`, `.pk-faq summary::after`) are content-box too. Prices: `${PRICE_EUR} €` with a normal space + `whitespace-nowrap` (a no-break space renders 1 px wider at 64 px).
 - Fonts are self-hosted in `src/assets/fonts` (`font-display: swap`): Kyiv Type Sans (main, preloaded in `__root.tsx`), Black Han Sans (Korean words only), Caveat (marker notes), Archivo Black («KOREA '27» only).
 - Assets: `src/assets/korea/` (photos as WebP with the reference base names; Ukrainian `alt` copied from the sections).
 - Collage budget: torn photos, notes, stickers, stamps only in the hero, program city headers, section dividers and the final CTA. Max one lime area per screen. «KOREA '27» once (final CTA). No motion in the mockup; any added motion must respect `prefers-reduced-motion`.
@@ -25,7 +25,7 @@
 
 ## Page structure (`src/routes/index.tsx`, components in `src/components/korea/`)
 Header · Hero `#top` · About `#about` · WhyUs `#why` · Reviews `#reviews` · WhyKorea `#why-korea` · Partner `#partner` · Route `#route` · Program `#program` · Price `#price` · FinalCTA `#contact` (form `#form`) · Footer.
-- Done: Header (sticky below lg with burger menu sheet, static inline nav from lg), Hero, About, WhyUs, Reviews (quotes are real and verbatim: never edit them), WhyKorea, Partner, Route (KTX tag lifted on phone-width maps so it no longer overlaps «Кенджу»; reference value elsewhere), Program.
+- Done: Header (sticky below lg with burger menu sheet, static inline nav from lg), Hero, About, WhyUs, Reviews (quotes are real and verbatim: never edit them), WhyKorea, Partner, Route (KTX tag lifted on phone-width maps so it no longer overlaps «Кенджу»; reference value elsewhere), Program, Price.
 - `SnapRow`: mobile horizontal scroll-snap row (Reviews below lg, WhyKorea below md). Below its breakpoint it is a focusable region (tabIndex 0, role, aria-label «…, гортайте вбік»); from it a plain grid without those attributes. Prerender ships the mobile attributes; `useMediaQuery` (`src/hooks/use-media-query.ts`, server value given explicitly) drops them after hydration. 22 px top padding with −14 px margin so the Reviews tape is not clipped.
 - `PaperDivider` (torn lattice strip + sticker at the top of a section; host section is `relative`, no top border): WhyUs (heart, right), Reviews (smiley, left), Price (star, right).
 - Placeholders: all other sections.
@@ -55,7 +55,7 @@ Prerender needs a working Vite preview server; sandbox environments that cannot 
 - `bun.lock` is the single lockfile; do not add npm/pnpm/yarn lockfiles.
 
 ## Pending
-- Sections Price → Footer (placeholders now), including the lead form (S1).
+- Sections FinalCTA and Footer (placeholders now), including the lead form (S1).
 - WhyUs and Partner copy will be rewritten by the client (all of it is in `COPY` / `STATS` at the top of `WhyUs.tsx` and `COPY` in `Partner.tsx`).
 - `public/og-image.jpg` is an interim crop of the hanbok photo: make the real OG image from the hero.
 - Logos `logo-pointcamp-ink.png` / `-white.png` are low-res placeholders: replace with `logo-pointcamp.svg` from the other repos.

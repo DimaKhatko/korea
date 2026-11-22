@@ -135,4 +135,15 @@
 :where(.pk-sticker, .pk-mark) {
   max-width: none;
 }
+
+/*
+ * The three bundle rules that size an unclassed child or pseudo-element with a border:
+ * content-box like the reference (checkbox square 28 + 2×2 px, inputs 52 + 2×2 px tall,
+ * FAQ toggle 32 + 2×2 px). The pk-* rule above only reaches elements with a pk-* class.
+ */
+:where(.pk-list li)::before,
+:where(.pk-field input, .pk-field select),
+:where(.pk-faq summary)::after {
+  box-sizing: content-box;
+}
 }

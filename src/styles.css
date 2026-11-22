@@ -226,12 +226,25 @@
 
   html {
     scroll-behavior: smooth;
+    /* Anchor jumps land below the sticky mobile header (75 px); it is static from lg. */
+    scroll-padding-top: 80px;
+  }
+
+  @media (min-width: 64rem) {
+    html {
+      scroll-padding-top: 0;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
+  }
+
+  /* The reference pages keep the browser default line-height (preflight sets 1.5). */
+  html {
+    line-height: normal;
   }
 
   body {

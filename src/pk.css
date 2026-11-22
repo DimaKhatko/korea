@@ -45,7 +45,7 @@
 
 /* ---------- lime spray slogan */
 .pk-spray{position:relative;display:inline-grid;place-items:center;padding:56px 72px}
-.pk-spray::before{content:"";position:absolute;inset:0;background:url("./assets/korea/spray-lime.png") center/100% 100% no-repeat;z-index:0}
+.pk-spray::before{content:"";position:absolute;inset:0;background:url("./assets/korea/spray-lime.webp") center/100% 100% no-repeat;z-index:0}
 .pk-spray>*{position:relative;z-index:1;transform:rotate(-4deg)}
 
 /* ---------- buttons */
@@ -117,4 +117,13 @@
 .pk-in.pk-drop{animation:pk-drop .25s steps(1,end) both}
 @media (prefers-reduced-motion:reduce){.pk-in{animation:none!important}}
 
+/*
+ * The reference pages have no box-sizing reset, so every pk-* size (min-height of
+ * .pk-btn/.pk-tag, widths, fixed heights) is content-box there. Tailwind preflight makes
+ * everything border-box; this restores the reference behaviour for pk-* elements only.
+ * Zero specificity: where a reference element sets box-sizing:border-box, add `box-border`.
+ */
+:where([class^="pk-"], [class*=" pk-"]) {
+  box-sizing: content-box;
+}
 }

@@ -1,13 +1,141 @@
-/** Placeholder: section 05-why-korea (#why-korea). Content comes in a later task. */
+import type { CSSProperties } from "react";
+import photoSeoulNeonStreet from "@/assets/korea/photo-seoul-neon-street.webp";
+import photoSeoulGwanghwamun from "@/assets/korea/photo-seoul-gwanghwamun.webp";
+import photoSeoulSignRooftop from "@/assets/korea/photo-seoul-sign-rooftop.webp";
+import photoSeoulStreetFood from "@/assets/korea/photo-seoul-street-food.webp";
+import { SnapRow } from "./SnapRow";
+
+/* ---------- Copy and data (edit here) */
+
+type Card = {
+  /** Small Korean word above the title (decorative, aria-hidden). */
+  kr: string;
+  title: string;
+  text: string;
+  /** Tilted paper label on the photo. */
+  label: string;
+  labelTone: "lime" | "ink";
+  photo: { src: string; width: number; height: number; alt: string };
+};
+
+const CARDS: Card[] = [
+  {
+    kr: "케이팝",
+    title: "Дорами і K-pop",
+    text: "Знімаємо власний K-pop кліп у HiKR Ground, заходимо в KWANGYA від SM і гуляємо Гангнамом.",
+    label: "Знімаємо кліп",
+    labelTone: "lime",
+    photo: {
+      src: photoSeoulNeonStreet,
+      width: 282,
+      height: 300,
+      alt: "Вечірня вулиця Сеула з неоновими вивісками",
+    },
+  },
+  {
+    kr: "전통",
+    title: "Стародавні традиції",
+    text: "Фотосесія в ханбоках біля палацу Gyeongbokgung, Bukchon Hanok Village і Кенджу — столиця королівства Сілла.",
+    label: "Ханбоки",
+    labelTone: "ink",
+    photo: {
+      src: photoSeoulGwanghwamun,
+      width: 310,
+      height: 205,
+      alt: "Брама Gwanghwamun палацу Gyeongbokgung",
+    },
+  },
+  {
+    kr: "미래",
+    title: "Технології майбутнього",
+    text: "Бібліотека Starfield у COEX, 100-й поверх Busan X the Sky і цифрові зали ARTE Museum.",
+    label: "100-й поверх",
+    labelTone: "ink",
+    photo: {
+      src: photoSeoulSignRooftop,
+      width: 320,
+      height: 270,
+      alt: "Напис SEOUL на даху на тлі хмарочосів",
+    },
+  },
+  {
+    kr: "음식",
+    title: "Їжа і шопінг",
+    text: "K-BBQ, ттокпоккі, пунгеппан і десерти з матча. Канцелярія, косметика і K-pop альбоми.",
+    label: "Стріт-фуд",
+    labelTone: "ink",
+    photo: {
+      src: photoSeoulStreetFood,
+      width: 330,
+      height: 310,
+      alt: "Вуличний кухар готує їжу на ринку в Сеулі",
+    },
+  },
+];
+
+const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
+
+/**
+ * Why-Korea from 05-why-korea (#why-korea): intro and four photo cards (pk-card pk-day).
+ * Below md: SnapRow with 290 px cards. md–lg: 2 columns. From lg: 4 columns.
+ * (The reference desktop file switches to 1 column under 640 px; that width is covered by
+ * the mobile row here.)
+ */
 export function WhyKorea() {
   return (
-    <section
-      id="why-korea"
-      className="pk-paper border-t border-line px-5 py-space-10 md:px-10 md:py-space-12"
-    >
-      <div className="mx-auto max-w-[1280px]">
-        <h2 className="text-[30px] leading-[1.05] font-black md:text-h2">WhyKorea · Чому Корея</h2>
-        <p className="mt-space-2 text-body-sm text-ink-soft">Заглушка секції</p>
+    <section id="why-korea" className="pk-paper border-t border-line">
+      <div className="mx-auto flex flex-col gap-5 py-16 md:max-w-[680px] md:px-5 lg:max-w-[1280px] lg:gap-12 lg:px-10 lg:py-24">
+        <div className="flex flex-col gap-5 px-5 md:px-0 lg:max-w-[760px]">
+          <p className="m-0 flex items-baseline gap-2.5 text-[14px] font-black tracking-[0.06em] text-ink-soft uppercase">
+            <span lang="ko" className="font-kr text-[18px] font-normal tracking-normal text-ink">
+              왜 한국
+            </span>
+            <span>Чому Корея</span>
+          </p>
+          <h2 className="m-0 text-[30px] leading-[1.05] font-black tracking-[-0.01em] lg:text-[40px]">
+            Корея, яку підлітки знають з дорам і K-pop, — наживо
+          </h2>
+          {/* 917 px wide from lg, wider than its 760 px block, as in the desktop reference. */}
+          <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:w-[917px] lg:text-[19px]">
+            Палаци XIV століття тут стоять поруч із хмарочосами, а вулична їжа — частина програми.
+          </p>
+        </div>
+
+        <SnapRow
+          label="Чому Корея, гортайте вбік"
+          breakpoint="md"
+          gridClassName="md:grid-cols-2 md:gap-6 lg:grid-cols-4"
+        >
+          {CARDS.map((card) => (
+            <article
+              key={card.kr}
+              className="pk-card pk-day w-[290px] flex-none snap-start md:w-auto"
+            >
+              <div className="pk-day__media">
+                <img
+                  src={card.photo.src}
+                  alt={card.photo.alt}
+                  width={card.photo.width}
+                  height={card.photo.height}
+                  loading="lazy"
+                />
+                <span
+                  className={`pk-label ${card.labelTone === "lime" ? "pk-label--lime" : "pk-label--ink"}`}
+                  style={tilt(-3)}
+                >
+                  <span className="px-[14px] py-2 text-[15px]">{card.label}</span>
+                </span>
+              </div>
+              <div className="pk-day__body px-5 pt-[18px] pb-[22px]">
+                <div className="pk-day__kr" lang="ko" aria-hidden="true">
+                  {card.kr}
+                </div>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </div>
+            </article>
+          ))}
+        </SnapRow>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import smileySticker from "@/assets/korea/sticker-smiley.png";
 import starSticker from "@/assets/korea/sticker-star-holo.png";
 import { PaperDivider } from "./PaperDivider";
+import { SnapRow } from "./SnapRow";
 
 /* ---------- Copy and data (edit here) */
 
@@ -63,8 +64,8 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
 
 /**
  * Reviews from 04-reviews (#reviews): divider with the smiley, ratings, quotes, sakura tags.
- * Below lg: ratings stacked, quotes in a horizontal scroll-snap row (300 px cards, the next
- * one peeks), focusable for keyboard scrolling. From lg: ratings in 3 columns, quotes 2×2.
+ * Below lg: ratings stacked, quotes in a SnapRow (300 px cards, the next one peeks).
+ * From lg: ratings in 3 columns, quotes 2×2.
  */
 export function Reviews() {
   return (
@@ -115,12 +116,7 @@ export function Reviews() {
           ))}
         </div>
 
-        <div
-          role="region"
-          aria-label="Відгуки батьків, гортайте вбік"
-          tabIndex={0}
-          className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pt-2 pb-3 lg:grid lg:snap-none lg:grid-cols-2 lg:gap-6 lg:overflow-visible lg:p-0"
-        >
+        <SnapRow label="Відгуки батьків, гортайте вбік" gridClassName="lg:grid-cols-2 lg:gap-6">
           {QUOTES.map((quote) => (
             <figure
               key={quote.author}
@@ -141,7 +137,7 @@ export function Reviews() {
               </figcaption>
             </figure>
           ))}
-        </div>
+        </SnapRow>
 
         <div className="flex flex-col gap-3 px-5 lg:gap-[14px] lg:px-0">
           <p className="m-0 text-[14px] font-black tracking-[0.06em] uppercase">{CHANGES_TITLE}</p>

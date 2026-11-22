@@ -126,4 +126,13 @@
 :where([class^="pk-"], [class*=" pk-"]) {
   box-sizing: content-box;
 }
+
+/*
+ * Same reason: preflight caps images at max-width:100%, the reference does not. Stickers
+ * and marker arrows have explicit widths and may overhang their box (e.g. the 52 px plane
+ * on the 44 px program rail).
+ */
+:where(.pk-sticker, .pk-mark) {
+  max-width: none;
+}
 }

@@ -55,7 +55,7 @@ Prerender needs a working Vite preview server; sandbox environments that cannot 
 - `bun.lock` is the single lockfile; do not add npm/pnpm/yarn lockfiles.
 
 ## Pending
-- Footer (placeholder now), including the lead form (S1).
+- Footer (placeholder now) and real lead sending (S1: replace the stub body of `submitLead()`).
 - WhyUs and Partner copy will be rewritten by the client (all of it is in `COPY` / `STATS` at the top of `WhyUs.tsx` and `COPY` in `Partner.tsx`).
 - `public/og-image.jpg` is an interim crop of the hanbok photo: make the real OG image from the hero.
 - Logos `logo-pointcamp-ink.png` / `-white.png` are low-res placeholders: replace with `logo-pointcamp.svg` from the other repos.

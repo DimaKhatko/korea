@@ -21,10 +21,12 @@
 - Assets: `src/assets/korea/` (photos as WebP with the reference base names; Ukrainian `alt` copied from the sections).
 - Collage budget: torn photos, notes, stickers, stamps only in the hero, program city headers, section dividers and the final CTA. Max one lime area per screen. «KOREA '27» once (final CTA). No motion in the mockup; any added motion must respect `prefers-reduced-motion`.
 - Placeholders `[ДАТИ]` ×2, `[ВІК]`, `[N]`, `[ФОТО]` and the price (3150 €, no «від») live only in `src/lib/korea.ts`; they stay visible until the client sends data.
+- Group photo for WhyUs: add `src/assets/korea/photo-pointcamp-group.webp` (or .jpg/.png) and it replaces the dashed «[ФОТО]» box automatically (`import.meta.glob` in `WhyUs.tsx`).
 
 ## Page structure (`src/routes/index.tsx`, components in `src/components/korea/`)
 Header · Hero `#top` · About `#about` · WhyUs `#why` · Reviews `#reviews` · WhyKorea `#why-korea` · Partner `#partner` · Route `#route` · Program `#program` · Price `#price` · FinalCTA `#contact` (form `#form`) · Footer.
-- Done: Header (sticky below lg with burger menu sheet, static inline nav from lg), Hero, About.
+- Done: Header (sticky below lg with burger menu sheet, static inline nav from lg), Hero, About, WhyUs.
+- `PaperDivider` (torn lattice strip + sticker at the top of a section; host section is `relative`, no top border): WhyUs (heart, right), Reviews (smiley, left), Price (star, right).
 - Placeholders: all other sections.
 
 ## Standard v1 rules (S1–S6, concise)
@@ -52,7 +54,8 @@ Prerender needs a working Vite preview server; sandbox environments that cannot 
 - `bun.lock` is the single lockfile; do not add npm/pnpm/yarn lockfiles.
 
 ## Pending
-- Sections About → Footer (placeholders now), including the lead form (S1).
+- Sections Reviews → Footer (placeholders now), including the lead form (S1).
+- WhyUs copy will be rewritten by the client (all of it is in `COPY` / `STATS` at the top of `WhyUs.tsx`).
 - `public/og-image.jpg` is an interim crop of the hanbok photo: make the real OG image from the hero.
 - Logos `logo-pointcamp-ink.png` / `-white.png` are low-res placeholders: replace with `logo-pointcamp.svg` from the other repos.
 - All `photo-*.webp` are placeholders cut from the program PDF: replace with originals, keep the names.

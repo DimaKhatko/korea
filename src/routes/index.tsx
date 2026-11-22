@@ -1,31 +1,98 @@
+import { lazy, Suspense, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/korea/Header";
 import { Hero } from "@/components/korea/Hero";
 import { About } from "@/components/korea/About";
 import { WhyUs } from "@/components/korea/WhyUs";
-import { Reviews } from "@/components/korea/Reviews";
-import { WhyKorea } from "@/components/korea/WhyKorea";
 import { Partner } from "@/components/korea/Partner";
 import { Route as RouteSection } from "@/components/korea/Route";
-import { Program } from "@/components/korea/Program";
-import { Price } from "@/components/korea/Price";
-import { FinalCTA } from "@/components/korea/FinalCTA";
-import { Footer } from "@/components/korea/Footer";
+
+/*
+ * Code splitting (as in pointcamp-winter): sections below the first screens with heavier
+ * code are lazy chunks. They are still prerendered into the HTML (text for crawlers and
+ * AI search) and hydrate when their chunk arrives.
+ */
+const Reviews = lazy(() =>
+  import("@/components/korea/Reviews").then((m) => ({ default: m.Reviews })),
+);
+const WhyKorea = lazy(() =>
+  import("@/components/korea/WhyKorea").then((m) => ({ default: m.WhyKorea })),
+);
+const Program = lazy(() =>
+  import("@/components/korea/Program").then((m) => ({ default: m.Program })),
+);
+const Price = lazy(() => import("@/components/korea/Price").then((m) => ({ default: m.Price })));
+const FinalCTA = lazy(() =>
+  import("@/components/korea/FinalCTA").then((m) => ({ default: m.FinalCTA })),
+);
+const Footer = lazy(() => import("@/components/korea/Footer").then((m) => ({ default: m.Footer })));
+
+/** One Suspense boundary per lazy section, so each hydrates independently. */
+function Deferred({ children }: { children: ReactNode }) {
+  return <Suspense fallback={null}>{children}</Suspense>;
+}
+
+import {
+  GROUP_1_ISO,
+  GROUP_2_ISO,
+  MAX_GROUP_SIZE,
+  PARTICIPANT_AGE,
+  PRICE_EUR,
+  SEARCH_INDEXABLE,
+  ageRange,
+  groupSize,
+  isoDates,
+} from "@/lib/korea";
 
 const SITE_URL = "https://korea.pointcamp.com.ua/";
 const ORG_ID = "https://pointcamp.com.ua/#organization";
+const PAGE_ID = `${SITE_URL}#webpage`;
+const TRIP_ID = `${SITE_URL}#trip`;
 
 const TITLE = "PointCamp Korea 2027 — весняні канікули в Південній Кореї";
+/** ≤ 160 characters; every fact is on the page (hero, About, Partner, Price). */
 const DESCRIPTION =
-  "Весняні канікули в Південній Кореї для підлітків: 10 днів, 9 ночей у Сеулі, Кенджу і Пусані. Перекладач Корейсько-українського центру весь час із групою, поруч троє дорослих PointCamp.";
+  "Весняні канікули 2027 у Південній Кореї: підлітки 10 днів подорожують Сеулом, Кенджу і Пусаном з перекладачем і командою PointCamp. 3150 €.";
+
+/** 1200×630, rendered from the desktop hero (logo, 한국, h1, collage). */
+const OG_IMAGE = {
+  url: `${SITE_URL}og-image.jpg`,
+  width: 1200,
+  height: 630,
+  alt: "PointCamp Korea 2027: весняні канікули в Південній Кореї. Дівчата в ханбоках біля палацу Gyeongbokgung",
+};
+
+/** Route as shown on the page: Сеул → Кенджу → Пусан → Сеул. */
+const ITINERARY = [
+  { name: "Сеул", alternateName: "Seoul" },
+  { name: "Кенджу", alternateName: "Gyeongju" },
+  { name: "Пусан", alternateName: "Busan" },
+  { name: "Сеул", alternateName: "Seoul" },
+];
 
 /**
- * JSON-LD @graph: the brand (same @id on every Point Camp landing, so crawlers and
- * AI search merge them into one entity) and this page. No Event/Offer node yet: the
- * group dates are still placeholders (src/lib/korea.ts); add it once they are known.
- * Everything here must match the visible page.
+ * JSON-LD @graph: the brand (same @id on every Point Camp landing, so crawlers and AI
+ * search merge them into one entity), this page and the trip with its offer. Dates, age
+ * and group size are added only once src/lib/korea.ts holds real values, never as
+ * placeholders. Everything here must match the visible page.
  */
 function structuredData() {
+  const age = ageRange(PARTICIPANT_AGE);
+  const capacity = groupSize(MAX_GROUP_SIZE);
+  const groups = [GROUP_1_ISO, GROUP_2_ISO]
+    .map(isoDates)
+    .map((dates, i) =>
+      dates
+        ? {
+            "@type": "Trip",
+            name: `Група ${i + 1}`,
+            departureTime: dates.start,
+            arrivalTime: dates.end,
+          }
+        : null,
+    )
+    .filter((group) => group !== null);
+
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -37,28 +104,80 @@ function structuredData() {
         url: "https://pointcamp.com.ua/",
         logo: `${SITE_URL}favicon-512x512.png`,
         foundingDate: "2011",
+        telephone: "+380662217373",
+        email: "contact@pointcamp.com.ua",
         sameAs: [
-          "https://www.facebook.com/pointcamp",
           "https://www.instagram.com/point_camp",
+          "https://facebook.com/pointcamp",
           "https://t.me/pointcamp",
         ],
-        contactPoint: {
-          "@type": "ContactPoint",
-          telephone: "+380662217373",
-          contactType: "customer service",
-          email: "contact@pointcamp.com.ua",
-          availableLanguage: ["uk"],
-        },
       },
       {
         "@type": "WebPage",
-        "@id": `${SITE_URL}#webpage`,
+        "@id": PAGE_ID,
         url: SITE_URL,
         name: TITLE,
         description: DESCRIPTION,
         inLanguage: "uk",
-        primaryImageOfPage: `${SITE_URL}og-image.jpg`,
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: OG_IMAGE.url,
+          width: OG_IMAGE.width,
+          height: OG_IMAGE.height,
+        },
+        about: { "@id": TRIP_ID },
         publisher: { "@id": ORG_ID },
+      },
+      {
+        "@type": "TouristTrip",
+        "@id": TRIP_ID,
+        name: "Весняні канікули в Південній Кореї 2027",
+        description:
+          "10 днів, 9 ночей: Сеул, Кенджу і Пусан. Перекладач Корейсько-українського центру весь час із групою, поруч троє дорослих PointCamp.",
+        url: SITE_URL,
+        image: OG_IMAGE.url,
+        inLanguage: "uk",
+        touristType: "Підлітки",
+        provider: { "@id": ORG_ID },
+        itinerary: {
+          "@type": "ItemList",
+          numberOfItems: ITINERARY.length,
+          itemListElement: ITINERARY.map((city, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "City",
+              ...city,
+              containedInPlace: { "@type": "Country", name: "Південна Корея" },
+            },
+          })),
+        },
+        offers: {
+          "@type": "Offer",
+          price: String(PRICE_EUR),
+          priceCurrency: "EUR",
+          url: `${SITE_URL}#price`,
+          offeredBy: { "@id": ORG_ID },
+          ...(capacity
+            ? {
+                eligibleQuantity: {
+                  "@type": "QuantitativeValue",
+                  maxValue: capacity,
+                  unitText: "учасників у групі",
+                },
+              }
+            : {}),
+        },
+        ...(age
+          ? {
+              audience: {
+                "@type": "PeopleAudience",
+                suggestedMinAge: age.min,
+                suggestedMaxAge: age.max,
+              },
+            }
+          : {}),
+        ...(groups.length ? { subTrip: groups } : {}),
       },
     ],
   };
@@ -69,14 +188,22 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
+      // Temporary: while src/lib/korea.ts still has «[…]» placeholders (see scripts/write-seo.mjs).
+      ...(SEARCH_INDEXABLE ? [] : [{ name: "robots", content: "noindex, follow" }]),
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL },
-      { property: "og:image", content: `${SITE_URL}og-image.jpg` },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
+      { property: "og:image", content: OG_IMAGE.url },
+      { property: "og:image:type", content: "image/jpeg" },
+      { property: "og:image:width", content: String(OG_IMAGE.width) },
+      { property: "og:image:height", content: String(OG_IMAGE.height) },
+      { property: "og:image:alt", content: OG_IMAGE.alt },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: OG_IMAGE.url },
+      { name: "twitter:image:alt", content: OG_IMAGE.alt },
     ],
     links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [
@@ -97,15 +224,27 @@ function Index() {
         <Hero />
         <About />
         <WhyUs />
-        <Reviews />
-        <WhyKorea />
+        <Deferred>
+          <Reviews />
+        </Deferred>
+        <Deferred>
+          <WhyKorea />
+        </Deferred>
         <Partner />
         <RouteSection />
-        <Program />
-        <Price />
-        <FinalCTA />
+        <Deferred>
+          <Program />
+        </Deferred>
+        <Deferred>
+          <Price />
+        </Deferred>
+        <Deferred>
+          <FinalCTA />
+        </Deferred>
       </main>
-      <Footer />
+      <Deferred>
+        <Footer />
+      </Deferred>
     </div>
   );
 }

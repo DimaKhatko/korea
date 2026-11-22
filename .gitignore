@@ -42,3 +42,6 @@ firebase-debug.*.log
 *.sln
 *.sw?
 .claude/
+
+# Generated before every build by scripts/write-seo.mjs
+public/sitemap.xml

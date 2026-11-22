@@ -1,0 +1,53 @@
+// Runs before every `build` (see package.json), with --experimental-strip-types so it can
+// import src/lib/korea.ts directly (the same rule the page uses).
+// - Writes public/sitemap.xml: the page with today's <lastmod> (Europe/Kyiv), or an empty
+//   urlset while placeholders are left (the page is noindex then; a sitemap must not list it).
+// - Prints a loud warning while noindex is on.
+// robots.txt is not touched: it keeps allowing crawling, otherwise crawlers could not see
+// the noindex.
+import { writeFileSync } from "node:fs";
+import { PENDING_PLACEHOLDERS, SEARCH_INDEXABLE } from "../src/lib/korea.ts";
+
+const SITE_URL = "https://korea.pointcamp.com.ua/";
+
+function kyivToday() {
+  for (const timeZone of ["Europe/Kyiv", "Europe/Kiev"]) {
+    try {
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).formatToParts(new Date());
+      const get = (type) => parts.find((p) => p.type === type)?.value ?? "";
+      return `${get("year")}-${get("month")}-${get("day")}`;
+    } catch {
+      // try the next zone name
+    }
+  }
+  return new Date().toISOString().slice(0, 10);
+}
+
+const today = process.env.BUILD_DATE || kyivToday();
+const urls = SEARCH_INDEXABLE
+  ? `  <url>\n    <loc>${SITE_URL}</loc>\n    <lastmod>${today}</lastmod>\n  </url>\n`
+  : `  <!-- Empty while src/lib/korea.ts still has placeholders (page is noindex). -->\n`;
+
+writeFileSync(
+  new URL("../public/sitemap.xml", import.meta.url),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}</urlset>\n`,
+);
+
+if (SEARCH_INDEXABLE) {
+  console.log(`seo: indexable, sitemap.xml lists ${SITE_URL} (lastmod ${today})`);
+} else {
+  const line = "!".repeat(72);
+  console.warn(
+    `\n${line}\n` +
+      `!! NOINDEX: the page is built with <meta name="robots" content="noindex, follow">\n` +
+      `!! and is left out of sitemap.xml, because src/lib/korea.ts still has placeholders:\n` +
+      PENDING_PLACEHOLDERS.map((p) => `!!   ${p}\n`).join("") +
+      `!! Fill them in and rebuild: both switch back automatically.\n` +
+      `${line}\n`,
+  );
+}

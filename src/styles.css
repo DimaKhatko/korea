@@ -5,10 +5,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ---------- Fonts (self-hosted, src/assets/fonts) */
+/* ---------- Fonts (self-hosted subsets, built by scripts/subset-font.py from the full
+ * sources in src/assets/fonts; re-run it when the display-face text changes) */
 @font-face {
   font-family: "Kyiv Type Sans";
-  src: url("./assets/fonts/KyivTypeSans-VarGX.woff2") format("woff2");
+  src: url("./assets/fonts/KyivTypeSans-Sub.woff2") format("woff2");
   font-weight: 100 1000;
   font-style: normal;
   font-display: swap;
@@ -16,7 +17,7 @@
 /* Korean words only: the face has no Cyrillic. */
 @font-face {
   font-family: "Black Han Sans";
-  src: url("./assets/fonts/BlackHanSans-Regular.woff2") format("woff2");
+  src: url("./assets/fonts/BlackHanSans-Sub.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -24,15 +25,15 @@
 /* Marker notes. */
 @font-face {
   font-family: "Caveat";
-  src: url("./assets/fonts/Caveat-Variable.woff2") format("woff2");
-  font-weight: 400 700;
+  src: url("./assets/fonts/Caveat-Sub.woff2") format("woff2");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 /* «KOREA '27» slogan only. */
 @font-face {
   font-family: "Archivo Black";
-  src: url("./assets/fonts/ArchivoBlack-Regular.woff2") format("woff2");
+  src: url("./assets/fonts/ArchivoBlack-Sub.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;

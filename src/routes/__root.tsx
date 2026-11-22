@@ -1,16 +1,27 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { ReactNode } from "react";
 import {
   Outlet,
   Link,
-  createRootRouteWithContext,
+  createRootRoute,
   useRouter,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import kyivTypeSansUrl from "../assets/fonts/KyivTypeSans-VarGX.woff2?url";
+import kyivTypeSansUrl from "../assets/fonts/KyivTypeSans-Sub.woff2?url";
+import paperTileUrl from "../assets/korea/paper-tile.jpg?url";
 import { GTM_ID } from "@/lib/analytics";
+
+/**
+ * Deferred Google Tag Manager (same loader as pointcamp-winter). `window.dataLayer` is
+ * declared in <head> right away (so `lead_submit` pushes are never lost); gtm.js itself
+ * is injected 3 s after `load` or on the first pointerdown / scroll / keydown /
+ * touchstart, whichever comes first. GTM then processes everything already queued in
+ * dataLayer, including the `gtm.js` event pushed here (the same event the standard
+ * snippet pushes), so Page View / GA4 / Meta Pixel tags fire as before.
+ */
+const GTM_LOADER = `(function(w,d){var done=0,ev=['pointerdown','scroll','keydown','touchstart'];function load(){if(done)return;done=1;ev.forEach(function(e){w.removeEventListener(e,load)});w.dataLayer=w.dataLayer||[];w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id=${GTM_ID}';d.head.appendChild(j)}ev.forEach(function(e){w.addEventListener(e,load,{passive:true})});function later(){setTimeout(load,3000)}if(d.readyState==='complete')later();else w.addEventListener('load',later)})(window,document);`;
 
 function NotFoundComponent() {
   return (
@@ -69,7 +80,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -82,7 +93,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#eae5d8" },
     ],
     links: [
-      // The main face is preloaded; the same hashed file is referenced by @font-face in styles.css.
+      // Only the main face is preloaded (subset, see scripts/subset-font.py); the same hashed
+      // file is referenced by @font-face in styles.css, so it is fetched once.
       {
         rel: "preload",
         href: kyivTypeSansUrl,
@@ -90,6 +102,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "font/woff2",
         crossOrigin: "anonymous",
       },
+      // The paper texture is the background of every section and the LCP element is the
+      // hero section, so the texture is fetched with the HTML instead of after the CSS
+      // (same hashed file as `.pk-paper` in pk.css).
+      { rel: "preload", href: paperTileUrl, as: "image", fetchPriority: "high" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -110,6 +126,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "apple-touch-icon", href: `${import.meta.env.BASE_URL}apple-touch-icon.png` },
       { rel: "manifest", href: `${import.meta.env.BASE_URL}site.webmanifest` },
     ],
+    scripts: [
+      // Declared before anything else runs; gtm.js itself is deferred (GTM_LOADER).
+      { children: "window.dataLayer=window.dataLayer||[];" },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -117,24 +137,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
+function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="uk">
       <head>
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','" +
-              GTM_ID +
-              "');",
-          }}
-        />
-        {/* End Google Tag Manager */}
         <HeadContent />
       </head>
       <body>
-        {/* Google Tag Manager (noscript) */}
+        {/* Google Tag Manager (noscript): must be in body, never head */}
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
@@ -144,7 +154,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
             title="Google Tag Manager"
           />
         </noscript>
-        {/* End Google Tag Manager (noscript) */}
+        <script dangerouslySetInnerHTML={{ __html: GTM_LOADER }} />
         {children}
         <Scripts />
       </body>
@@ -153,11 +163,5 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Outlet />
-    </QueryClientProvider>
-  );
+  return <Outlet />;
 }

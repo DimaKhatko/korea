@@ -1,6 +1,10 @@
-import { useRef, useState, type MouseEvent } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
+import { Suspense, lazy, useRef, useState, type MouseEvent } from "react";
 import { Logo } from "./Logo";
+
+const loadMenu = () => import("./MobileMenu");
+const MobileMenu = lazy(loadMenu);
+/** Start fetching the menu chunk as soon as the burger is hovered, touched or focused. */
+const preloadMenu = () => void loadMenu();
 
 /** Section anchors shown in the desktop nav and in the mobile menu. */
 const NAV_LINKS = [
@@ -13,11 +17,15 @@ const NAV_LINKS = [
 
 /**
  * Site header from 01-header-hero.
- * Below lg: sticky paper bar with hairline, «Заявка» and a burger that opens the menu sheet.
+ * Below lg: sticky paper bar with hairline, «Заявка» and a burger that opens the menu sheet
+ * (MobileMenu, lazy-loaded on the first tap).
  * From lg: logo, inline anchors and «Залишити заявку»; not sticky (as in the desktop reference).
  */
 export function Header() {
   const [open, setOpen] = useState(false);
+  // The lazy menu is mounted on the first open and stays mounted (keeps its close animation).
+  const [menuRequested, setMenuRequested] = useState(false);
+  const burgerRef = useRef<HTMLButtonElement>(null);
   // Anchor picked in the menu: scrolled to once the sheet has closed and released the scroll lock.
   const pendingHash = useRef<string | null>(null);
 
@@ -28,10 +36,14 @@ export function Header() {
   }
 
   function onMenuCloseAutoFocus(event: Event) {
-    const hash = pendingHash.current;
-    if (!hash) return;
-    pendingHash.current = null;
     event.preventDefault();
+    const hash = pendingHash.current;
+    // Closed with Escape, the overlay or the close button: focus goes back to the burger.
+    if (!hash) {
+      burgerRef.current?.focus();
+      return;
+    }
+    pendingHash.current = null;
     requestAnimationFrame(() => {
       const target = document.querySelector<HTMLElement>(hash);
       if (!target) return;
@@ -71,60 +83,34 @@ export function Header() {
             Заявка
           </a>
 
-          <Dialog.Root open={open} onOpenChange={setOpen}>
-            <Dialog.Trigger
-              type="button"
-              aria-label="Відкрити меню"
-              className="grid size-11 cursor-pointer place-items-center rounded-sm border-2 border-ink bg-sticker"
-            >
-              <BurgerIcon />
-            </Dialog.Trigger>
-            <Dialog.Portal>
-              <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/60 motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:fade-out-0 motion-safe:data-[state=open]:animate-in motion-safe:data-[state=open]:fade-in-0 lg:hidden" />
-              <Dialog.Content
-                aria-describedby={undefined}
+          <button
+            ref={burgerRef}
+            type="button"
+            aria-label="Відкрити меню"
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            onClick={() => {
+              setMenuRequested(true);
+              setOpen(true);
+            }}
+            onPointerEnter={preloadMenu}
+            onTouchStart={preloadMenu}
+            onFocus={preloadMenu}
+            className="grid size-11 cursor-pointer place-items-center rounded-sm border-2 border-ink bg-sticker"
+          >
+            <BurgerIcon />
+          </button>
+          {menuRequested && (
+            <Suspense fallback={null}>
+              <MobileMenu
+                open={open}
+                onOpenChange={setOpen}
+                links={NAV_LINKS}
+                onLinkClick={onMenuLinkClick}
                 onCloseAutoFocus={onMenuCloseAutoFocus}
-                className="pk-paper fixed inset-y-0 box-border right-0 z-50 flex w-[min(100%,360px)] flex-col gap-6 overflow-y-auto border-l-2 border-ink px-5 pt-3 pb-8 motion-safe:duration-200 motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:slide-out-to-right motion-safe:data-[state=open]:animate-in motion-safe:data-[state=open]:slide-in-from-right lg:hidden"
-              >
-                <div className="flex min-h-[50px] items-center justify-between gap-3">
-                  <Dialog.Title className="m-0 text-[14px] font-black tracking-[0.06em] text-ink-soft uppercase">
-                    Меню
-                  </Dialog.Title>
-                  <Dialog.Close
-                    type="button"
-                    aria-label="Закрити меню"
-                    className="grid size-11 cursor-pointer place-items-center rounded-sm border-2 border-ink bg-sticker"
-                  >
-                    <CloseIcon />
-                  </Dialog.Close>
-                </div>
-
-                <nav aria-label="Розділи сторінки">
-                  <ul className="m-0 list-none border-t-2 border-ink p-0">
-                    {NAV_LINKS.map((link) => (
-                      <li key={link.href} className="border-b border-line">
-                        <a
-                          href={link.href}
-                          onClick={(event) => onMenuLinkClick(event, link.href)}
-                          className="flex min-h-14 items-center text-[22px] font-black no-underline"
-                        >
-                          {link.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-
-                <a
-                  className="pk-btn box-border min-h-14 w-full"
-                  href="#form"
-                  onClick={(event) => onMenuLinkClick(event, "#form")}
-                >
-                  Залишити заявку
-                </a>
-              </Dialog.Content>
-            </Dialog.Portal>
-          </Dialog.Root>
+              />
+            </Suspense>
+          )}
         </div>
       </div>
     </header>
@@ -136,20 +122,6 @@ function BurgerIcon() {
     <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true">
       <path
         d="M1 1h18M1 7h18M1 13h18"
-        stroke="#121212"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        fill="none"
-      />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
-      <path
-        d="M2 2l14 14M16 2L2 16"
         stroke="#121212"
         strokeWidth="2.4"
         strokeLinecap="round"

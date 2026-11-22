@@ -25,10 +25,10 @@
 
 ## Page structure (`src/routes/index.tsx`, components in `src/components/korea/`)
 Header · Hero `#top` · About `#about` · WhyUs `#why` · Reviews `#reviews` · WhyKorea `#why-korea` · Partner `#partner` · Route `#route` · Program `#program` · Price `#price` · FinalCTA `#contact` (form `#form`) · Footer.
-- Done: Header (sticky below lg with burger menu sheet, static inline nav from lg), Hero, About, WhyUs, Reviews (quotes are real and verbatim: never edit them), WhyKorea, Partner, Route (KTX tag lifted on phone-width maps so it no longer overlaps «Кенджу»; reference value elsewhere), Program, Price, FinalCTA + LeadForm UI (validation and states; sending is a stub until S1 lands).
+- Done: Header (sticky below lg with burger menu sheet, static inline nav from lg), Hero, About, WhyUs, Reviews (quotes are real and verbatim: never edit them), WhyKorea, Partner, Route (KTX tag lifted on phone-width maps so it no longer overlaps «Кенджу»; reference value elsewhere), Program, Price, FinalCTA + LeadForm UI (validation and states; sending is a stub until S1 lands), Footer.
 - `SnapRow`: mobile horizontal scroll-snap row (Reviews below lg, WhyKorea below md). Below its breakpoint it is a focusable region (tabIndex 0, role, aria-label «…, гортайте вбік»); from it a plain grid without those attributes. Prerender ships the mobile attributes; `useMediaQuery` (`src/hooks/use-media-query.ts`, server value given explicitly) drops them after hydration. 22 px top padding with −14 px margin so the Reviews tape is not clipped.
 - `PaperDivider` (torn lattice strip + sticker at the top of a section; host section is `relative`, no top border): WhyUs (heart, right), Reviews (smiley, left), Price (star, right).
-- Placeholders: all other sections.
+- `Logo` inlines `src/assets/korea/logo-pointcamp.svg` (`?raw`): purple → `currentColor`, viewBox cropped to the letters (`30 74 515 104`). Header: ink, 24 px / 30 px from lg. Footer: white, 32 px. If the SVG artwork changes, re-check the crop.
 
 ## Standard v1 rules (S1–S6, concise)
 - **S1 Lead submission** *(UI done in `LeadForm.tsx`; `submitLead()` in `src/lib/lead.ts` is a stub that resolves after 600 ms, `?lead_error=1` simulates a failure — replace its body, keep the types)*. `src/lib/lead.ts` exports `LANDING = "korea"`, `WEBHOOK_URL` (Make scenario `pointcamp-leads`), `LeadData { name; phone; email; participant }`, `SendResult { ok; error? }`, `submitLead(data)`. Payload keys exactly: `landing, name, phone, email, participant, page_url, utm_source, utm_medium, utm_campaign, utm_content, utm_term, submitted_at` (ISO), `test` (true when `?test=1`). POST JSON, retry once after 1500 ms, then `{ ok:false, error }`. Push `{ event: "lead_submit" }` to `window.dataLayer` only after a confirmed success; never on failure; guard `window` for SSR. Form via `FormData` with name attrs `name/phone/email/participant`, consent checkbox, CSS-hidden honeypot `website`. Status `idle | sending | sent | error`; errors shown in `marker-deep`. No Telegram tokens or other secrets in client code, no browser calls to third-party APIs. (HANDOFF says the webhook URL comes "from env": decide with Dima before building.)
@@ -55,10 +55,9 @@ Prerender needs a working Vite preview server; sandbox environments that cannot 
 - `bun.lock` is the single lockfile; do not add npm/pnpm/yarn lockfiles.
 
 ## Pending
-- Footer (placeholder now) and real lead sending (S1: replace the stub body of `submitLead()`).
+- Real lead sending (S1: replace the stub body of `submitLead()`).
 - WhyUs and Partner copy will be rewritten by the client (all of it is in `COPY` / `STATS` at the top of `WhyUs.tsx` and `COPY` in `Partner.tsx`).
 - `public/og-image.jpg` is an interim crop of the hanbok photo: make the real OG image from the hero.
-- Logos `logo-pointcamp-ink.png` / `-white.png` are low-res placeholders: replace with `logo-pointcamp.svg` from the other repos.
 - All `photo-*.webp` are placeholders cut from the program PDF: replace with originals, keep the names.
 - JSON-LD `Event` + `Offer` node (dates, 3150 €, availability) once the group dates are known; FAQ block + `FAQPage` if a FAQ is added (`pk-faq` exists in pk.css).
 - `wrangler.jsonc` — unused Cloudflare config; verify and remove.

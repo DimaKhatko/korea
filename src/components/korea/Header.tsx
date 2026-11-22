@@ -1,6 +1,6 @@
 import { useRef, useState, type MouseEvent } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import logoInk from "@/assets/korea/logo-pointcamp-ink.png";
+import { Logo } from "./Logo";
 
 /** Section anchors shown in the desktop nav and in the mobile menu. */
 const NAV_LINKS = [
@@ -10,9 +10,6 @@ const NAV_LINKS = [
   { href: "#price", label: "Вартість" },
   { href: "#reviews", label: "Відгуки" },
 ] as const;
-
-const LOGO_WIDTH = 380;
-const LOGO_HEIGHT = 264;
 
 /**
  * Site header from 01-header-hero.
@@ -50,13 +47,7 @@ export function Header() {
     <header className="pk-paper sticky top-0 z-40 border-b border-line max-lg:bg-none lg:static lg:border-b-0">
       <div className="mx-auto flex items-center justify-between gap-3 px-5 py-3 md:max-w-[680px] lg:max-w-[1360px] lg:flex-wrap lg:gap-6 lg:px-10 lg:py-5">
         <a href="#top" aria-label="PointCamp — на початок сторінки" className="block leading-none">
-          <img
-            src={logoInk}
-            alt="PointCamp"
-            width={LOGO_WIDTH}
-            height={LOGO_HEIGHT}
-            className="h-9 w-auto lg:h-11"
-          />
+          <Logo className="h-6 text-ink lg:h-[30px]" />
         </a>
 
         <nav aria-label="Розділи сторінки" className="hidden flex-wrap gap-7 lg:flex">

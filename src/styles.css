@@ -1,9 +1,11 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./pk.css";
 
 @custom-variant dark (&:is(.dark *));
 
+/* ---------- Fonts (self-hosted, src/assets/fonts) */
 @font-face {
   font-family: "Kyiv Type Sans";
   src: url("./assets/fonts/KyivTypeSans-VarGX.woff2") format("woff2");
@@ -11,18 +13,191 @@
   font-style: normal;
   font-display: swap;
 }
-
-@theme {
-  --font-sans: "Kyiv Type Sans", ui-sans-serif, system-ui, sans-serif;
+/* Korean words only: the face has no Cyrillic. */
+@font-face {
+  font-family: "Black Han Sans";
+  src: url("./assets/fonts/BlackHanSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* Marker notes. */
+@font-face {
+  font-family: "Caveat";
+  src: url("./assets/fonts/Caveat-Variable.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* «KOREA '27» slogan only. */
+@font-face {
+  font-family: "Archivo Black";
+  src: url("./assets/fonts/ArchivoBlack-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
+/*
+ * ---------- Design tokens (_reference/korea-design/tokens.json)
+ * Plain CSS variables with the token names (--paper, --ink, --space-5, ...);
+ * the pk-* classes in pk.css read these directly.
+ */
+:root {
+  /* Colour */
+  --paper: #eae5d8;
+  --paper-light: #f7f4ec;
+  --sticker: #ffffff;
+  --ink: #121212;
+  --ink-soft: #4a463f;
+  --ink-line: #8a8170;
+  --line: #cfc7b4;
+  --lime: #c8f534;
+  --on-lime: var(--ink);
+  --marker: #e62e26;
+  --marker-deep: #c4211b;
+  --stamp: #cd282d;
+  --sakura: #ffb0c8;
+  --sakura-deep: #e15a8c;
+  --sun: #ffd41e;
+  --tape: rgba(214, 210, 196, 0.69);
+  --ring: var(--ink);
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+  --space-10: 64px;
+  --space-12: 96px;
+
+  /* Tilt for collage pieces (more than tilt-max reads as mess) */
+  --tilt-content: 1.5deg;
+  --tilt-accent: 4deg;
+  --tilt-max: 8deg;
+
+  /* shadcn/ui semantic colours (src/components/ui), mapped onto the Korea palette */
+  --radius: 8px;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--sticker);
+  --card-foreground: var(--ink);
+  --popover: var(--sticker);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--sticker);
+  --secondary: var(--lime);
+  --secondary-foreground: var(--on-lime);
+  --muted: var(--paper-light);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--paper-light);
+  --accent-foreground: var(--ink);
+  --destructive: var(--marker-deep);
+  --destructive-foreground: var(--sticker);
+  --border: var(--line);
+  --input: var(--ink-line);
+}
+
+/*
+ * Tokens whose Tailwind namespace already matches the token name (--font-*,
+ * --radius-*, --shadow-*). `static` emits them on :root even when no utility
+ * uses them, because pk.css reads var(--font-kr), var(--radius-sm), var(--shadow-hard).
+ */
+@theme static {
+  --font-kr: "Black Han Sans", sans-serif;
+  --font-sans: "Kyiv Type Sans", system-ui, sans-serif;
+  --font-hand: Caveat, cursive;
+  --font-slogan: "Archivo Black", "Kyiv Type Sans", sans-serif;
+
+  --radius-none: 0px;
+  --radius-sm: 6px;
+  --radius-pill: 999px;
+
+  --shadow-photo: 7px 12px 10px rgba(18, 18, 18, 0.35);
+  --shadow-sticker: 4px 7px 6px rgba(18, 18, 18, 0.3);
+  --shadow-hard: 4px 4px 0px #121212;
+}
+
+/* Type scale from tokens.json: text-h1, text-body, text-note, ... (desktop sizes) */
+@theme {
+  --text-kr-display: 160px;
+  --text-kr-display--line-height: 0.9;
+  --text-kr-display--font-weight: 400;
+  --text-city: 120px;
+  --text-city--line-height: 0.9;
+  --text-city--font-weight: 1000;
+  --text-city--letter-spacing: -0.02em;
+  --text-slogan: 112px;
+  --text-slogan--line-height: 0.9;
+  --text-slogan--font-weight: 400;
+  --text-h1: 56px;
+  --text-h1--line-height: 1.02;
+  --text-h1--font-weight: 900;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h2: 40px;
+  --text-h2--line-height: 1.05;
+  --text-h2--font-weight: 900;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h3: 22px;
+  --text-h3--line-height: 1.25;
+  --text-h3--font-weight: 750;
+  --text-body-lg: 19px;
+  --text-body-lg--line-height: 1.55;
+  --text-body: 17px;
+  --text-body--line-height: 1.6;
+  --text-body-sm: 15px;
+  --text-body-sm--line-height: 1.55;
+  --text-label: 18px;
+  --text-label--line-height: 1.1;
+  --text-label--font-weight: 900;
+  --text-label--letter-spacing: 0.02em;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.4;
+  --text-caption--font-weight: 600;
+  --text-note-lg: 44px;
+  --text-note-lg--line-height: 1.05;
+  --text-note-lg--font-weight: 700;
+  --text-note: 32px;
+  --text-note--line-height: 1.1;
+  --text-note--font-weight: 700;
+}
+
+/* Colour, spacing and shadcn mappings: utilities such as bg-paper, text-ink-soft, p-space-5 */
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
+  --color-paper: var(--paper);
+  --color-paper-light: var(--paper-light);
+  --color-sticker: var(--sticker);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-line: var(--ink-line);
+  --color-line: var(--line);
+  --color-lime: var(--lime);
+  --color-on-lime: var(--on-lime);
+  --color-marker: var(--marker);
+  --color-marker-deep: var(--marker-deep);
+  --color-stamp: var(--stamp);
+  --color-sakura: var(--sakura);
+  --color-sakura-deep: var(--sakura-deep);
+  --color-sun: var(--sun);
+  --color-tape: var(--tape);
+  --color-ring: var(--ring);
+
+  --spacing-space-1: var(--space-1);
+  --spacing-space-2: var(--space-2);
+  --spacing-space-3: var(--space-3);
+  --spacing-space-4: var(--space-4);
+  --spacing-space-5: var(--space-5);
+  --spacing-space-6: var(--space-6);
+  --spacing-space-8: var(--space-8);
+  --spacing-space-10: var(--space-10);
+  --spacing-space-12: var(--space-12);
+
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -42,78 +217,6 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  --color-sakura: var(--sakura);
-  --color-sky-soft: var(--sky-soft);
-  --color-navy: var(--navy);
-  --color-beige: var(--beige);
-  --color-blossom: var(--blossom);
-  --color-ink: var(--ink);
-
-  --font-display: "Kyiv Type Sans", "Zen Maru Gothic", "Nunito", system-ui, sans-serif;
-  --font-body: "Kyiv Type Sans", "Zen Maru Gothic", system-ui, sans-serif;
-}
-
-:root {
-  --radius: 1rem;
-
-  /* Brand palette — values converted to oklch */
-  --background: oklch(0.972 0.013 85); /* #F8F6F1 rice paper */
-  --foreground: oklch(0.18 0 0); /* #111 ink */
-  --card: oklch(0.99 0.005 85);
-  --card-foreground: oklch(0.18 0 0);
-  --popover: oklch(0.99 0.005 85);
-  --popover-foreground: oklch(0.18 0 0);
-
-  --primary: oklch(0.585 0.245 27.5); /* #E60012 Japanese red */
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.88 0.07 10); /* #F7C6D0 sakura */
-  --secondary-foreground: oklch(0.18 0 0);
-  --muted: oklch(0.95 0.018 220); /* #DCEFF5 soft sky */
-  --muted-foreground: oklch(0.42 0.02 60);
-  --accent: oklch(0.88 0.08 6); /* #FFB7C5 blossom */
-  --accent-foreground: oklch(0.18 0 0);
-  --destructive: oklch(0.585 0.245 27.5);
-  --destructive-foreground: oklch(0.99 0 0);
-
-  --border: oklch(0.88 0.015 60);
-  --input: oklch(0.88 0.015 60);
-  --ring: oklch(0.585 0.245 27.5);
-
-  /* Custom brand tokens */
-  --sakura: oklch(0.88 0.07 10); /* #F7C6D0 */
-  --blossom: oklch(0.88 0.08 6); /* #FFB7C5 */
-  --sky-soft: oklch(0.95 0.018 220); /* #DCEFF5 */
-  --navy: oklch(0.34 0.09 265); /* #243B6B */
-  --beige: oklch(0.89 0.025 65); /* #EADCCF */
-  --ink: oklch(0.18 0 0);
-
-  /* Gradients */
-  --grad-sakura: linear-gradient(180deg, var(--sakura) 0%, var(--background) 100%);
-  --grad-sun: radial-gradient(
-    circle at 50% 35%,
-    var(--primary) 0%,
-    oklch(0.45 0.2 25) 60%,
-    var(--navy) 100%
-  );
-  --grad-sky: linear-gradient(180deg, var(--sky-soft) 0%, var(--background) 100%);
-  --grad-red-navy: linear-gradient(135deg, var(--primary) 0%, var(--navy) 100%);
-
-  /* Shadows */
-  --shadow-polaroid: 0 12px 30px -10px oklch(0 0 0 / 0.25), 0 4px 10px -4px oklch(0 0 0 / 0.15);
-  --shadow-card: 0 8px 24px -12px oklch(0 0 0 / 0.18);
-  --shadow-red-glow: 0 0 40px oklch(0.585 0.245 27.5 / 0.45);
-}
-
-.dark {
-  --background: oklch(0.18 0.02 25);
-  --foreground: oklch(0.97 0 0);
-  --card: oklch(0.22 0.02 25);
-  --card-foreground: oklch(0.97 0 0);
-  --primary: oklch(0.62 0.25 27.5);
-  --primary-foreground: oklch(0.99 0 0);
-  --border: oklch(0.3 0.02 25);
 }
 
 @layer base {
@@ -125,178 +228,39 @@
     scroll-behavior: smooth;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-body);
-    font-weight: 400;
-    background-image:
-      radial-gradient(oklch(0 0 0 / 0.04) 1px, transparent 1px),
-      radial-gradient(oklch(0 0 0 / 0.03) 1px, transparent 1px);
-    background-size:
-      24px 24px,
-      56px 56px;
-    background-position:
-      0 0,
-      12px 12px;
+    margin: 0;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: var(--font-display);
-    letter-spacing: -0.01em;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
   }
 
-  .bg-grad-sun {
-    background: var(--grad-sun);
-  }
-  .bg-grad-sakura {
-    background: var(--grad-sakura);
-  }
-  .bg-grad-sky {
-    background: var(--grad-sky);
-  }
-  .bg-grad-red-navy {
-    background: var(--grad-red-navy);
+  a {
+    color: var(--ink);
   }
 
-  .shadow-polaroid {
-    box-shadow: var(--shadow-polaroid);
-  }
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-  .shadow-red-glow {
-    box-shadow: var(--shadow-red-glow);
+  a:hover {
+    color: var(--ink-soft);
   }
 
-  /* Sunburst rays */
-  .bg-rays {
-    background: repeating-conic-gradient(
-      from 0deg at 50% 100%,
-      oklch(0.585 0.245 27.5) 0deg 10deg,
-      oklch(0.5 0.22 25) 10deg 20deg
-    );
-  }
-
-  /* Seigaiha (wave) pattern */
-  .bg-seigaiha {
-    background-color: var(--sky-soft);
-    background-image:
-      radial-gradient(
-        circle at 50% 100%,
-        transparent 18px,
-        oklch(0.585 0.245 27.5 / 0.18) 18px 20px,
-        transparent 20px
-      ),
-      radial-gradient(
-        circle at 0% 100%,
-        transparent 18px,
-        oklch(0.585 0.245 27.5 / 0.18) 18px 20px,
-        transparent 20px
-      ),
-      radial-gradient(
-        circle at 100% 100%,
-        transparent 18px,
-        oklch(0.585 0.245 27.5 / 0.18) 18px 20px,
-        transparent 20px
-      );
-    background-size: 40px 20px;
-  }
-
-  .bg-rice-paper {
-    background-color: var(--background);
-    background-image:
-      radial-gradient(oklch(0 0 0 / 0.05) 1px, transparent 1px),
-      radial-gradient(oklch(0 0 0 / 0.04) 1px, transparent 1px);
-    background-size:
-      22px 22px,
-      50px 50px;
-    background-position:
-      0 0,
-      11px 11px;
-  }
-
-  /* Torn paper top/bottom edges */
-  .torn-top {
-    -webkit-mask-image: radial-gradient(circle 8px at 8px 0, transparent 7px, black 8px);
-    mask-image: radial-gradient(circle 8px at 8px 0, transparent 7px, black 8px);
-    -webkit-mask-size: 16px 100%;
-    mask-size: 16px 100%;
-    -webkit-mask-repeat: repeat-x;
-    mask-repeat: repeat-x;
-  }
-
-  .polaroid {
-    background: white;
-    padding: 0.75rem 0.75rem 2.25rem;
-    box-shadow: var(--shadow-polaroid);
-    border-radius: 4px;
-  }
-
-  .tape::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-3deg);
-    width: 70px;
-    height: 18px;
-    background: oklch(0.95 0.05 90 / 0.7);
-    border-radius: 2px;
-    box-shadow: 0 1px 2px oklch(0 0 0 / 0.1);
-  }
-
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  .animate-fade-up {
-    animation: fade-up 0.7s ease-out both;
-  }
-
-  @keyframes pulse-red {
-    0%,
-    100% {
-      box-shadow: 0 0 0 0 oklch(0.585 0.245 27.5 / 0.55);
-    }
-    50% {
-      box-shadow: 0 0 0 14px oklch(0.585 0.245 27.5 / 0);
-    }
-  }
-  .pulse-red {
-    animation: pulse-red 2.2s ease-out infinite;
-  }
-
-  @keyframes float-slow {
-    0%,
-    100% {
-      transform: translateY(0) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-12px) rotate(2deg);
-    }
-  }
-  .float-slow {
-    animation: float-slow 6s ease-in-out infinite;
-  }
-
-  .text-stroke-red {
-    -webkit-text-stroke: 2px var(--primary);
-    color: transparent;
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 3px;
   }
 }

@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import kyivTypeSansUrl from "../assets/fonts/KyivTypeSans-VarGX.woff2?url";
+import { GTM_ID } from "@/lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -72,28 +74,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Point Camp — оригінальні табори та подорожі для підлітків" },
-      {
-        name: "description",
-        content:
-          "Освітні подорожі та табори Point Camp: досвід, менторство і безпека. Подорож до Японії 2026 для підлітків.",
-      },
+      { title: "PointCamp Korea 2027 — весняні канікули в Південній Кореї" },
       { name: "author", content: "Point Camp" },
-      {
-        property: "og:title",
-        content: "Point Camp — оригінальні табори та подорожі для підлітків",
-      },
-      {
-        property: "og:description",
-        content:
-          "Освітні подорожі та табори Point Camp: досвід, менторство і безпека. Подорож до Японії 2026 для підлітків.",
-      },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Point Camp" },
       { property: "og:locale", content: "uk_UA" },
-      { name: "theme-color", content: "#4A316D" },
+      { name: "theme-color", content: "#eae5d8" },
     ],
     links: [
+      // The main face is preloaded; the same hashed file is referenced by @font-face in styles.css.
+      {
+        rel: "preload",
+        href: kyivTypeSansUrl,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -129,39 +125,19 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PGJNFD95');",
+              "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','" +
+              GTM_ID +
+              "');",
           }}
         />
         {/* End Google Tag Manager */}
-        {/* Fonts — loaded async (off the critical path) so they don't block first paint.
-            Primary text uses self-hosted "Kyiv Type Sans" (font-display: swap); the
-            Google stylesheet only provides the Zen Maru Gothic fallback. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="preload"
-          as="style"
-          href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap';l.media='print';l.onload=function(){this.media='all'};document.head.appendChild(l);})();",
-          }}
-        />
-        <noscript>
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap"
-          />
-        </noscript>
         <HeadContent />
       </head>
       <body>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PGJNFD95"
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}

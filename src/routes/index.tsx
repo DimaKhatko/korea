@@ -1,28 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "@/components/japan/Header";
-import { Hero } from "@/components/japan/Hero";
-import { Intro } from "@/components/japan/Intro";
-import { WhyUs } from "@/components/japan/WhyUs";
-import { Reviews } from "@/components/japan/Reviews";
-import { WhyJapan } from "@/components/japan/WhyJapan";
-import { Omotenashi } from "@/components/japan/Omotenashi";
-import { Route as RouteSection } from "@/components/japan/Route";
-import { Program } from "@/components/japan/Program";
-import { Price } from "@/components/japan/Price";
-import { Moments } from "@/components/japan/Moments";
-import { FinalCTA } from "@/components/japan/FinalCTA";
-import { Footer } from "@/components/japan/Footer";
-import { StickyApplyButton } from "@/components/japan/StickyApplyButton";
-import { SoldOutModal } from "@/components/japan/SoldOutModal";
+import { Header } from "@/components/korea/Header";
+import { Hero } from "@/components/korea/Hero";
+import { About } from "@/components/korea/About";
+import { WhyUs } from "@/components/korea/WhyUs";
+import { Reviews } from "@/components/korea/Reviews";
+import { WhyKorea } from "@/components/korea/WhyKorea";
+import { Partner } from "@/components/korea/Partner";
+import { Route as RouteSection } from "@/components/korea/Route";
+import { Program } from "@/components/korea/Program";
+import { Price } from "@/components/korea/Price";
+import { FinalCTA } from "@/components/korea/FinalCTA";
+import { Footer } from "@/components/korea/Footer";
 
-const SITE_URL = "https://japan.pointcamp.com.ua/";
+const SITE_URL = "https://korea.pointcamp.com.ua/";
 const ORG_ID = "https://pointcamp.com.ua/#organization";
+
+const TITLE = "PointCamp Korea 2027 — весняні канікули в Південній Кореї";
+const DESCRIPTION =
+  "Весняні канікули в Південній Кореї для підлітків: 10 днів, 9 ночей у Сеулі, Кенджу і Пусані. Перекладач Корейсько-українського центру весь час із групою, поруч троє дорослих PointCamp.";
 
 /**
  * JSON-LD @graph: the brand (same @id on every Point Camp landing, so crawlers and
- * AI search merge them into one entity) and this page. The autumn 2026 trip is over,
- * so there is deliberately no Event/Offer node: add one (dates, price, availability)
- * together with the next season's copy. Everything here must match the visible page.
+ * AI search merge them into one entity) and this page. No Event/Offer node yet: the
+ * group dates are still placeholders (src/lib/korea.ts); add it once they are known.
+ * Everything here must match the visible page.
  */
 function structuredData() {
   return {
@@ -53,9 +54,8 @@ function structuredData() {
         "@type": "WebPage",
         "@id": `${SITE_URL}#webpage`,
         url: SITE_URL,
-        name: "Point Camp · Japan — подорож до Японії для підлітків та молоді",
-        description:
-          "Подорож до Японії для підлітків та молоді: Токіо, Кіото, Нара, Осака. Досвід, менторство і безпека — 10 днів, що змінюють уявлення про світ.",
+        name: TITLE,
+        description: DESCRIPTION,
         inLanguage: "uk",
         primaryImageOfPage: `${SITE_URL}og-image.jpg`,
         publisher: { "@id": ORG_ID },
@@ -67,21 +67,13 @@ function structuredData() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Point Camp · Japan 2026 — подорож, що змінює уявлення про світ" },
-      {
-        name: "description",
-        content:
-          "Подорож до Японії для підлітків та молоді: Токіо, Кіото, Нара, Осака. Досвід, менторство і безпека — 10 днів, що змінюють уявлення про світ.",
-      },
-      { property: "og:title", content: "Point Camp · Japan 2026" },
-      {
-        property: "og:description",
-        content:
-          "Подорож до Японії для підлітків та молоді: Токіо, Кіото, Нара, Осака. Досвід, менторство і безпека — 10 днів, що змінюють уявлення про світ.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://japan.pointcamp.com.ua/" },
-      { property: "og:image", content: "https://japan.pointcamp.com.ua/og-image.jpg" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: `${SITE_URL}og-image.jpg` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -99,24 +91,21 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="relative bg-background text-ink min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-clip bg-paper text-ink">
       <Header />
       <main>
         <Hero />
-        <Intro />
+        <About />
         <WhyUs />
         <Reviews />
-        <WhyJapan />
-        <Omotenashi />
+        <WhyKorea />
+        <Partner />
         <RouteSection />
         <Program />
         <Price />
-        <Moments />
         <FinalCTA />
       </main>
       <Footer />
-      <StickyApplyButton />
-      <SoldOutModal />
     </div>
   );
 }

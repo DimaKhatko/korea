@@ -44,4 +44,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://japan.pointcamp.com.ua/sitemap.xml
+Sitemap: https://korea.pointcamp.com.ua/sitemap.xml

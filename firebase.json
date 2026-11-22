@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "target": "japan",
+    "target": "korea",
     "public": "dist/client",
     "ignore": [
       "firebase.json",

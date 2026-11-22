@@ -3,7 +3,7 @@ import photoHanbok from "@/assets/korea/photo-seoul-hanbok.webp";
 import photoHaeundae from "@/assets/korea/photo-busan-haeundae.webp";
 import stamp10Days from "@/assets/korea/stamp-10-days.png";
 import markerArrow from "@/assets/korea/marker-arrow-red.svg";
-import { GROUP_1_DATES, GROUP_2_DATES, PRICE_EUR } from "@/lib/korea";
+import { PRICE_EUR, TRIP_DATES } from "@/lib/korea";
 
 /** Per-element tilt for pk-* collage pieces (they rotate by var(--tilt)). */
 const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
@@ -45,8 +45,7 @@ export function Hero() {
 
           <div className="flex flex-wrap gap-2 lg:gap-2.5">
             <span className="pk-tag">Сеул – Кенджу – Пусан – Сеул</span>
-            <span className="pk-tag">Група 1: {GROUP_1_DATES}</span>
-            <span className="pk-tag">Група 2: {GROUP_2_DATES}</span>
+            <span className="pk-tag">{TRIP_DATES}</span>
           </div>
 
           <div className="mt-1 flex flex-col gap-1.5 lg:flex-row lg:flex-wrap lg:items-baseline lg:gap-3.5">

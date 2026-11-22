@@ -1,5 +1,5 @@
 import starSticker from "@/assets/korea/sticker-star-holo.png";
-import { GROUP_1_DATES, GROUP_2_DATES, PRICE_EUR } from "@/lib/korea";
+import { PRICE_EUR, TRIP_DATES } from "@/lib/korea";
 import { PaperDivider } from "./PaperDivider";
 
 /* ---------- Copy and data (edit here) */
@@ -61,10 +61,7 @@ export function Price() {
             <p className="pk-price m-0 text-[52px] whitespace-nowrap lg:text-[64px]">{`${PRICE_EUR} €`}</p>
             <div className="flex flex-col gap-2 text-[15px] leading-[1.5] text-ink-soft">
               <span>
-                <strong className="text-ink">Група 1:</strong> {GROUP_1_DATES}
-              </span>
-              <span>
-                <strong className="text-ink">Група 2:</strong> {GROUP_2_DATES}
+                <strong className="text-ink">Дати:</strong> {TRIP_DATES}
               </span>
             </div>
             <a className="pk-btn box-border min-h-14 w-full" href="#form">

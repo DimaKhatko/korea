@@ -33,15 +33,13 @@ function Deferred({ children }: { children: ReactNode }) {
 }
 
 import {
-  GROUP_1_ISO,
-  GROUP_2_ISO,
   MAX_GROUP_SIZE,
   PARTICIPANT_AGE,
   PRICE_EUR,
   SEARCH_INDEXABLE,
   ageRange,
   groupSize,
-  isoDates,
+  tripDates,
 } from "@/lib/korea";
 
 const SITE_URL = "https://korea.pointcamp.com.ua/";
@@ -72,26 +70,14 @@ const ITINERARY = [
 
 /**
  * JSON-LD @graph: the brand (same @id on every Point Camp landing, so crawlers and AI
- * search merge them into one entity), this page and the trip with its offer. Dates, age
- * and group size are added only once src/lib/korea.ts holds real values, never as
- * placeholders. Everything here must match the visible page.
+ * search merge them into one entity), this page and the trip (one group, 21–30.03.2027)
+ * with its offer. Dates, age and group size are added only once src/lib/korea.ts holds
+ * real values, never as placeholders. Everything here must match the visible page.
  */
 function structuredData() {
   const age = ageRange(PARTICIPANT_AGE);
   const capacity = groupSize(MAX_GROUP_SIZE);
-  const groups = [GROUP_1_ISO, GROUP_2_ISO]
-    .map(isoDates)
-    .map((dates, i) =>
-      dates
-        ? {
-            "@type": "Trip",
-            name: `Група ${i + 1}`,
-            departureTime: dates.start,
-            arrivalTime: dates.end,
-          }
-        : null,
-    )
-    .filter((group) => group !== null);
+  const dates = tripDates();
 
   return {
     "@context": "https://schema.org",
@@ -177,7 +163,7 @@ function structuredData() {
               },
             }
           : {}),
-        ...(groups.length ? { subTrip: groups } : {}),
+        ...(dates ? { departureTime: dates.start, arrivalTime: dates.end } : {}),
       },
     ],
   };

@@ -4,9 +4,12 @@
  * _reference/korea-design/HANDOFF.md) until real values arrive; replace them here only.
  */
 
-/** Group dates, «Група 1: [ДАТИ]» / «Група 2: [ДАТИ]». */
-export const GROUP_1_DATES = "[ДАТИ]";
-export const GROUP_2_DATES = "[ДАТИ]";
+/** Trip dates as shown on the page (one group): Hero tag, About card, Price. */
+export const TRIP_DATES = "21–30 березня 2027";
+
+/** The same dates, machine-readable (ISO YYYY-MM-DD), for the JSON-LD trip. */
+export const START_ISO = "2027-03-21";
+export const END_ISO = "2027-03-30";
 
 /** Participant age, «Підлітки [ВІК]». */
 export const PARTICIPANT_AGE = "[ВІК]";
@@ -20,13 +23,6 @@ export const GROUP_PHOTO = "[ФОТО]";
 /** Trip price in euros. Shown as «3150 €», without «від». */
 export const PRICE_EUR = 3150;
 
-/**
- * Machine-readable group dates (ISO YYYY-MM-DD) for the JSON-LD trip. Fill them together
- * with GROUP_1_DATES / GROUP_2_DATES; while empty, no dates are published to search engines.
- */
-export const GROUP_1_ISO = { start: "", end: "" };
-export const GROUP_2_ISO = { start: "", end: "" };
-
 /* ---------- Derived (do not edit) */
 
 /** True while a value still contains a «[…]» placeholder. */
@@ -38,8 +34,7 @@ export const isPlaceholder = (value: string): boolean => /\[[^\]]*\]/.test(value
  * (scripts/write-seo.mjs). Both switch back on the next build once all are real.
  */
 export const PENDING_PLACEHOLDERS: string[] = Object.entries({
-  GROUP_1_DATES,
-  GROUP_2_DATES,
+  TRIP_DATES,
   PARTICIPANT_AGE,
   MAX_GROUP_SIZE,
 })
@@ -62,10 +57,9 @@ export function groupSize(value: string): number | null {
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
-/** A group's ISO dates when both are filled in, else null. */
-export function isoDates(dates: {
-  start: string;
-  end: string;
-}): { start: string; end: string } | null {
-  return ISO_DATE.test(dates.start) && ISO_DATE.test(dates.end) ? dates : null;
+/** Trip start/end for the JSON-LD when both are valid ISO dates, else null. */
+export function tripDates(): { start: string; end: string } | null {
+  return ISO_DATE.test(START_ISO) && ISO_DATE.test(END_ISO)
+    ? { start: START_ISO, end: END_ISO }
+    : null;
 }

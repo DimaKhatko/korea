@@ -6,15 +6,14 @@ import photoSeoulKoreaUniversity from "@/assets/korea/photo-seoul-korea-universi
 import photoSeoulHanRiver from "@/assets/korea/photo-seoul-han-river.webp";
 import photoSeoulLotteWorld from "@/assets/korea/photo-seoul-lotte-world.webp";
 import photoGyeongjuTombs from "@/assets/korea/photo-gyeongju-tombs.webp";
-import photoBusanSkyCapsule from "@/assets/korea/photo-busan-sky-capsule.webp";
 import photoBusanArteMuseum from "@/assets/korea/photo-busan-arte-museum.webp";
 import photoBusanDroneShow from "@/assets/korea/photo-busan-drone-show.webp";
 import photoSeoulShop from "@/assets/korea/photo-seoul-shop.webp";
 
 /* ---------- Copy and data (edit here)
- * Several day texts were deliberately softened after fact-checking (day 4 Lotte World
- * without Magic Pass, day 6 no cable car, day 8 drone show «по суботах… якщо дозволить
- * погода»). Keep them as they are. */
+ * Programme for the single group 21–30.03.2027, day texts as supplied by the client.
+ * Day 5 keeps the softened Lotte World text (no Magic Pass details, the rules changed in
+ * 2026); the drone show on day 7 stays «якщо дозволить погода». */
 
 type Photo = { src: string; width: number; height: number; alt: string };
 
@@ -36,19 +35,29 @@ type DayRow = {
   title: string;
   text: string;
   tags: string[];
-  /** null: no photo (day 10), a plane sticker fills the media area. */
+  /** null: no photo (arrival day 1, departure day 10): the plane sticker replaces the number
+   * on the rail and fills the media area. */
   photo: Photo | null;
 };
 
 /** Timeline in order: city header rows followed by their days. */
 const TIMELINE: (CityRow | DayRow)[] = [
-  { type: "city", kr: "서울", name: "Сеул", label: "Дні 1–4" },
+  { type: "city", kr: "서울", name: "Сеул", label: "Дні 1–5" },
   {
     type: "day",
     day: 1,
     kr: "첫째 날",
+    title: "Приліт до Сеула",
+    text: "Зустрічаємо групу в аеропорту Інчхон і заселяємося в готель. Перший день — на адаптацію до часового поясу: брифінг про правила й безпеку, знайомство з містом, перша спільна вечеря.",
+    tags: ["Інчхон", "Брифінг", "Адаптація"],
+    photo: null,
+  },
+  {
+    type: "day",
+    day: 2,
+    kr: "둘째 날",
     title: "Естетика стародавнього Сеула",
-    text: "Одягаємо ханбоки й ідемо на фотосесію до палацу Gyeongbokgung, гуляємо Bukchon Hanok Village, пробуємо стріт-фуд в Інсадоні.",
+    text: "Одягаємо ханбоки й ідемо на фотосесію до палацу Gyeongbokgung, дивимося зміну королівської варти, гуляємо Bukchon Hanok Village і пробуємо стріт-фуд в Інсадоні.",
     tags: ["Ханбок", "Gyeongbokgung", "Інсадон"],
     photo: {
       src: photoSeoulHanbok,
@@ -59,10 +68,10 @@ const TIMELINE: (CityRow | DayRow)[] = [
   },
   {
     type: "day",
-    day: 2,
-    kr: "둘째 날",
+    day: 3,
+    kr: "셋째 날",
     title: "K-pop вайб і панорама",
-    text: "Кампус-тур Korea University, знімаємо власний K-pop кліп у HiKR Ground, а на захід сонця піднімаємося на N Seoul Tower.",
+    text: "Кампус-тур Korea University, знімаємо власний K-pop кліп у HiKR Ground, гуляємо ханоковими провулками Ікседону, а на захід сонця піднімаємося на N Seoul Tower.",
     tags: ["Korea University", "K-pop кліп", "N Seoul Tower"],
     photo: {
       src: photoSeoulKoreaUniversity,
@@ -73,17 +82,22 @@ const TIMELINE: (CityRow | DayRow)[] = [
   },
   {
     type: "day",
-    day: 3,
-    kr: "셋째 날",
+    day: 4,
+    kr: "넷째 날",
     title: "Гангнам і футуризм",
-    text: "KWANGYA від SM, COEX і бібліотека Starfield, вулиці Gangnam Style, а ввечері — парк Yeouido Hangang біля річки.",
-    tags: ["KWANGYA", "Starfield", "Yeouido"],
-    photo: { src: photoSeoulHanRiver, width: 1000, height: 255, alt: "Річка Хан і квартали Сеула" },
+    text: "KWANGYA від SM, пікнік у парку Yeouido Hangang біля річки, а ввечері COEX, бібліотека Starfield і вулиці Gangnam Style.",
+    tags: ["KWANGYA", "Yeouido", "Starfield"],
+    photo: {
+      src: photoSeoulHanRiver,
+      width: 1000,
+      height: 255,
+      alt: "Річка Хан і квартали Сеула",
+    },
   },
   {
     type: "day",
-    day: 4,
-    kr: "넷째 날",
+    day: 5,
+    kr: "다섯째 날",
     title: "Lotte World на весь день",
     text: "Цілий день у парку розваг Lotte World. За бажанням — фото в корейській шкільній формі.",
     tags: ["Lotte World", "Шкільна форма"],
@@ -94,13 +108,13 @@ const TIMELINE: (CityRow | DayRow)[] = [
       alt: "Атракціони Lotte World серед квітучих дерев",
     },
   },
-  { type: "city", kr: "경주", name: "Кенджу", label: "День 5", stamp: true },
+  { type: "city", kr: "경주", name: "Кенджу", label: "День 6", stamp: true },
   {
     type: "day",
-    day: 5,
-    kr: "다섯째 날",
+    day: 6,
+    kr: "여섯째 날",
     title: "Кенджу — корейська «машина часу»",
-    text: "KTX до стародавньої столиці королівства Сілла і автобусний тур місцями ЮНЕСКО: замість хмарочосів — зелені пагорби-гробниці королів.",
+    text: "KTX до стародавньої столиці королівства Сілла і тур місцями ЮНЕСКО: храм Пульгукса, грот Соккурам, зелені пагорби-гробниці королів. Увечері переїжджаємо до Пусана.",
     tags: ["KTX", "ЮНЕСКО", "Сілла"],
     photo: {
       src: photoGyeongjuTombs,
@@ -109,47 +123,33 @@ const TIMELINE: (CityRow | DayRow)[] = [
       alt: "Пагорби-гробниці королів Сілла в Кенджу",
     },
   },
-  { type: "city", kr: "부산", name: "Пусан", label: "Дні 6–8" },
-  {
-    type: "day",
-    day: 6,
-    kr: "여섯째 날",
-    title: "Пусан — місто океану",
-    text: "KTX до Пусана, погляд на океан зі 100-го поверху Busan X the Sky і прогулянка над морем.",
-    tags: ["KTX", "X the Sky", "Узбережжя"],
-    photo: {
-      src: photoBusanSkyCapsule,
-      width: 600,
-      height: 490,
-      alt: "Капсула Sky Capsule над узбережжям Пусана",
-    },
-  },
+  { type: "city", kr: "부산", name: "Пусан", label: "Дні 7–8" },
   {
     type: "day",
     day: 7,
     kr: "일곱째 날",
-    title: "ARTE Museum і захід сонця",
-    text: "Цифрові зали ARTE Museum Busan, прогулянка узбережжям і захід сонця над океаном.",
-    tags: ["ARTE Museum", "Захід сонця"],
+    title: "Пусан — місто океану",
+    text: "Пляж Haeundae, океан зі 100-го поверху Busan X the Sky, кольорові вулички Gamcheon і канатка над морем. Увечері — пляж Gwangalli і шоу дронів над мостом, якщо дозволить погода.",
+    tags: ["X the Sky", "Gamcheon", "Шоу дронів"],
     photo: {
-      src: photoBusanArteMuseum,
-      width: 640,
-      height: 520,
-      alt: "Діти в залі ARTE Museum Busan",
+      src: photoBusanDroneShow,
+      width: 620,
+      height: 440,
+      alt: "Шоу дронів над пляжем Gwangalli",
     },
   },
   {
     type: "day",
     day: 8,
     kr: "여덟째 날",
-    title: "Пляж Gwangalli",
-    text: "Пляж Gwangalli і сувеніри. По суботах увечері над пляжем шоу дронів — якщо дозволить погода.",
-    tags: ["Gwangalli", "Сувеніри", "Шоу дронів"],
+    title: "ARTE Museum і стежка над океаном",
+    text: "Пляжний поїзд Blueline Park уздовж узбережжя, цифрові зали ARTE Museum Busan і прибережна стежка Igidae на захід сонця.",
+    tags: ["Blueline Park", "ARTE Museum", "Igidae"],
     photo: {
-      src: photoBusanDroneShow,
-      width: 620,
-      height: 440,
-      alt: "Шоу дронів над пляжем Gwangalli",
+      src: photoBusanArteMuseum,
+      width: 640,
+      height: 520,
+      alt: "Діти в залі ARTE Museum Busan",
     },
   },
   { type: "city", kr: "서울", name: "Сеул", label: "Дні 9–10" },
@@ -158,9 +158,14 @@ const TIMELINE: (CityRow | DayRow)[] = [
     day: 9,
     kr: "아홉째 날",
     title: "Шопінг і прощальна вечеря",
-    text: "KTX назад до Сеула, шопінг — канцелярія, косметика, K-pop альбоми — і прощальна вечеря всією групою.",
-    tags: ["KTX", "Шопінг", "Прощальна вечеря"],
-    photo: { src: photoSeoulShop, width: 560, height: 440, alt: "Вітрина корейського магазину" },
+    text: "Повертаємося до Сеула, останній шопінг — канцелярія, косметика, K-pop альбоми — і прощальна вечеря всією групою.",
+    tags: ["Сеул", "Шопінг", "Прощальна вечеря"],
+    photo: {
+      src: photoSeoulShop,
+      width: 560,
+      height: 440,
+      alt: "Вітрина корейського магазину",
+    },
   },
   {
     type: "day",
@@ -172,9 +177,6 @@ const TIMELINE: (CityRow | DayRow)[] = [
     photo: null,
   },
 ];
-
-/** The last day gets the plane instead of a number on the rail. */
-const LAST_DAY = 10;
 
 const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
 
@@ -252,11 +254,12 @@ function CityHeader({ row }: { row: CityRow }) {
 }
 
 function DayItem({ row }: { row: DayRow }) {
-  const isLast = row.day === LAST_DAY;
+  /** Days without a photo (arrival, departure) show the plane on the rail and in the media area. */
+  const isTravelDay = row.photo === null;
   return (
     <li className="grid grid-cols-[44px_1fr] items-start gap-4 py-2.5 lg:grid-cols-[72px_1fr]">
       <span className="grid place-items-center pt-3.5 lg:pt-6">
-        {isLast ? (
+        {isTravelDay ? (
           <img
             className="pk-sticker block w-[52px] lg:w-16"
             src={planeHolo}

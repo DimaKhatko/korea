@@ -12,7 +12,7 @@ type Leg =
 
 const LEGS: Leg[] = [
   { title: "Приліт до Сеула", detail: "день 1", marker: "plane", tilt: 90 },
-  { title: "Сеул → Кенджу", detail: "KTX, близько 2 год · день 5", marker: "ring" },
+  { title: "Сеул → Кенджу", detail: "KTX, близько 2 год · день 6", marker: "ring" },
   { title: "Кенджу → Пусан", detail: "KTX, близько 30 хв · день 6", marker: "ring" },
   { title: "Пусан → Сеул", detail: "KTX, близько 2,5 год · день 9", marker: "ring" },
   { title: "Виліт до Європи", detail: "день 10", marker: "plane", tilt: 0 },

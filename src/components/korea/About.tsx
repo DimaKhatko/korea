@@ -3,7 +3,7 @@ import planeHolo from "@/assets/korea/plane-holo.png";
 import photoHanRiver from "@/assets/korea/photo-seoul-han-river.webp";
 import photoGyeongjuTombs from "@/assets/korea/photo-gyeongju-tombs.webp";
 import photoArteMuseum from "@/assets/korea/photo-busan-arte-museum.webp";
-import { GROUP_1_DATES, GROUP_2_DATES, MAX_GROUP_SIZE, PARTICIPANT_AGE } from "@/lib/korea";
+import { MAX_GROUP_SIZE, PARTICIPANT_AGE, TRIP_DATES } from "@/lib/korea";
 
 /* ---------- Copy and data (edit here) */
 
@@ -13,7 +13,7 @@ const FACTS: Fact[] = [
   {
     glyph: "날",
     title: "10 днів, 9 ночей",
-    text: `Весняні канікули, березень 2027. Дві групи: ${GROUP_1_DATES} і ${GROUP_2_DATES}.`,
+    text: `Весняні канікули: ${TRIP_DATES}.`,
     lime: true,
   },
   { glyph: "길", title: "3 міста", text: "Між містами їдемо швидкісним потягом KTX." },

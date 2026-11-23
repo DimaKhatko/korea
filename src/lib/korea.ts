@@ -20,9 +20,6 @@ export const PARTICIPANT_AGE = "10–20 років";
  */
 export const MAX_GROUP_SIZE = "20";
 
-/** Slot for a PointCamp group photo in WhyUs, shown as «[ФОТО]» until the photo is supplied. */
-export const GROUP_PHOTO = "[ФОТО]";
-
 /** Trip price in euros. Shown as «3150 €», without «від». */
 export const PRICE_EUR = 3150;
 

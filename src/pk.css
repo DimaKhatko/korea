@@ -148,3 +148,8 @@
   box-sizing: content-box;
 }
 }
+.pk-collage__item{top:var(--m-top);left:var(--m-left);width:var(--m-w)}
+@media (min-width:1024px){.pk-collage__item{top:var(--d-top);left:var(--d-left);width:var(--d-w)}}
+.pk-polaroid{padding:10px 10px 0}
+.pk-polaroid__caption{display:block;padding:8px 2px 10px;font:900 12px/1.2 var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+@media (min-width:1024px){.pk-polaroid{padding:12px 12px 0}.pk-polaroid__caption{padding:10px 2px 14px;font-size:13px}}

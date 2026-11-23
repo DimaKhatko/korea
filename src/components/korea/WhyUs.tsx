@@ -1,5 +1,5 @@
 import heartSticker from "@/assets/korea/sticker-heart-red.png";
-import { GROUP_PHOTO } from "@/lib/korea";
+import { GroupCollage } from "./GroupCollage";
 import { PaperDivider } from "./PaperDivider";
 
 /* ---------- Copy and data (edit here; the client will rewrite this section's copy) */
@@ -8,7 +8,7 @@ const COPY = {
   eyebrow: "Чому з нами",
   title: "Табори й подорожі для дітей і підлітків з 2011 року",
   intro: "Азія — наш новий напрямок: після трьох груп у Японії відкриваємо Корею і Китай.",
-  photoCaption: "Група PointCamp у Японії",
+  photoCaption: "Наші групи в Японії та Хорватії",
 };
 
 type Stat = { value: string; text: string; lime?: boolean };
@@ -19,17 +19,6 @@ const STATS: Stat[] = [
   { value: "51", text: "мандрівник уже побував з нами в Японії за три поїздки.", lime: true },
   { value: "3 країни", text: "Азії у 2027: Японія, Корея і Китай." },
 ];
-
-/**
- * Group photo: drop a file named photo-pointcamp-group.(webp|jpg|jpeg|png) into
- * src/assets/korea/ and it replaces the dashed «[ФОТО]» box on the next build.
- * The frame keeps its size (4:3 below lg, column height from lg), the photo is cropped to fit.
- */
-const groupPhotoFiles = import.meta.glob<string>(
-  "../../assets/korea/photo-pointcamp-group.{webp,jpg,jpeg,png}",
-  { eager: true, query: "?url", import: "default" },
-);
-const groupPhotoSrc: string | undefined = Object.values(groupPhotoFiles)[0];
 
 /**
  * Why-us from 03-why-us (#why): paper divider with the heart, intro, four stat cards and
@@ -54,26 +43,7 @@ export function WhyUs() {
             </p>
           </div>
 
-          {groupPhotoSrc ? (
-            <figure className="m-0 aspect-[4/3] w-full overflow-hidden rounded-sm border-2 border-ink bg-paper-light lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:aspect-auto lg:min-h-[520px]">
-              <img
-                src={groupPhotoSrc}
-                alt={COPY.photoCaption}
-                width={1200}
-                height={900}
-                loading="lazy"
-                className="block size-full object-cover"
-              />
-            </figure>
-          ) : (
-            <figure className="m-0 grid aspect-[4/3] w-full place-items-center rounded-sm border-2 border-dashed border-ink-line bg-paper-light p-6 text-center lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:aspect-auto lg:min-h-[520px]">
-              <figcaption className="text-[15px] leading-[1.5] font-bold text-ink-soft">
-                {GROUP_PHOTO}
-                <br />
-                {COPY.photoCaption}
-              </figcaption>
-            </figure>
-          )}
+          <GroupCollage caption={COPY.photoCaption} />
 
           <div className="grid grid-cols-2 gap-3 lg:col-start-1 lg:row-start-2 lg:gap-5 lg:self-start">
             {STATS.map((stat) => (

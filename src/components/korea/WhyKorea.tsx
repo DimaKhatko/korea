@@ -68,7 +68,7 @@ const CARDS: Card[] = [
       src: photoSeoulStreetFood,
       width: 330,
       height: 310,
-      alt: "Вуличний кухар готує їжу на ринку в Сеулі",
+      alt: "Корн-доги й пиріжки на вуличному лотку в Сеулі",
     },
   },
 ];

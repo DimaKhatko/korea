@@ -136,7 +136,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
       src: photoBusanDroneShow,
       width: 620,
       height: 440,
-      alt: "Шоу дронів над пляжем Gwangalli",
+      alt: "Пляж Haeundae у Пусані: океан і хмарочоси",
     },
   },
   {
@@ -150,7 +150,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
       src: photoBusanArteMuseum,
       width: 640,
       height: 520,
-      alt: "Діти в залі ARTE Museum Busan",
+      alt: "Зал ARTE Museum з проєкціями квітів",
     },
   },
   { type: "city", kr: "서울", name: "Сеул", label: "Дні 9–10" },
@@ -165,7 +165,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
       src: photoSeoulShop,
       width: 560,
       height: 440,
-      alt: "Вітрина корейського магазину",
+      alt: "Вечірня вулиця Мьондону з вивісками магазинів косметики й канцелярії",
     },
   },
   {

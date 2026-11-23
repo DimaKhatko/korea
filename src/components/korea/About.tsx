@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import planeHolo from "@/assets/korea/plane-holo.png";
 import photoHanRiver from "@/assets/korea/photo-seoul-han-river.webp";
 import photoGyeongjuTombs from "@/assets/korea/photo-gyeongju-tombs.webp";
-import photoArteMuseum from "@/assets/korea/photo-busan-arte-museum.webp";
+import photoBusanCoast from "@/assets/korea/photo-busan-coast.webp";
 import { MAX_GROUP_SIZE, PARTICIPANT_AGE, TRIP_DATES } from "@/lib/korea";
 
 /* ---------- Copy and data (edit here) */
@@ -61,10 +61,10 @@ const PHOTOS: Photo[] = [
     label: "Кенджу",
   },
   {
-    src: photoArteMuseum,
+    src: photoBusanCoast,
     width: 640,
     height: 520,
-    alt: "Зал ARTE Museum Busan з проєкціями квітів",
+    alt: "Пусан: трамвайчики Blueline Park над океаном і хмарочоси Haeundae",
     label: "Пусан",
   },
 ];

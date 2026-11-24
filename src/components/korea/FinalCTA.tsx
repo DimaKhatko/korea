@@ -17,10 +17,7 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
  */
 export function FinalCTA() {
   return (
-    <section
-      id="contact"
-      className="pk-paper overflow-hidden border-t border-line"
-    >
+    <section id="contact" className="pk-paper overflow-hidden border-t border-line">
       <div className="mx-auto flex flex-col gap-[18px] px-5 py-16 md:max-w-[680px] lg:grid lg:max-w-[1280px] lg:grid-cols-2 lg:items-start lg:gap-16 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-[18px] lg:gap-5">
           <p className="m-0 flex items-baseline gap-2.5 text-[14px] font-black tracking-[0.06em] text-ink-soft uppercase">

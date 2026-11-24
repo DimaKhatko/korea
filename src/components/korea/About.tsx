@@ -83,10 +83,7 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
  */
 export function About() {
   return (
-    <section
-      id="about"
-      className="pk-paper border-t border-line"
-    >
+    <section id="about" className="pk-paper border-t border-line">
       <div className="mx-auto flex flex-col gap-5 px-5 py-16 md:max-w-[680px] lg:max-w-[1280px] lg:gap-10 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-5 lg:grid lg:grid-cols-2 lg:items-start lg:gap-12">
           <div className="flex flex-col gap-5">

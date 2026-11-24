@@ -72,10 +72,7 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
  */
 export function WhyKorea() {
   return (
-    <section
-      id="why-korea"
-      className="pk-paper border-t border-line"
-    >
+    <section id="why-korea" className="pk-paper border-t border-line">
       <div className="mx-auto flex flex-col gap-5 py-16 md:max-w-[680px] md:px-5 lg:max-w-[1280px] lg:gap-12 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-5 px-5 md:px-0 lg:max-w-[760px]">
           <p className="m-0 flex items-baseline gap-2.5 text-[14px] font-black tracking-[0.06em] text-ink-soft uppercase">

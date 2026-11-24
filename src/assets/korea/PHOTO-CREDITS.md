@@ -1,28 +1,42 @@
-# Фото лендингу Korea: джерела
+# Фото лендингу Korea: джерела й ліцензії
 
-Усі фото перевірені Дімою як дозволені до використання (23.11.2026). Люди в кадрі не давали згоди на рекламу, тому фото без крупних облич.
+Діма перевірив усі фото як дозволені до використання на сайті (23.11.2026). Люди в кадрі не давали згоди на рекламу, тому фото без крупних облич.
 
-| Файл | Що в кадрі | Джерело |
-|---|---|---|
-| photo-seoul-hanbok.webp | Ханбоки біля брами Кванхвамун | https://unsplash.com/photos/nRUl54RIPeE (Hsinkai Tai) |
-| photo-seoul-han-river.webp | Річка Хан, Lotte World Tower | https://unsplash.com/photos/2csH9SjutAM (Jiwon Kang) |
-| photo-seoul-neon-street.webp | Вечірня вулиця з неоном | https://unsplash.com/photos/… (photo-1517154421773) |
-| photo-seoul-shop.webp | Мьондон удень, ART BOX | https://unsplash.com/photos/-sUFxh7wQqY (uchiha) |
-| photo-seoul-korea-university.webp | Головний корпус Korea University, колір виправлено | https://unsplash.com/photos/bsAIWt5T4aY (Ryoo Geon Uk) |
-| photo-busan-coast.webp | Капсули Blueline Park, Хеунде | https://unsplash.com/photos/SHAyPdfOUP0 (Jaythen Bag-ayan) |
-| photo-busan-haeundae.webp | Хеунде, вежа LCT | busan-2.jpg (Drive) |
-| photo-busan-drone-show.webp | Пляж Хеунде (тимчасово замість шоу дронів) | busan-3.jpg (Drive) |
-| photo-busan-arte-museum.webp | Зал ARTE Museum, квіти | Busan Arte 1.jpeg (Drive), 1180 px |
-| photo-gyeongju-tombs.webp | Кургани Сілла | кенджу.jpg (Drive) |
-| photo-seoul-gwanghwamun.webp | Брама Кванхвамун і гора Пугаксан | slide4-2.jpg (Drive) |
-| photo-seoul-sign-rooftop.webp | Напис SEOUL, Lotte World Tower | cover2.jpg (Drive) |
-| photo-seoul-street-food.webp | Вуличний лоток: корн-доги, пиріжки | streetfood.jpg (Drive) |
-| photo-seoul-lotte-world.webp | Lotte World, Magic Island, сакура | lotte2.jpg (Drive) |
+Перевірка 24.11.2026: сторінки Unsplash з робочого середовища недоступні (мережа), тому ліцензію кожного фото там не підтверджено. На Unsplash бувають безкоштовні фото (Unsplash License) і платні Unsplash+, з різними умовами. Перед рекламою треба відкрити кожне посилання й подивитися, що там написано. «невідомо» означає «не перевірено», а не «заборонено».
+
+Файли тут — джерела. На сторінку йдуть їхні варіанти з `responsive/` (`node scripts/images.mjs`).
+
+## Фото на сторінці
+
+| Файл | Де на сторінці | Джерело | Автор | Ліцензія | Сайт | Платна реклама |
+|---|---|---|---|---|---|---|
+| photo-seoul-hanbok.webp | Hero (колаж), Програма день 2, OG-картинка | https://unsplash.com/photos/nRUl54RIPeE | Hsinkai Tai | невідомо (Unsplash, не перевірено) | так (перевірено Дімою) | невідомо |
+| photo-seoul-han-river.webp | Про подорож (фото «Сеул»), Програма день 4 | https://unsplash.com/photos/2csH9SjutAM | Jiwon Kang | невідомо (Unsplash, не перевірено) | так (перевірено Дімою) | невідомо |
+| photo-seoul-neon-street.webp | Чому Корея (K-pop) | Unsplash, сторінку не записано (id зображення photo-1517154421773) | невідомо | невідомо | так (перевірено Дімою) | невідомо |
+| photo-seoul-shop.webp | Програма день 9 | https://unsplash.com/photos/-sUFxh7wQqY | uchiha | невідомо (Unsplash, не перевірено) | так (перевірено Дімою) | невідомо |
+| photo-seoul-korea-university.webp | Програма день 3 (колір виправлено) | https://unsplash.com/photos/bsAIWt5T4aY | Ryoo Geon Uk | невідомо (Unsplash, не перевірено) | так (перевірено Дімою) | невідомо |
+| photo-busan-coast.webp | Про подорож (фото «Пусан») | https://unsplash.com/photos/SHAyPdfOUP0 | Jaythen Bag-ayan | невідомо (Unsplash, не перевірено) | так (перевірено Дімою) | невідомо |
+| photo-busan-haeundae.webp | Hero (колаж), OG-картинка | Google Drive `busan-2.jpg` | невідомо | невідомо | так (перевірено Дімою) | невідомо |
+| photo-busan-drone-show.webp | Програма день 7 (пляж Хеунде, тимчасово замість шоу дронів) | Google Drive `busan-3.jpg` | невідомо | невідомо | так (перевірено Дімою) | невідомо |
+| photo-busan-arte-museum.webp | Програма день 8 | Google Drive `Busan Arte 1.jpeg` | невідомо | невідомо | так (перевірено Дімою) | невідомо |
+| photo-gyeongju-tombs.webp | Про подорож (фото «Кьонджу»), Програма день 6 | Google Drive `кенджу.jpg` | невідомо | невідомо | так (перевірено Дімою) | невідомо |
+| photo-seoul-gwanghwamun.webp | Чому Корея (традиції) | Google Drive `slide4-2.jpg` | невідомо | невідомо | так (перевірено Дімою) | невідомо |
+| photo-seoul-sign-rooftop.webp | Чому Корея (місто майбутнього), фінальний блок із формою | Google Drive `cover2.jpg` | невідомо | невідомо | так (перевірено Дімою) | невідомо |
+| photo-seoul-street-food.webp | Чому Корея (їжа) | Google Drive `streetfood.jpg` | невідомо | невідомо | так (перевірено Дімою) | невідомо |
+| photo-seoul-lotte-world.webp | Програма день 5 | Google Drive `lotte2.jpg` | невідомо | невідомо | так (перевірено Дімою) | невідомо |
 
 ## Власні фото PointCamp (колаж у «Чому з нами»), `pointcamp/`
 
-| Файл | Звідки |
-|---|---|
-| pc-tokyo.webp, pc-nara.webp, pc-shibuya.webp | Японія, репо `japan` (moment-10, moment-02, group) |
-| pc-croatia-kayak.webp, pc-adriatic.webp | Хорватія, репо `pointcamp-croatia` (moments-m4-kayak-group, moments-m1-sunset-girls) |
-| pc-winter.webp | Зимовий табір, Google Drive `PointWinterCamp00013.jpeg` |
+| Файл | Де на сторінці | Джерело | Автор | Ліцензія | Сайт | Платна реклама |
+|---|---|---|---|---|---|---|
+| pc-tokyo.webp | Чому з нами, «Токіо» | репо `japan`, moment-10 | PointCamp (фотограф невідомий) | власне фото | так | невідомо: у кадрі учасники, потрібні згоди |
+| pc-nara.webp | Чому з нами, «Нара» (лише десктоп) | репо `japan`, moment-02 | PointCamp (фотограф невідомий) | власне фото | так | невідомо: у кадрі учасники, потрібні згоди |
+| pc-shibuya.webp | Чому з нами, «Сібуя» (лише десктоп) | репо `japan`, group | PointCamp (фотограф невідомий) | власне фото | так | невідомо: у кадрі учасники, потрібні згоди |
+| pc-croatia-kayak.webp | Чому з нами, «Хорватія» | репо `pointcamp-croatia`, moments-m4-kayak-group | PointCamp (фотограф невідомий) | власне фото | так | невідомо: у кадрі учасники, потрібні згоди |
+| pc-adriatic.webp | Чому з нами, «Адріатика» (лише десктоп) | репо `pointcamp-croatia`, moments-m1-sunset-girls | PointCamp (фотограф невідомий) | власне фото | так | невідомо: у кадрі учасники, потрібні згоди |
+| pc-winter.webp | Чому з нами, «Зимовий табір» | Google Drive `PointWinterCamp00013.jpeg` | PointCamp (фотограф невідомий) | власне фото | так | невідомо: у кадрі учасники, потрібні згоди |
+
+## Інше
+
+- `og-image.jpg` — скриншот hero, на ньому photo-seoul-hanbok і photo-busan-haeundae, тому умови в нього ті самі.
+- Наклейки, штампи, текстура паперу, спрей, карта маршруту — з макета `_reference/korea-design/assets`, це не фото.

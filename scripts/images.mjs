@@ -29,8 +29,6 @@ const PHOTO_QUALITY = 72;
 /** Each delivered file stays under this; busy photos step their quality down to fit. */
 const MAX_BYTES = 150 * 1024;
 const MIN_QUALITY = 56;
-/** Photos the page does not use (kept as sources only). */
-const UNUSED = new Set(["photo-busan-sky-capsule"]);
 
 /** Decorations: one WebP each, at the design size unless `width` is given. */
 const DECOR_FROM = "_reference/korea-design/assets";
@@ -62,7 +60,6 @@ for (const job of PHOTO_JOBS) {
     .sort()) {
     const src = path.join(fromDir, file);
     const base = file.replace(/\.webp$/, "");
-    if (UNUSED.has(base)) continue;
     const meta = await sharp(src).metadata();
     const widths = [...new Set(WIDTHS.map((w) => Math.min(w, meta.width)))];
     for (const target of widths) {

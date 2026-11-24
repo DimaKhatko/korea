@@ -122,6 +122,12 @@ export const Route = createRootRoute({
         sizes: "16x16",
         href: `${import.meta.env.BASE_URL}favicon-16x16.png`,
       },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "48x48",
+        href: `${import.meta.env.BASE_URL}favicon-48x48.png`,
+      },
       { rel: "apple-touch-icon", href: `${import.meta.env.BASE_URL}apple-touch-icon.png` },
       { rel: "manifest", href: `${import.meta.env.BASE_URL}site.webmanifest` },
     ],

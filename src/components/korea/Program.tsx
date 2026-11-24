@@ -170,10 +170,7 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
  */
 export function Program() {
   return (
-    <section
-      id="program"
-      className="pk-paper border-t border-line"
-    >
+    <section id="program" className="pk-paper border-t border-line">
       <div className="mx-auto flex flex-col gap-6 pt-16 pr-3.5 pb-16 pl-3 md:max-w-[680px] lg:max-w-[1080px] lg:gap-10 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-4 pr-1.5 pl-2 lg:max-w-[760px] lg:gap-5 lg:px-0">
           <p className="m-0 flex items-baseline gap-2.5 text-[14px] font-black tracking-[0.06em] text-ink-soft uppercase">

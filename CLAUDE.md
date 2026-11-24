@@ -66,6 +66,7 @@ Prerender needs a working Vite preview server; sandbox environments that cannot 
 
 ## Pending
 - Re-shoot `src/assets/korea/og-image.jpg` if the hero changes (desktop 1440×756 screenshot of the top of the page with header nav/CTA, tags, price and buttons hidden, resized to 1200×630, JPEG q84).
-- All `photo-*.webp` are placeholders cut from the program PDF: replace with originals, keep the names, then run `node scripts/images.mjs`. `photo-busan-sky-capsule.webp` is currently unused (dropped from Program in Task 15).
+- All `photo-*.webp` are placeholders cut from the program PDF: replace with originals, keep the names, then run `node scripts/images.mjs`. Sources, authors and licence status: `src/assets/korea/PHOTO-CREDITS.md` (licences of Unsplash and Drive photos not verified yet: check before paid ads).
 - `src/server.ts` has a pre-existing prettier error (template code); `eslint .` fails on it until it is reformatted.
+- `vite-tsconfig-paths` deprecation notice on every build: the Lovable wrapper (also the latest 2.27.3) adds the plugin itself; it goes away when the wrapper switches to Vite's `resolve.tsconfigPaths`.
 - Root `NotFoundComponent` / `ErrorComponent` in `__root.tsx` are English template copy.

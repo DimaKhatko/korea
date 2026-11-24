@@ -3,12 +3,15 @@
  * src/assets/korea/responsive/<name>-<width>w.webp). Only the variants are bundled; the
  * full-size sources in src/assets/korea/ are never imported, so they never ship.
  */
+import DIMENSIONS from "../assets/korea/responsive/dimensions.json";
+
 const VARIANTS = import.meta.glob<string>("../assets/korea/responsive/*.webp", {
   eager: true,
   import: "default",
 });
 
-export type Responsive = { src: string; srcSet: string };
+/** `width`/`height`: the intrinsic size (largest variant) for the <img> attributes. */
+export type Responsive = { src: string; srcSet: string; width: number; height: number };
 
 /**
  * `src` (the variant closest to `fallbackWidth`, for browsers without srcset) and
@@ -25,8 +28,13 @@ export function responsive(name: string, fallbackWidth = 800): Responsive {
   if (entries.length === 0)
     throw new Error(`No width variants for "${name}" (run scripts/images.mjs)`);
   const fallback = entries.find((v) => v.width >= fallbackWidth) ?? entries[entries.length - 1];
+  const size = (DIMENSIONS as Record<string, number[] | undefined>)[name];
+  if (!size) throw new Error(`No dimensions for "${name}" (run scripts/images.mjs)`);
+  const [width, height] = size;
   return {
     src: fallback.url,
     srcSet: entries.map((v) => `${v.url} ${v.width}w`).join(", "),
+    width,
+    height,
   };
 }

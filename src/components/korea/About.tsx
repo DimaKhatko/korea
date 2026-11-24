@@ -45,8 +45,6 @@ type Photo = {
   img: Responsive;
   /** Rendered width: wide first photo, then two squares (see the grid below). */
   sizes: string;
-  width: number;
-  height: number;
   alt: string;
   label: string;
 };
@@ -58,24 +56,18 @@ const PHOTOS: Photo[] = [
   {
     img: responsive("photo-seoul-han-river"),
     sizes: SIZES_WIDE,
-    width: 1000,
-    height: 255,
     alt: "Сеул: річка Хан і квартали на тлі гір",
     label: "Сеул",
   },
   {
     img: responsive("photo-gyeongju-tombs"),
     sizes: SIZES_SQUARE,
-    width: 1060,
-    height: 570,
     alt: "Кьонджу: пагорби-гробниці королів Сілла",
     label: "Кьонджу",
   },
   {
     img: responsive("photo-busan-coast"),
     sizes: SIZES_SQUARE,
-    width: 640,
-    height: 520,
     alt: "Пусан: капсули Blueline Park над океаном і хмарочоси Хеунде",
     label: "Пусан",
   },
@@ -93,7 +85,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="kr-cv [--cv-h:1680px] lg:[--cv-h:1210px] pk-paper border-t border-line"
+      className="pk-paper border-t border-line"
     >
       <div className="mx-auto flex flex-col gap-5 px-5 py-16 md:max-w-[680px] lg:max-w-[1280px] lg:gap-10 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-5 lg:grid lg:grid-cols-2 lg:items-start lg:gap-12">
@@ -190,8 +182,8 @@ export function About() {
                 srcSet={photo.img.srcSet}
                 sizes={photo.sizes}
                 alt={photo.alt}
-                width={photo.width}
-                height={photo.height}
+                width={photo.img.width}
+                height={photo.img.height}
                 loading="lazy"
                 decoding="async"
                 className="block size-full object-cover"

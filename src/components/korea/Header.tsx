@@ -1,4 +1,5 @@
 import { Suspense, lazy, useRef, useState, type MouseEvent } from "react";
+import { useReplayWhenHydrated } from "@/lib/prehydration";
 import { Logo } from "./Logo";
 
 const loadMenu = () => import("./MobileMenu");
@@ -31,6 +32,8 @@ export function Header() {
   // The lazy menu is mounted on the first open and stays mounted (keeps its close animation).
   const [menuRequested, setMenuRequested] = useState(false);
   const burgerRef = useRef<HTMLButtonElement>(null);
+  // A tap on the burger before hydration was held by the inline guard; replayed here.
+  useReplayWhenHydrated(burgerRef);
   // Anchor picked in the menu: scrolled to once the sheet has closed and released the scroll lock.
   const pendingHash = useRef<string | null>(null);
 
@@ -100,6 +103,7 @@ export function Header() {
             type="button"
             aria-label="Відкрити меню"
             aria-haspopup="dialog"
+            data-replay=""
             aria-expanded={open}
             onClick={() => {
               setMenuRequested(true);

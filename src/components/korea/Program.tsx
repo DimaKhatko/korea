@@ -9,7 +9,7 @@ import stampUnesco from "@/assets/korea/stamp-unesco.webp";
  * changed in 2026); day 7 no cable car promise (Сондо may close for maintenance in March),
  * «прогулянка узбережжям Сондо» instead; drone show «якщо дозволить погода». */
 
-type Photo = { img: Responsive; width: number; height: number; alt: string };
+type Photo = { img: Responsive; alt: string };
 
 /** Rendered photo width: full card width below lg (max 590 px), the 340 px column from lg. */
 const PHOTO_SIZES = "(min-width: 1024px) 340px, (min-width: 680px) 590px, calc(100vw - 90px)";
@@ -58,8 +58,6 @@ const TIMELINE: (CityRow | DayRow)[] = [
     tags: ["Ханбок", "Кьонбоккун", "Інсадон"],
     photo: {
       img: responsive("photo-seoul-hanbok"),
-      width: 700,
-      height: 360,
       alt: "Дівчата в ханбоках біля палацу Кьонбоккун",
     },
   },
@@ -72,8 +70,6 @@ const TIMELINE: (CityRow | DayRow)[] = [
     tags: ["Korea University", "HiKR Ground", "N Seoul Tower"],
     photo: {
       img: responsive("photo-seoul-korea-university"),
-      width: 680,
-      height: 400,
       alt: "Головний корпус Korea University",
     },
   },
@@ -86,8 +82,6 @@ const TIMELINE: (CityRow | DayRow)[] = [
     tags: ["KWANGYA", "Йоідо", "Starfield"],
     photo: {
       img: responsive("photo-seoul-han-river"),
-      width: 1000,
-      height: 255,
       alt: "Річка Хан і квартали Сеула",
     },
   },
@@ -100,8 +94,6 @@ const TIMELINE: (CityRow | DayRow)[] = [
     tags: ["Lotte World", "Шкільна форма"],
     photo: {
       img: responsive("photo-seoul-lotte-world"),
-      width: 660,
-      height: 520,
       alt: "Атракціони Lotte World серед квітучих дерев",
     },
   },
@@ -115,8 +107,6 @@ const TIMELINE: (CityRow | DayRow)[] = [
     tags: ["KTX", "ЮНЕСКО", "Сілла"],
     photo: {
       img: responsive("photo-gyeongju-tombs"),
-      width: 1060,
-      height: 570,
       alt: "Пагорби-гробниці королів Сілла в Кьонджу",
     },
   },
@@ -130,8 +120,6 @@ const TIMELINE: (CityRow | DayRow)[] = [
     tags: ["X the Sky", "Камчхон", "Шоу дронів"],
     photo: {
       img: responsive("photo-busan-drone-show"),
-      width: 620,
-      height: 440,
       alt: "Пляж Хеунде у Пусані: океан і хмарочоси",
     },
   },
@@ -144,8 +132,6 @@ const TIMELINE: (CityRow | DayRow)[] = [
     tags: ["Blueline Park", "ARTE Museum", "Ігіде"],
     photo: {
       img: responsive("photo-busan-arte-museum"),
-      width: 640,
-      height: 520,
       alt: "Зал ARTE Museum з проєкціями квітів",
     },
   },
@@ -159,8 +145,6 @@ const TIMELINE: (CityRow | DayRow)[] = [
     tags: ["Сеул", "Шопінг", "Прощальна вечеря"],
     photo: {
       img: responsive("photo-seoul-shop"),
-      width: 560,
-      height: 440,
       alt: "Мьондон удень: магазини косметики й канцелярії ART BOX",
     },
   },
@@ -188,7 +172,7 @@ export function Program() {
   return (
     <section
       id="program"
-      className="kr-cv [--cv-h:5590px] lg:[--cv-h:3530px] pk-paper border-t border-line"
+      className="pk-paper border-t border-line"
     >
       <div className="mx-auto flex flex-col gap-6 pt-16 pr-3.5 pb-16 pl-3 md:max-w-[680px] lg:max-w-[1080px] lg:gap-10 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-4 pr-1.5 pl-2 lg:max-w-[760px] lg:gap-5 lg:px-0">
@@ -288,8 +272,8 @@ function DayItem({ row }: { row: DayRow }) {
               srcSet={row.photo.img.srcSet}
               sizes={PHOTO_SIZES}
               alt={row.photo.alt}
-              width={row.photo.width}
-              height={row.photo.height}
+              width={row.photo.img.width}
+              height={row.photo.img.height}
               loading="lazy"
               decoding="async"
               className="block size-full object-cover"

@@ -106,8 +106,8 @@ export function GroupCollage({ caption }: { caption: string }) {
                 srcSet={p.img.srcSet}
                 sizes={p.landscape ? SIZES_LANDSCAPE : SIZES_SQUARE}
                 alt={p.alt}
-                width={p.landscape ? 800 : 640}
-                height={p.landscape ? 600 : 640}
+                width={p.img.width}
+                height={p.img.height}
                 loading="lazy"
                 decoding="async"
                 className={`block w-full object-cover ${p.landscape ? "aspect-[4/3]" : "aspect-square"}`}

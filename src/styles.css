@@ -325,13 +325,21 @@
 }
 
 /*
- * Long sections below the first screens render only near the viewport
- * (content-visibility: auto): the browser skips their style, layout, paint and
- * background images on load. --cv-h is the placeholder height before the first render
- * (measured at 390 / 1440 px; `auto` remembers the real height afterwards). Not used on
- * sections with a PaperDivider: paint containment would clip its sticker.
+ * The footer renders only near the viewport (content-visibility: auto): the browser skips
+ * its style, layout and paint on load. --cv-h is its placeholder height before the first
+ * render (measured; `auto` remembers the real height afterwards). Only on the footer: it
+ * comes after every anchor target. On sections before a target, placeholder heights that
+ * differ from the real ones (they vary with the phone width) move the target during an
+ * anchor jump, and paint containment would clip PaperDivider stickers.
  */
 .kr-cv {
   content-visibility: auto;
   contain-intrinsic-block-size: auto var(--cv-h, 1000px);
+}
+
+/* A submit or tap held until hydration (src/lib/prehydration.ts): shown as busy. */
+form[data-pending] button[type="submit"],
+[data-replay][data-pending] {
+  cursor: progress;
+  opacity: 0.6;
 }

@@ -1,5 +1,6 @@
 import { useRef, useState, type FormEvent } from "react";
 import { submitLead, type LeadData } from "@/lib/lead";
+import { useReplayWhenHydrated } from "@/lib/prehydration";
 
 /* ---------- Copy (edit here) */
 
@@ -80,7 +81,8 @@ function validateField(field: FieldName, form: HTMLFormElement): string | undefi
  * Error: the form stays mounted but hidden (so its values survive) and the error block
  * takes its place; «Спробувати ще раз» shows the filled form again. The #form anchor sits
  * on the wrapper, so it works in every state.
- * method="post" so that a submit before hydration never puts personal data into the URL.
+ * Before hydration the inline guard (src/lib/prehydration.ts) holds a submit and replays
+ * it after hydration; method="post" stays as a last resort (no personal data in the URL).
  */
 export function LeadForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -89,6 +91,8 @@ export function LeadForm() {
   const successRef = useRef<HTMLDivElement>(null);
   const errorRef = useRef<HTMLDivElement>(null);
   const submitRef = useRef<HTMLButtonElement>(null);
+  // A submit made before hydration was held by the inline guard; it is replayed here.
+  useReplayWhenHydrated(formRef);
 
   function revalidate(field: FieldName) {
     if (!errors[field] || !formRef.current) return;

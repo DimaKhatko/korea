@@ -19,7 +19,7 @@ export function FinalCTA() {
   return (
     <section
       id="contact"
-      className="kr-cv [--cv-h:1300px] lg:[--cv-h:835px] pk-paper overflow-hidden border-t border-line"
+      className="pk-paper overflow-hidden border-t border-line"
     >
       <div className="mx-auto flex flex-col gap-[18px] px-5 py-16 md:max-w-[680px] lg:grid lg:max-w-[1280px] lg:grid-cols-2 lg:items-start lg:gap-16 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-[18px] lg:gap-5">
@@ -57,8 +57,8 @@ export function FinalCTA() {
                   srcSet={photoSignRooftop.srcSet}
                   sizes="(min-width: 1024px) 239px, 186px"
                   alt="Напис SEOUL на даху на тлі хмарочосів"
-                  width={900}
-                  height={759}
+                  width={photoSignRooftop.width}
+                  height={photoSignRooftop.height}
                   loading="lazy"
                   decoding="async"
                   className="block w-full"

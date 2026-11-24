@@ -13,6 +13,7 @@ import kyivTypeSansUrl from "../assets/fonts/KyivTypeSans-Sub.woff2?url";
 import paperTileUrl from "../assets/korea/paper-tile.webp?url";
 import { GTM_ID } from "@/lib/analytics";
 import { PAGE_TITLE } from "@/lib/korea";
+import { PREHYDRATION_GUARD } from "@/lib/prehydration";
 
 /**
  * Deferred Google Tag Manager (same loader as pointcamp-winter). `window.dataLayer` is
@@ -125,6 +126,8 @@ export const Route = createRootRoute({
       { rel: "manifest", href: `${import.meta.env.BASE_URL}site.webmanifest` },
     ],
     scripts: [
+      // Holds submits and taps on JS-only buttons until hydration (src/lib/prehydration.ts).
+      { children: PREHYDRATION_GUARD },
       // Declared before anything else runs; gtm.js itself is deferred (GTM_LOADER).
       { children: "window.dataLayer=window.dataLayer||[];" },
     ],

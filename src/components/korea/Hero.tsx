@@ -93,8 +93,8 @@ export function Hero() {
                 srcSet={photoHanbok.srcSet}
                 sizes="(min-width: 1024px) 386px, 283px"
                 alt="Дівчата в ханбоках біля палацу Кьонбоккун"
-                width={700}
-                height={360}
+                width={photoHanbok.width}
+                height={photoHanbok.height}
                 loading="eager"
                 fetchPriority="high"
               />
@@ -112,8 +112,8 @@ export function Hero() {
                 srcSet={photoHaeundae.srcSet}
                 sizes="223px"
                 alt="Пляж Хеунде в Пусані і хмарочоси над ним"
-                width={440}
-                height={330}
+                width={photoHaeundae.width}
+                height={photoHaeundae.height}
                 loading="lazy"
                 decoding="async"
                 className="aspect-[4/3] object-cover object-[50%_35%]"
@@ -132,8 +132,8 @@ export function Hero() {
                 srcSet={photoHaeundae.srcSet}
                 sizes="296px"
                 alt="Пляж Хеунде в Пусані і хмарочоси над ним"
-                width={440}
-                height={480}
+                width={photoHaeundae.width}
+                height={photoHaeundae.height}
                 loading="lazy"
                 decoding="async"
               />

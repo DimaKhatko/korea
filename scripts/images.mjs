@@ -6,11 +6,12 @@
 //    sources and are never imported: only their width variants are bundled, written to
 //    src/assets/korea/responsive/<name>-<width>w.webp and read by src/lib/responsive.ts.
 //    Widths larger than the source are clamped to the source width (never upscaled).
+//    Their sizes go to src/assets/korea/responsive/dimensions.json (width/height attributes).
 // 2. Decorations (paper tile, lime spray, stickers, stamps) are re-encoded as WebP from
 //    the design originals in _reference/korea-design/assets into src/assets/korea/.
 //
 // Re-running is idempotent.
-import { mkdirSync, readdirSync, statSync, unlinkSync } from "node:fs";
+import { mkdirSync, readdirSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -50,6 +51,8 @@ const DECOR_JOBS = [
 
 const kib = (bytes) => `${(bytes / 1024).toFixed(0)} KiB`;
 let total = 0;
+/** name -> [width, height] of its largest variant (its intrinsic size for <img width/height>). */
+const dimensions = {};
 
 mkdirSync(path.join(root, OUT), { recursive: true });
 for (const job of PHOTO_JOBS) {
@@ -77,12 +80,20 @@ for (const job of PHOTO_JOBS) {
       }
       total += statSync(out).size;
       const { height } = await sharp(out).metadata();
+      dimensions[base] = [width, height];
       console.log(
         `${path.relative(root, out)}  ${width}×${height}  q${quality}  ${kib(statSync(out).size)}`,
       );
     }
   }
 }
+
+// Read by src/lib/responsive.ts: every <img> gets the real intrinsic size, so the box the
+// browser reserves before the photo loads has the photo's aspect ratio (no layout shift).
+writeFileSync(
+  path.join(root, OUT, "dimensions.json"),
+  JSON.stringify(Object.fromEntries(Object.entries(dimensions).sort()), null, 2) + "\n",
+);
 
 for (const job of DECOR_JOBS) {
   const src = path.join(root, DECOR_FROM, job.file);

@@ -10,7 +10,7 @@ export function Faq() {
   return (
     <section
       id="faq"
-      className="kr-cv [--cv-h:2075px] lg:[--cv-h:1745px] pk-paper border-t border-line"
+      className="pk-paper border-t border-line"
     >
       <div className="mx-auto flex flex-col gap-6 px-5 py-16 md:max-w-[680px] min-[60rem]:grid min-[60rem]:max-w-[1280px] min-[60rem]:grid-cols-[1fr_1.9fr] min-[60rem]:items-start min-[60rem]:gap-14 min-[60rem]:px-10 min-[60rem]:py-24">
         <div className="flex flex-col gap-5 min-[60rem]:sticky min-[60rem]:top-24">

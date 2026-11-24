@@ -12,7 +12,7 @@ type Card = {
   /** Tilted paper label on the photo. */
   label: string;
   labelTone: "lime" | "ink";
-  photo: { img: Responsive; width: number; height: number; alt: string };
+  photo: { img: Responsive; alt: string };
 };
 
 const CARDS: Card[] = [
@@ -24,8 +24,6 @@ const CARDS: Card[] = [
     labelTone: "lime",
     photo: {
       img: responsive("photo-seoul-neon-street"),
-      width: 282,
-      height: 300,
       alt: "Вечірня вулиця Сеула з неоновими вивісками",
     },
   },
@@ -37,8 +35,6 @@ const CARDS: Card[] = [
     labelTone: "ink",
     photo: {
       img: responsive("photo-seoul-gwanghwamun"),
-      width: 310,
-      height: 205,
       alt: "Брама Кванхвамун палацу Кьонбоккун",
     },
   },
@@ -50,8 +46,6 @@ const CARDS: Card[] = [
     labelTone: "ink",
     photo: {
       img: responsive("photo-seoul-sign-rooftop"),
-      width: 320,
-      height: 270,
       alt: "Напис SEOUL на даху на тлі хмарочосів",
     },
   },
@@ -63,8 +57,6 @@ const CARDS: Card[] = [
     labelTone: "ink",
     photo: {
       img: responsive("photo-seoul-street-food"),
-      width: 330,
-      height: 310,
       alt: "Корн-доги й пиріжки на вуличному лотку в Сеулі",
     },
   },
@@ -82,7 +74,7 @@ export function WhyKorea() {
   return (
     <section
       id="why-korea"
-      className="kr-cv [--cv-h:980px] lg:[--cv-h:910px] pk-paper border-t border-line"
+      className="pk-paper border-t border-line"
     >
       <div className="mx-auto flex flex-col gap-5 py-16 md:max-w-[680px] md:px-5 lg:max-w-[1280px] lg:gap-12 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-5 px-5 md:px-0 lg:max-w-[760px]">
@@ -117,8 +109,8 @@ export function WhyKorea() {
                   srcSet={card.photo.img.srcSet}
                   sizes="(min-width: 1024px) 278px, (min-width: 768px) 304px, 290px"
                   alt={card.photo.alt}
-                  width={card.photo.width}
-                  height={card.photo.height}
+                  width={card.photo.img.width}
+                  height={card.photo.img.height}
                   loading="lazy"
                   decoding="async"
                 />

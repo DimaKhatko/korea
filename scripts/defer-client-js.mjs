@@ -8,7 +8,8 @@
 // the first paint. This script removes those modulepreload links and replaces the module
 // script with a tiny inline loader that injects the same script after the first
 // contentful paint (or on load, the first pointerdown / keydown / touchstart, or after 3 s,
-// whichever comes first). The build fails if the expected markup is not found.
+// whichever comes first), and re-adds the modulepreload links at that moment. The build
+// fails if the expected markup is not found.
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -26,11 +27,18 @@ const [tag, src] = scripts[0];
 const preloads = html.match(/<link rel="modulepreload" href="[^"]+"\/>/g) ?? [];
 if (preloads.length === 0) throw new Error("defer-client-js: no modulepreload links found");
 for (const link of preloads) html = html.replace(link, "");
+// Re-added by the loader together with the entry script, so the chunks still download in
+// parallel instead of one after another once loading starts.
+const preloadHrefs = preloads
+  .map((link) => link.match(/href="([^"]+)"/)[1])
+  .filter((h) => h !== src);
 
 // After the first-contentful-paint entry (plus one task), or on load, the first
 // interaction, or after 3 s, whichever comes first.
 const loader =
   "<script>(function(){var d=0;function go(){if(d)return;d=1;" +
+  `${JSON.stringify(preloadHrefs)}.forEach(function(h){var l=document.createElement("link");` +
+  'l.rel="modulepreload";l.href=h;document.head.appendChild(l)});' +
   'var s=document.createElement("script");s.type="module";' +
   `s.src=${JSON.stringify(src)};document.head.appendChild(s)}` +
   "function later(){setTimeout(go,0)}" +

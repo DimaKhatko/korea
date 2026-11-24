@@ -188,7 +188,7 @@ function IconList({ items }: { items: IconLink[] }) {
  */
 export function Footer() {
   return (
-    <footer className="kr-cv [--cv-h:1200px] lg:[--cv-h:515px] bg-ink text-sticker">
+    <footer className="kr-cv [--cv-h:1201px] md:[--cv-h:817px] lg:[--cv-h:513px] bg-ink text-sticker">
       <div className="mx-auto flex flex-col gap-8 px-5 pt-12 pb-8 md:max-w-[680px] md:gap-12 lg:max-w-[1280px] lg:px-10 lg:pt-[72px] lg:pb-9">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[1.5fr_0.9fr_1.3fr_1fr_1fr]">
           <div className="flex max-w-[360px] flex-col gap-[14px]">

@@ -68,7 +68,7 @@ export function Route() {
   return (
     <section
       id="route"
-      className="kr-cv [--cv-h:1185px] lg:[--cv-h:860px] pk-paper border-t border-line"
+      className="pk-paper border-t border-line"
     >
       <div className="mx-auto flex flex-col gap-5 px-5 py-16 md:max-w-[680px] lg:grid lg:max-w-[1280px] lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-10 lg:py-24">
         <div className="contents lg:flex lg:flex-col lg:gap-[22px]">

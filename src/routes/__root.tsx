@@ -10,7 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import kyivTypeSansUrl from "../assets/fonts/KyivTypeSans-Sub.woff2?url";
-import paperTileUrl from "../assets/korea/paper-tile.jpg?url";
+import paperTileUrl from "../assets/korea/paper-tile.webp?url";
 import { GTM_ID } from "@/lib/analytics";
 import { PAGE_TITLE } from "@/lib/korea";
 

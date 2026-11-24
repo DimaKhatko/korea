@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import lattice from "@/assets/korea/lattice.svg";
 import routeMap from "@/assets/korea/korea-route-map.svg";
-import planeHolo from "@/assets/korea/plane-holo.png";
+import planeHolo from "@/assets/korea/plane-holo.webp";
 
 /* ---------- Copy and data (edit here) */
 
@@ -66,7 +66,10 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
  */
 export function Route() {
   return (
-    <section id="route" className="pk-paper border-t border-line">
+    <section
+      id="route"
+      className="kr-cv [--cv-h:1185px] lg:[--cv-h:860px] pk-paper border-t border-line"
+    >
       <div className="mx-auto flex flex-col gap-5 px-5 py-16 md:max-w-[680px] lg:grid lg:max-w-[1280px] lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-10 lg:py-24">
         <div className="contents lg:flex lg:flex-col lg:gap-[22px]">
           <div className="order-1 flex flex-col gap-5 lg:order-none lg:gap-[22px]">
@@ -100,6 +103,7 @@ export function Route() {
                       width={256}
                       height={256}
                       loading="lazy"
+                      decoding="async"
                       style={tilt(leg.tilt)}
                     />
                   ) : (
@@ -130,6 +134,7 @@ export function Route() {
                 width={600}
                 height={783}
                 loading="lazy"
+                decoding="async"
                 className="block size-full"
               />
               {CITY_LABELS.map((city) => (
@@ -159,6 +164,7 @@ export function Route() {
                 width={256}
                 height={256}
                 loading="lazy"
+                decoding="async"
                 style={tilt(90)}
               />
             </figure>

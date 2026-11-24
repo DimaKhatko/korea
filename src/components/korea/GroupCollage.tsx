@@ -1,17 +1,16 @@
 import type { CSSProperties } from "react";
-import pcTokyo from "@/assets/korea/pointcamp/pc-tokyo.webp";
-import pcCroatiaKayak from "@/assets/korea/pointcamp/pc-croatia-kayak.webp";
-import pcWinter from "@/assets/korea/pointcamp/pc-winter.webp";
-import pcNara from "@/assets/korea/pointcamp/pc-nara.webp";
-import pcAdriatic from "@/assets/korea/pointcamp/pc-adriatic.webp";
-import pcShibuya from "@/assets/korea/pointcamp/pc-shibuya.webp";
+import { responsive, type Responsive } from "@/lib/responsive";
 
 /* ---------- Data (edit here). Own PointCamp photos from past trips and camps, square, the winter one 4:3. */
+
+/** Rendered widths: 3 photos stacked below lg, 6 small polaroids from lg. */
+const SIZES_SQUARE = "(min-width: 1024px) 200px, (min-width: 680px) 361px, 60vw";
+const SIZES_LANDSCAPE = "(min-width: 1024px) 235px, (min-width: 680px) 478px, 78vw";
 
 type Box = { top: string; left: string; width: string };
 
 type CollagePhoto = {
-  src: string;
+  img: Responsive;
   alt: string;
   label: string;
   tilt: number;
@@ -24,7 +23,7 @@ type CollagePhoto = {
 
 const PHOTOS: CollagePhoto[] = [
   {
-    src: pcTokyo,
+    img: responsive("pc-tokyo"),
     alt: "Група PointCamp стрибає на набережній у Токіо",
     label: "Токіо",
     tilt: -4,
@@ -32,7 +31,7 @@ const PHOTOS: CollagePhoto[] = [
     desktop: { top: "0%", left: "0%", width: "33%" },
   },
   {
-    src: pcCroatiaKayak,
+    img: responsive("pc-croatia-kayak"),
     alt: "Учасники табору PointCamp з каяками на березі моря в Хорватії",
     label: "Хорватія",
     tilt: 4,
@@ -40,7 +39,7 @@ const PHOTOS: CollagePhoto[] = [
     desktop: { top: "4%", left: "28%", width: "32%" },
   },
   {
-    src: pcWinter,
+    img: responsive("pc-winter"),
     alt: "Зимовий табір PointCamp: група обіймається на засніженому полі",
     label: "Зимовий табір",
     tilt: -2,
@@ -49,7 +48,7 @@ const PHOTOS: CollagePhoto[] = [
     desktop: { top: "1%", left: "56%", width: "44%" },
   },
   {
-    src: pcNara,
+    img: responsive("pc-nara"),
     alt: "Учасники PointCamp фотографують оленів у Нарі",
     label: "Нара",
     tilt: 3,
@@ -57,7 +56,7 @@ const PHOTOS: CollagePhoto[] = [
     desktop: { top: "50%", left: "2%", width: "35%" },
   },
   {
-    src: pcAdriatic,
+    img: responsive("pc-adriatic"),
     alt: "Дівчата з табору PointCamp на заході сонця біля Адріатики",
     label: "Адріатика",
     tilt: -3,
@@ -65,7 +64,7 @@ const PHOTOS: CollagePhoto[] = [
     desktop: { top: "53%", left: "33%", width: "35%" },
   },
   {
-    src: pcShibuya,
+    img: responsive("pc-shibuya"),
     alt: "Група PointCamp увечері на Сібуї в Токіо",
     label: "Сібуя",
     tilt: 5,
@@ -103,11 +102,14 @@ export function GroupCollage({ caption }: { caption: string }) {
             <span className="pk-photo__tape" />
             <span className="pk-photo__paper pk-polaroid">
               <img
-                src={p.src}
+                src={p.img.src}
+                srcSet={p.img.srcSet}
+                sizes={p.landscape ? SIZES_LANDSCAPE : SIZES_SQUARE}
                 alt={p.alt}
                 width={p.landscape ? 800 : 640}
                 height={p.landscape ? 600 : 640}
                 loading="lazy"
+                decoding="async"
                 className={`block w-full object-cover ${p.landscape ? "aspect-[4/3]" : "aspect-square"}`}
               />
               <span className="pk-polaroid__caption">{p.label}</span>

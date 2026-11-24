@@ -1,4 +1,4 @@
-import heartSticker from "@/assets/korea/sticker-heart-red.png";
+import heartSticker from "@/assets/korea/sticker-heart-red.webp";
 import { GroupCollage } from "./GroupCollage";
 import { PaperDivider } from "./PaperDivider";
 

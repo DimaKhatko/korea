@@ -1,9 +1,11 @@
 import type { CSSProperties } from "react";
-import photoHanbok from "@/assets/korea/photo-seoul-hanbok.webp";
-import photoHaeundae from "@/assets/korea/photo-busan-haeundae.webp";
-import stamp10Days from "@/assets/korea/stamp-10-days.png";
+import stamp10Days from "@/assets/korea/stamp-10-days.webp";
 import markerArrow from "@/assets/korea/marker-arrow-red.svg";
 import { PRICE_EUR, TRIP_DATES, TRIP_SUMMARY, TRIP_TITLE } from "@/lib/korea";
+import { responsive } from "@/lib/responsive";
+
+const photoHanbok = responsive("photo-seoul-hanbok");
+const photoHaeundae = responsive("photo-busan-haeundae");
 
 /**
  * No orphans in the wrapped h1: a one-letter preposition stays with the next word and the
@@ -87,7 +89,9 @@ export function Hero() {
             <span className="pk-photo__tape" />
             <span className="pk-photo__paper">
               <img
-                src={photoHanbok}
+                src={photoHanbok.src}
+                srcSet={photoHanbok.srcSet}
+                sizes="(min-width: 1024px) 386px, 283px"
                 alt="Дівчата в ханбоках біля палацу Кьонбоккун"
                 width={700}
                 height={360}
@@ -104,11 +108,14 @@ export function Hero() {
             <span className="pk-photo__tape" />
             <span className="pk-photo__paper">
               <img
-                src={photoHaeundae}
+                src={photoHaeundae.src}
+                srcSet={photoHaeundae.srcSet}
+                sizes="223px"
                 alt="Пляж Хеунде в Пусані і хмарочоси над ним"
                 width={440}
                 height={330}
                 loading="lazy"
+                decoding="async"
                 className="aspect-[4/3] object-cover object-[50%_35%]"
               />
             </span>
@@ -121,11 +128,14 @@ export function Hero() {
             <span className="pk-photo__tape" />
             <span className="pk-photo__paper h-[337px]">
               <img
-                src={photoHaeundae}
+                src={photoHaeundae.src}
+                srcSet={photoHaeundae.srcSet}
+                sizes="296px"
                 alt="Пляж Хеунде в Пусані і хмарочоси над ним"
                 width={440}
                 height={480}
                 loading="lazy"
+                decoding="async"
               />
               <span className="pk-photo__caption text-center">Пусан, пляж Хеунде</span>
             </span>

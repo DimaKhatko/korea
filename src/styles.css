@@ -323,3 +323,15 @@
     }
   }
 }
+
+/*
+ * Long sections below the first screens render only near the viewport
+ * (content-visibility: auto): the browser skips their style, layout, paint and
+ * background images on load. --cv-h is the placeholder height before the first render
+ * (measured at 390 / 1440 px; `auto` remembers the real height afterwards). Not used on
+ * sections with a PaperDivider: paint containment would clip its sticker.
+ */
+.kr-cv {
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto var(--cv-h, 1000px);
+}

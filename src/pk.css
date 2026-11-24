@@ -6,7 +6,7 @@
  */
 @layer components {
 /* PointCamp Korea — collage + landing classes. Values come from tokens.css (var(--…)). */
-.pk-paper{background-color:var(--paper);background-image:url("./assets/korea/paper-tile.jpg");background-size:512px 512px;color:var(--ink);font-family:var(--font-sans)}
+.pk-paper{background-color:var(--paper);background-image:url("./assets/korea/paper-tile.webp");background-size:512px 512px;color:var(--ink);font-family:var(--font-sans)}
 
 /* ---------- Korean + Ukrainian headline pair */
 .pk-kr{font-family:var(--font-kr);font-weight:400;font-size:160px;line-height:.9;color:var(--ink);margin:0}

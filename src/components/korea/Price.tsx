@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import starSticker from "@/assets/korea/sticker-star-holo.png";
+import starSticker from "@/assets/korea/sticker-star-holo.webp";
 import { PRICE_EUR, PRICE_EXTRAS, TRIP_DATES } from "@/lib/korea";
 import { PaperDivider } from "./PaperDivider";
 import { PaperStar } from "./PaperStar";

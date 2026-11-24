@@ -31,7 +31,10 @@ const COPY = {
  */
 export function Partner() {
   return (
-    <section id="partner" className="pk-paper border-t border-line">
+    <section
+      id="partner"
+      className="kr-cv [--cv-h:1000px] lg:[--cv-h:760px] pk-paper border-t border-line"
+    >
       <div className="mx-auto px-5 py-16 md:max-w-[680px] lg:max-w-[1280px] lg:px-10 lg:py-24">
         <div className="flex flex-col gap-[18px] rounded-sm border-2 border-ink bg-lime px-[22px] py-7 text-on-lime shadow-hard lg:grid lg:grid-cols-2 lg:items-start lg:gap-14 lg:p-14">
           <div className="flex flex-col gap-[18px] lg:gap-[22px]">

@@ -1,8 +1,10 @@
 import type { CSSProperties } from "react";
-import photoSignRooftop from "@/assets/korea/photo-seoul-sign-rooftop.webp";
-import sakuraSticker from "@/assets/korea/sticker-sakura.png";
+import { responsive } from "@/lib/responsive";
+import sakuraSticker from "@/assets/korea/sticker-sakura.webp";
 import markerArrow from "@/assets/korea/marker-arrow-red.svg";
 import { LeadForm } from "./LeadForm";
+
+const photoSignRooftop = responsive("photo-seoul-sign-rooftop");
 
 const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
 
@@ -15,7 +17,10 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
  */
 export function FinalCTA() {
   return (
-    <section id="contact" className="pk-paper overflow-hidden border-t border-line">
+    <section
+      id="contact"
+      className="kr-cv [--cv-h:1300px] lg:[--cv-h:835px] pk-paper overflow-hidden border-t border-line"
+    >
       <div className="mx-auto flex flex-col gap-[18px] px-5 py-16 md:max-w-[680px] lg:grid lg:max-w-[1280px] lg:grid-cols-2 lg:items-start lg:gap-16 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-[18px] lg:gap-5">
           <p className="m-0 flex items-baseline gap-2.5 text-[14px] font-black tracking-[0.06em] text-ink-soft uppercase">
@@ -48,11 +53,14 @@ export function FinalCTA() {
               <span className="pk-photo__tape" />
               <span className="pk-photo__paper">
                 <img
-                  src={photoSignRooftop}
+                  src={photoSignRooftop.src}
+                  srcSet={photoSignRooftop.srcSet}
+                  sizes="(min-width: 1024px) 239px, 186px"
                   alt="Напис SEOUL на даху на тлі хмарочосів"
                   width={900}
                   height={759}
                   loading="lazy"
+                  decoding="async"
                   className="block w-full"
                 />
               </span>
@@ -65,6 +73,7 @@ export function FinalCTA() {
               width={226}
               height={226}
               loading="lazy"
+              decoding="async"
               style={tilt(-10)}
             />
 
@@ -81,6 +90,8 @@ export function FinalCTA() {
               alt=""
               width={240}
               height={180}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>

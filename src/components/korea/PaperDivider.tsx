@@ -40,6 +40,7 @@ export function PaperDivider({ sticker, side }: PaperDividerProps) {
         width={256}
         height={256}
         loading="lazy"
+        decoding="async"
         style={{ "--tilt": "12deg" } as CSSProperties}
       />
     </div>

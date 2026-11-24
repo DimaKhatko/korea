@@ -1,4 +1,4 @@
-import smileySticker from "@/assets/korea/sticker-smiley.png";
+import smileySticker from "@/assets/korea/sticker-smiley.webp";
 import { PaperDivider } from "./PaperDivider";
 import { PaperStar } from "./PaperStar";
 import { SnapRow } from "./SnapRow";

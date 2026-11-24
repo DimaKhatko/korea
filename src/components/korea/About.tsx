@@ -1,8 +1,6 @@
 import type { CSSProperties } from "react";
-import planeHolo from "@/assets/korea/plane-holo.png";
-import photoHanRiver from "@/assets/korea/photo-seoul-han-river.webp";
-import photoGyeongjuTombs from "@/assets/korea/photo-gyeongju-tombs.webp";
-import photoBusanCoast from "@/assets/korea/photo-busan-coast.webp";
+import planeHolo from "@/assets/korea/plane-holo.webp";
+import { responsive, type Responsive } from "@/lib/responsive";
 import { MAX_GROUP_SIZE, PARTICIPANT_AGE, TRIP_DATES } from "@/lib/korea";
 
 /* ---------- Copy and data (edit here) */
@@ -43,25 +41,39 @@ const STOPS: Stop[] = [
   { name: "Виліт", when: "день 10, до Європи", marker: "plane", tilt: 0 },
 ];
 
-type Photo = { src: string; width: number; height: number; alt: string; label: string };
+type Photo = {
+  img: Responsive;
+  /** Rendered width: wide first photo, then two squares (see the grid below). */
+  sizes: string;
+  width: number;
+  height: number;
+  alt: string;
+  label: string;
+};
+
+const SIZES_WIDE = "(min-width: 1024px) 572px, (min-width: 680px) 636px, calc(100vw - 44px)";
+const SIZES_SQUARE = "(min-width: 1024px) 284px, (min-width: 680px) 310px, calc(50vw - 30px)";
 
 const PHOTOS: Photo[] = [
   {
-    src: photoHanRiver,
+    img: responsive("photo-seoul-han-river"),
+    sizes: SIZES_WIDE,
     width: 1000,
     height: 255,
     alt: "Сеул: річка Хан і квартали на тлі гір",
     label: "Сеул",
   },
   {
-    src: photoGyeongjuTombs,
+    img: responsive("photo-gyeongju-tombs"),
+    sizes: SIZES_SQUARE,
     width: 1060,
     height: 570,
     alt: "Кьонджу: пагорби-гробниці королів Сілла",
     label: "Кьонджу",
   },
   {
-    src: photoBusanCoast,
+    img: responsive("photo-busan-coast"),
+    sizes: SIZES_SQUARE,
     width: 640,
     height: 520,
     alt: "Пусан: капсули Blueline Park над океаном і хмарочоси Хеунде",
@@ -79,7 +91,10 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
  */
 export function About() {
   return (
-    <section id="about" className="pk-paper border-t border-line">
+    <section
+      id="about"
+      className="kr-cv [--cv-h:1680px] lg:[--cv-h:1210px] pk-paper border-t border-line"
+    >
       <div className="mx-auto flex flex-col gap-5 px-5 py-16 md:max-w-[680px] lg:max-w-[1280px] lg:gap-10 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-5 lg:grid lg:grid-cols-2 lg:items-start lg:gap-12">
           <div className="flex flex-col gap-5">
@@ -145,6 +160,7 @@ export function About() {
                       width={256}
                       height={256}
                       loading="lazy"
+                      decoding="async"
                       style={tilt(stop.tilt)}
                     />
                   ) : (
@@ -170,11 +186,14 @@ export function About() {
               className={`relative m-0 box-content overflow-hidden rounded-sm border-2 border-ink bg-paper-light lg:aspect-auto lg:h-[300px] ${i === 0 ? "col-span-full aspect-video lg:col-span-1" : "aspect-square"}`}
             >
               <img
-                src={photo.src}
+                src={photo.img.src}
+                srcSet={photo.img.srcSet}
+                sizes={photo.sizes}
                 alt={photo.alt}
                 width={photo.width}
                 height={photo.height}
                 loading="lazy"
+                decoding="async"
                 className="block size-full object-cover"
               />
               <figcaption

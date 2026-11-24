@@ -1,14 +1,7 @@
 import type { CSSProperties } from "react";
-import planeHolo from "@/assets/korea/plane-holo.png";
-import stampUnesco from "@/assets/korea/stamp-unesco.png";
-import photoSeoulHanbok from "@/assets/korea/photo-seoul-hanbok.webp";
-import photoSeoulKoreaUniversity from "@/assets/korea/photo-seoul-korea-university.webp";
-import photoSeoulHanRiver from "@/assets/korea/photo-seoul-han-river.webp";
-import photoSeoulLotteWorld from "@/assets/korea/photo-seoul-lotte-world.webp";
-import photoGyeongjuTombs from "@/assets/korea/photo-gyeongju-tombs.webp";
-import photoBusanArteMuseum from "@/assets/korea/photo-busan-arte-museum.webp";
-import photoBusanDroneShow from "@/assets/korea/photo-busan-drone-show.webp";
-import photoSeoulShop from "@/assets/korea/photo-seoul-shop.webp";
+import { responsive, type Responsive } from "@/lib/responsive";
+import planeHolo from "@/assets/korea/plane-holo.webp";
+import stampUnesco from "@/assets/korea/stamp-unesco.webp";
 
 /* ---------- Copy and data (edit here)
  * Programme for the single group 21–30.03.2027, day texts as supplied by the client.
@@ -16,7 +9,10 @@ import photoSeoulShop from "@/assets/korea/photo-seoul-shop.webp";
  * changed in 2026); day 7 no cable car promise (Сондо may close for maintenance in March),
  * «прогулянка узбережжям Сондо» instead; drone show «якщо дозволить погода». */
 
-type Photo = { src: string; width: number; height: number; alt: string };
+type Photo = { img: Responsive; width: number; height: number; alt: string };
+
+/** Rendered photo width: full card width below lg (max 590 px), the 340 px column from lg. */
+const PHOTO_SIZES = "(min-width: 1024px) 340px, (min-width: 680px) 590px, calc(100vw - 90px)";
 
 type CityRow = {
   type: "city";
@@ -61,7 +57,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     text: "Одягаємо ханбоки й ідемо на фотосесію до палацу Кьонбоккун, дивимося зміну королівської варти, гуляємо ханоковим селом Пукчхон і пробуємо стріт-фуд в Інсадоні.",
     tags: ["Ханбок", "Кьонбоккун", "Інсадон"],
     photo: {
-      src: photoSeoulHanbok,
+      img: responsive("photo-seoul-hanbok"),
       width: 700,
       height: 360,
       alt: "Дівчата в ханбоках біля палацу Кьонбоккун",
@@ -75,7 +71,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     text: "Кампус-тур Korea University, пробуємо себе в K-pop в AR-залах HiKR Ground, гуляємо ханоковими провулками Іксондону, а на захід сонця піднімаємося на N Seoul Tower.",
     tags: ["Korea University", "HiKR Ground", "N Seoul Tower"],
     photo: {
-      src: photoSeoulKoreaUniversity,
+      img: responsive("photo-seoul-korea-university"),
       width: 680,
       height: 400,
       alt: "Головний корпус Korea University",
@@ -89,7 +85,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     text: "KWANGYA від SM, пікнік у парку Йоідо Ханган біля річки, а ввечері COEX, бібліотека Starfield і вулиці Gangnam Style.",
     tags: ["KWANGYA", "Йоідо", "Starfield"],
     photo: {
-      src: photoSeoulHanRiver,
+      img: responsive("photo-seoul-han-river"),
       width: 1000,
       height: 255,
       alt: "Річка Хан і квартали Сеула",
@@ -103,7 +99,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     text: "Цілий день у парку розваг Lotte World. За бажанням — фото в корейській шкільній формі.",
     tags: ["Lotte World", "Шкільна форма"],
     photo: {
-      src: photoSeoulLotteWorld,
+      img: responsive("photo-seoul-lotte-world"),
       width: 660,
       height: 520,
       alt: "Атракціони Lotte World серед квітучих дерев",
@@ -118,7 +114,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     text: "KTX до стародавньої столиці королівства Сілла і тур місцями ЮНЕСКО: храм Пульгукса, грот Соккурам, зелені пагорби-гробниці королів. Увечері переїжджаємо до Пусана.",
     tags: ["KTX", "ЮНЕСКО", "Сілла"],
     photo: {
-      src: photoGyeongjuTombs,
+      img: responsive("photo-gyeongju-tombs"),
       width: 1060,
       height: 570,
       alt: "Пагорби-гробниці королів Сілла в Кьонджу",
@@ -133,7 +129,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     text: "Пляж Хеунде, океан зі 100-го поверху Busan X the Sky, кольорові вулички Камчхону і прогулянка узбережжям Сондо. Увечері — пляж Кваналлі і шоу дронів над мостом, якщо дозволить погода.",
     tags: ["X the Sky", "Камчхон", "Шоу дронів"],
     photo: {
-      src: photoBusanDroneShow,
+      img: responsive("photo-busan-drone-show"),
       width: 620,
       height: 440,
       alt: "Пляж Хеунде у Пусані: океан і хмарочоси",
@@ -147,7 +143,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     text: "Пляжний поїзд Blueline Park уздовж узбережжя, цифрові зали ARTE Museum Busan і прибережна стежка Ігіде на захід сонця.",
     tags: ["Blueline Park", "ARTE Museum", "Ігіде"],
     photo: {
-      src: photoBusanArteMuseum,
+      img: responsive("photo-busan-arte-museum"),
       width: 640,
       height: 520,
       alt: "Зал ARTE Museum з проєкціями квітів",
@@ -162,7 +158,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     text: "Повертаємося до Сеула, останній шопінг — канцелярія, косметика, K-pop альбоми — і прощальна вечеря всією групою.",
     tags: ["Сеул", "Шопінг", "Прощальна вечеря"],
     photo: {
-      src: photoSeoulShop,
+      img: responsive("photo-seoul-shop"),
       width: 560,
       height: 440,
       alt: "Мьондон удень: магазини косметики й канцелярії ART BOX",
@@ -190,7 +186,10 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
  */
 export function Program() {
   return (
-    <section id="program" className="pk-paper border-t border-line">
+    <section
+      id="program"
+      className="kr-cv [--cv-h:5590px] lg:[--cv-h:3530px] pk-paper border-t border-line"
+    >
       <div className="mx-auto flex flex-col gap-6 pt-16 pr-3.5 pb-16 pl-3 md:max-w-[680px] lg:max-w-[1080px] lg:gap-10 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-4 pr-1.5 pl-2 lg:max-w-[760px] lg:gap-5 lg:px-0">
           <p className="m-0 flex items-baseline gap-2.5 text-[14px] font-black tracking-[0.06em] text-ink-soft uppercase">
@@ -246,6 +245,7 @@ function CityHeader({ row }: { row: CityRow }) {
             width={336}
             height={83}
             loading="lazy"
+            decoding="async"
             style={tilt(-6)}
           />
         )}
@@ -268,6 +268,7 @@ function DayItem({ row }: { row: DayRow }) {
             width={256}
             height={256}
             loading="lazy"
+            decoding="async"
             style={tilt(0)}
           />
         ) : (
@@ -283,11 +284,14 @@ function DayItem({ row }: { row: DayRow }) {
         <div className="relative aspect-video overflow-hidden bg-paper-light lg:aspect-auto lg:min-h-[230px]">
           {row.photo ? (
             <img
-              src={row.photo.src}
+              src={row.photo.img.src}
+              srcSet={row.photo.img.srcSet}
+              sizes={PHOTO_SIZES}
               alt={row.photo.alt}
               width={row.photo.width}
               height={row.photo.height}
               loading="lazy"
+              decoding="async"
               className="block size-full object-cover"
             />
           ) : (
@@ -299,6 +303,7 @@ function DayItem({ row }: { row: DayRow }) {
                 width={256}
                 height={256}
                 loading="lazy"
+                decoding="async"
                 style={tilt(0)}
               />
             </span>

@@ -1,8 +1,5 @@
 import type { CSSProperties } from "react";
-import photoSeoulNeonStreet from "@/assets/korea/photo-seoul-neon-street.webp";
-import photoSeoulGwanghwamun from "@/assets/korea/photo-seoul-gwanghwamun.webp";
-import photoSeoulSignRooftop from "@/assets/korea/photo-seoul-sign-rooftop.webp";
-import photoSeoulStreetFood from "@/assets/korea/photo-seoul-street-food.webp";
+import { responsive, type Responsive } from "@/lib/responsive";
 import { SnapRow } from "./SnapRow";
 
 /* ---------- Copy and data (edit here) */
@@ -15,7 +12,7 @@ type Card = {
   /** Tilted paper label on the photo. */
   label: string;
   labelTone: "lime" | "ink";
-  photo: { src: string; width: number; height: number; alt: string };
+  photo: { img: Responsive; width: number; height: number; alt: string };
 };
 
 const CARDS: Card[] = [
@@ -26,7 +23,7 @@ const CARDS: Card[] = [
     label: "K-pop в AR",
     labelTone: "lime",
     photo: {
-      src: photoSeoulNeonStreet,
+      img: responsive("photo-seoul-neon-street"),
       width: 282,
       height: 300,
       alt: "Вечірня вулиця Сеула з неоновими вивісками",
@@ -39,7 +36,7 @@ const CARDS: Card[] = [
     label: "Ханбоки",
     labelTone: "ink",
     photo: {
-      src: photoSeoulGwanghwamun,
+      img: responsive("photo-seoul-gwanghwamun"),
       width: 310,
       height: 205,
       alt: "Брама Кванхвамун палацу Кьонбоккун",
@@ -52,7 +49,7 @@ const CARDS: Card[] = [
     label: "100-й поверх",
     labelTone: "ink",
     photo: {
-      src: photoSeoulSignRooftop,
+      img: responsive("photo-seoul-sign-rooftop"),
       width: 320,
       height: 270,
       alt: "Напис SEOUL на даху на тлі хмарочосів",
@@ -65,7 +62,7 @@ const CARDS: Card[] = [
     label: "Стріт-фуд",
     labelTone: "ink",
     photo: {
-      src: photoSeoulStreetFood,
+      img: responsive("photo-seoul-street-food"),
       width: 330,
       height: 310,
       alt: "Корн-доги й пиріжки на вуличному лотку в Сеулі",
@@ -83,7 +80,10 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
  */
 export function WhyKorea() {
   return (
-    <section id="why-korea" className="pk-paper border-t border-line">
+    <section
+      id="why-korea"
+      className="kr-cv [--cv-h:980px] lg:[--cv-h:910px] pk-paper border-t border-line"
+    >
       <div className="mx-auto flex flex-col gap-5 py-16 md:max-w-[680px] md:px-5 lg:max-w-[1280px] lg:gap-12 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-5 px-5 md:px-0 lg:max-w-[760px]">
           <p className="m-0 flex items-baseline gap-2.5 text-[14px] font-black tracking-[0.06em] text-ink-soft uppercase">
@@ -113,11 +113,14 @@ export function WhyKorea() {
             >
               <div className="pk-day__media">
                 <img
-                  src={card.photo.src}
+                  src={card.photo.img.src}
+                  srcSet={card.photo.img.srcSet}
+                  sizes="(min-width: 1024px) 278px, (min-width: 768px) 304px, 290px"
                   alt={card.photo.alt}
                   width={card.photo.width}
                   height={card.photo.height}
                   loading="lazy"
+                  decoding="async"
                 />
                 <span
                   className={`pk-label ${card.labelTone === "lime" ? "pk-label--lime" : "pk-label--ink"}`}

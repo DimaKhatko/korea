@@ -2,17 +2,22 @@ import { lazy, Suspense, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/korea/Header";
 import { Hero } from "@/components/korea/Hero";
-import { About } from "@/components/korea/About";
-import { WhyUs } from "@/components/korea/WhyUs";
-import { Partner } from "@/components/korea/Partner";
-import { Route as RouteSection } from "@/components/korea/Route";
-import { FAQ, Faq } from "@/components/korea/Faq";
+import { FAQ } from "@/lib/faq";
 
 /*
- * Code splitting (as in pointcamp-winter): sections below the first screens with heavier
- * code are lazy chunks. They are still prerendered into the HTML (text for crawlers and
- * AI search) and hydrate when their chunk arrives.
+ * Code splitting (as in pointcamp-winter): every section after the Hero is a lazy chunk.
+ * They are still prerendered into the HTML (text for crawlers and AI search) and hydrate
+ * when their chunk arrives.
  */
+const About = lazy(() => import("@/components/korea/About").then((m) => ({ default: m.About })));
+const WhyUs = lazy(() => import("@/components/korea/WhyUs").then((m) => ({ default: m.WhyUs })));
+const Partner = lazy(() =>
+  import("@/components/korea/Partner").then((m) => ({ default: m.Partner })),
+);
+const RouteSection = lazy(() =>
+  import("@/components/korea/Route").then((m) => ({ default: m.Route })),
+);
+const Faq = lazy(() => import("@/components/korea/Faq").then((m) => ({ default: m.Faq })));
 const Reviews = lazy(() =>
   import("@/components/korea/Reviews").then((m) => ({ default: m.Reviews })),
 );
@@ -231,23 +236,33 @@ function Index() {
       <Header />
       <main>
         <Hero />
-        <About />
-        <WhyUs />
+        <Deferred>
+          <About />
+        </Deferred>
+        <Deferred>
+          <WhyUs />
+        </Deferred>
         <Deferred>
           <Reviews />
         </Deferred>
         <Deferred>
           <WhyKorea />
         </Deferred>
-        <Partner />
-        <RouteSection />
+        <Deferred>
+          <Partner />
+        </Deferred>
+        <Deferred>
+          <RouteSection />
+        </Deferred>
         <Deferred>
           <Program />
         </Deferred>
         <Deferred>
           <Price />
         </Deferred>
-        <Faq />
+        <Deferred>
+          <Faq />
+        </Deferred>
         <Deferred>
           <FinalCTA />
         </Deferred>

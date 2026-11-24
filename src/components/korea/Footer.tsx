@@ -4,11 +4,9 @@ import { Logo } from "./Logo";
 /* ---------- Copy and data (edit here; URLs as in the reference) */
 
 const COPY = {
-  slogan: "잊지 못할 여행",
-  tagline: "Подорож, яку згадуватимуть усе життя.",
   description:
-    "Подорож до Південної Кореї для підлітків: Сеул, Кенджу, Пусан. Весняні канікули, березень 2027.",
-  copyright: "© 2026 Point Camp · Korea. Усі права захищені.",
+    "Подорож до Південної Кореї для підлітків та молоді: Сеул, Кьонджу, Пусан. Весняні канікули, березень 2027.",
+  copyright: "© 2026 PointCamp. Усі права захищені.",
   privacy: {
     href: "https://drive.google.com/file/d/16D4I7OvCw2L4-G1QejjEtVx3G4P448ob/preview",
     text: "Обробка персональних даних",
@@ -134,7 +132,7 @@ const SOCIALS: IconLink[] = [
 /** `wide`: the reference pins this item to 187 px from lg, so the line breaks there. */
 const OTHER_PROGRAMS: { href: string; text: string; wide?: boolean }[] = [
   { href: "https://japan.pointcamp.com.ua/", text: "Подорож до Японії →" },
-  { href: "https://croatia.pointcamp.com.ua/", text: "Літній кемп у Хорватії →", wide: true },
+  { href: "https://croatia.pointcamp.com.ua/", text: "Літній табір у Хорватії →", wide: true },
 ];
 
 /* ---------- */
@@ -195,12 +193,6 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[1.5fr_0.9fr_1.3fr_1fr_1fr]">
           <div className="flex max-w-[360px] flex-col gap-[14px]">
             <Logo label="PointCamp" className="h-8 self-start text-white" />
-            <p className="m-0 flex flex-col gap-1">
-              <span lang="ko" className="font-kr text-[20px] text-lime">
-                {COPY.slogan}
-              </span>
-              <span className="text-[17px] font-extrabold text-sticker">{COPY.tagline}</span>
-            </p>
             <p className="m-0 text-[15px] leading-[1.55] text-[#d7d1c3]">{COPY.description}</p>
           </div>
 

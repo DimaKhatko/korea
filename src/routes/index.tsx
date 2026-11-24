@@ -49,23 +49,22 @@ const PAGE_ID = `${SITE_URL}#webpage`;
 const TRIP_ID = `${SITE_URL}#trip`;
 const FAQ_ID = `${SITE_URL}#faq`;
 
-const TITLE = "PointCamp Korea 2027 — весняні канікули в Південній Кореї";
+const TITLE = "Весняні канікули в Кореї для підлітків 2027 | PointCamp";
 /** ≤ 160 characters; every fact is on the page (hero, About, Partner, Price). */
-const DESCRIPTION =
-  "Весняні канікули 2027 у Південній Кореї: підлітки 10–20 років 10 днів подорожують Сеулом, Кенджу і Пусаном. Поруч щонайменше троє дорослих. 3150 €.";
+const DESCRIPTION = `Весняні канікули 2027 у Південній Кореї для підлітків та молоді: 10 днів у Сеулі, Кьонджу й Пусані, група до ${MAX_GROUP_SIZE} учасників, 3150 €. 21–30 березня.`;
 
 /** 1200×630, rendered from the desktop hero (logo, 한국, h1, collage). */
 const OG_IMAGE = {
   url: `${SITE_URL}og-image.jpg`,
   width: 1200,
   height: 630,
-  alt: "PointCamp Korea 2027: весняні канікули в Південній Кореї. Дівчата в ханбоках біля палацу Gyeongbokgung",
+  alt: "PointCamp Korea 2027: весняні канікули в Південній Кореї. Дівчата в ханбоках біля палацу Кьонбоккун",
 };
 
-/** Route as shown on the page: Сеул → Кенджу → Пусан → Сеул. */
+/** Route as shown on the page: Сеул → Кьонджу → Пусан → Сеул. */
 const ITINERARY = [
   { name: "Сеул", alternateName: "Seoul" },
-  { name: "Кенджу", alternateName: "Gyeongju" },
+  { name: "Кьонджу", alternateName: "Gyeongju" },
   { name: "Пусан", alternateName: "Busan" },
   { name: "Сеул", alternateName: "Seoul" },
 ];
@@ -121,8 +120,7 @@ function structuredData() {
         "@type": "TouristTrip",
         "@id": TRIP_ID,
         name: "Весняні канікули в Південній Кореї 2027",
-        description:
-          "10 днів, 9 ночей: Сеул, Кенджу і Пусан. Поруч щонайменше троє дорослих, серед них — наша людина в Кореї.",
+        description: `10 днів у Кореї: Сеул, Кьонджу і Пусан. Група до ${MAX_GROUP_SIZE} учасників, з нею щонайменше троє дорослих, серед них — наша людина в Кореї.`,
         url: SITE_URL,
         image: OG_IMAGE.url,
         inLanguage: "uk",

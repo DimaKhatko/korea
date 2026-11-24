@@ -16,11 +16,11 @@ const FACTS: Fact[] = [
     text: `Весняні канікули: ${TRIP_DATES}.`,
     lime: true,
   },
-  { glyph: "길", title: "3 міста", text: "Між містами їдемо швидкісним потягом KTX." },
+  { glyph: "길", title: "3 міста", text: "Сеул, Кьонджу і Пусан." },
   {
     glyph: "누구",
     title: "Для кого",
-    text: `Підлітки ${PARTICIPANT_AGE}. У групі до ${MAX_GROUP_SIZE} учасників.`,
+    text: `Підлітки й молодь ${PARTICIPANT_AGE}. У групі до ${MAX_GROUP_SIZE} учасників.`,
   },
   {
     glyph: "팀",
@@ -37,7 +37,7 @@ type Stop =
 const STOPS: Stop[] = [
   { name: "Приліт", when: "день 1, Сеул", marker: "plane", tilt: 90 },
   { name: "Сеул", when: "дні 1–5", marker: "dot", filled: true },
-  { name: "Кенджу", when: "день 6", marker: "dot", filled: false },
+  { name: "Кьонджу", when: "день 6", marker: "dot", filled: false },
   { name: "Пусан", when: "дні 7–8", marker: "dot", filled: false },
   { name: "Сеул", when: "дні 9–10", marker: "dot", filled: true },
   { name: "Виліт", when: "день 10, до Європи", marker: "plane", tilt: 0 },
@@ -57,14 +57,14 @@ const PHOTOS: Photo[] = [
     src: photoGyeongjuTombs,
     width: 1060,
     height: 570,
-    alt: "Кенджу: пагорби-гробниці королів Сілла",
-    label: "Кенджу",
+    alt: "Кьонджу: пагорби-гробниці королів Сілла",
+    label: "Кьонджу",
   },
   {
     src: photoBusanCoast,
     width: 640,
     height: 520,
-    alt: "Пусан: трамвайчики Blueline Park над океаном і хмарочоси Haeundae",
+    alt: "Пусан: капсули Blueline Park над океаном і хмарочоси Хеунде",
     label: "Пусан",
   },
 ];
@@ -90,10 +90,11 @@ export function About() {
               <span>Про подорож</span>
             </p>
             <h2 className="m-0 text-[30px] leading-[1.05] font-black tracking-[-0.01em] lg:text-[40px]">
-              Сеул, Кенджу і Пусан за 10 днів
+              Сеул, Кьонджу і Пусан за 10 днів
             </h2>
             <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:max-w-[40ch] lg:text-[19px]">
-              Повне занурення у світ дорам, K-pop, футуристичних технологій та стародавніх традицій.
+              Палаци й K-pop у Сеулі, стародавня столиця Сілла в Кьонджу, океан і 100-й поверх у
+              Пусані.
             </p>
           </div>
 

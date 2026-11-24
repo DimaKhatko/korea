@@ -13,8 +13,8 @@ import photoSeoulShop from "@/assets/korea/photo-seoul-shop.webp";
 /* ---------- Copy and data (edit here)
  * Programme for the single group 21–30.03.2027, day texts as supplied by the client.
  * Softened facts, keep as written: day 5 Lotte World without Magic Pass details (rules
- * changed in 2026); day 7 no cable car promise (Songdo may close for maintenance in March),
- * «прогулянка узбережжям Songdo» instead; drone show «якщо дозволить погода». */
+ * changed in 2026); day 7 no cable car promise (Сондо may close for maintenance in March),
+ * «прогулянка узбережжям Сондо» instead; drone show «якщо дозволить погода». */
 
 type Photo = { src: string; width: number; height: number; alt: string };
 
@@ -49,7 +49,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     day: 1,
     kr: "첫째 날",
     title: "Приліт до Сеула",
-    text: "Зустрічаємо групу в аеропорту Інчхон і заселяємося в готель. Перший день — на адаптацію до часового поясу: брифінг про правила й безпеку, знайомство з містом, перша спільна вечеря.",
+    text: "Прилітаємо в аеропорт Інчхон, там нас зустрічає наша людина в Кореї, і заселяємося в готель. Перший день — на адаптацію до часового поясу: брифінг про правила й безпеку, знайомство з містом, перша спільна вечеря.",
     tags: ["Інчхон", "Брифінг", "Адаптація"],
     photo: null,
   },
@@ -58,13 +58,13 @@ const TIMELINE: (CityRow | DayRow)[] = [
     day: 2,
     kr: "둘째 날",
     title: "Естетика стародавнього Сеула",
-    text: "Одягаємо ханбоки й ідемо на фотосесію до палацу Gyeongbokgung, дивимося зміну королівської варти, гуляємо Bukchon Hanok Village і пробуємо стріт-фуд в Інсадоні.",
-    tags: ["Ханбок", "Gyeongbokgung", "Інсадон"],
+    text: "Одягаємо ханбоки й ідемо на фотосесію до палацу Кьонбоккун, дивимося зміну королівської варти, гуляємо ханоковим селом Пукчхон і пробуємо стріт-фуд в Інсадоні.",
+    tags: ["Ханбок", "Кьонбоккун", "Інсадон"],
     photo: {
       src: photoSeoulHanbok,
       width: 700,
       height: 360,
-      alt: "Дівчата в ханбоках біля палацу Gyeongbokgung",
+      alt: "Дівчата в ханбоках біля палацу Кьонбоккун",
     },
   },
   {
@@ -72,7 +72,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
     day: 3,
     kr: "셋째 날",
     title: "K-pop вайб і панорама",
-    text: "Кампус-тур Korea University, знімаємо власний K-pop кліп у HiKR Ground, гуляємо ханоковими провулками Ікседону, а на захід сонця піднімаємося на N Seoul Tower.",
+    text: "Кампус-тур Korea University, знімаємо власний K-pop кліп у HiKR Ground, гуляємо ханоковими провулками Іксондону, а на захід сонця піднімаємося на N Seoul Tower.",
     tags: ["Korea University", "K-pop кліп", "N Seoul Tower"],
     photo: {
       src: photoSeoulKoreaUniversity,
@@ -86,8 +86,8 @@ const TIMELINE: (CityRow | DayRow)[] = [
     day: 4,
     kr: "넷째 날",
     title: "Гангнам і футуризм",
-    text: "KWANGYA від SM, пікнік у парку Yeouido Hangang біля річки, а ввечері COEX, бібліотека Starfield і вулиці Gangnam Style.",
-    tags: ["KWANGYA", "Yeouido", "Starfield"],
+    text: "KWANGYA від SM, пікнік у парку Йоідо Ханган біля річки, а ввечері COEX, бібліотека Starfield і вулиці Gangnam Style.",
+    tags: ["KWANGYA", "Йоідо", "Starfield"],
     photo: {
       src: photoSeoulHanRiver,
       width: 1000,
@@ -109,19 +109,19 @@ const TIMELINE: (CityRow | DayRow)[] = [
       alt: "Атракціони Lotte World серед квітучих дерев",
     },
   },
-  { type: "city", kr: "경주", name: "Кенджу", label: "День 6", stamp: true },
+  { type: "city", kr: "경주", name: "Кьонджу", label: "День 6", stamp: true },
   {
     type: "day",
     day: 6,
     kr: "여섯째 날",
-    title: "Кенджу — корейська «машина часу»",
+    title: "Кьонджу — корейська «машина часу»",
     text: "KTX до стародавньої столиці королівства Сілла і тур місцями ЮНЕСКО: храм Пульгукса, грот Соккурам, зелені пагорби-гробниці королів. Увечері переїжджаємо до Пусана.",
     tags: ["KTX", "ЮНЕСКО", "Сілла"],
     photo: {
       src: photoGyeongjuTombs,
       width: 1060,
       height: 570,
-      alt: "Пагорби-гробниці королів Сілла в Кенджу",
+      alt: "Пагорби-гробниці королів Сілла в Кьонджу",
     },
   },
   { type: "city", kr: "부산", name: "Пусан", label: "Дні 7–8" },
@@ -130,13 +130,13 @@ const TIMELINE: (CityRow | DayRow)[] = [
     day: 7,
     kr: "일곱째 날",
     title: "Пусан — місто океану",
-    text: "Пляж Haeundae, океан зі 100-го поверху Busan X the Sky, кольорові вулички Gamcheon і прогулянка узбережжям Songdo. Увечері — пляж Gwangalli і шоу дронів над мостом, якщо дозволить погода.",
-    tags: ["X the Sky", "Gamcheon", "Шоу дронів"],
+    text: "Пляж Хеунде, океан зі 100-го поверху Busan X the Sky, кольорові вулички Камчхону і прогулянка узбережжям Сондо. Увечері — пляж Кваналлі і шоу дронів над мостом, якщо дозволить погода.",
+    tags: ["X the Sky", "Камчхон", "Шоу дронів"],
     photo: {
       src: photoBusanDroneShow,
       width: 620,
       height: 440,
-      alt: "Пляж Haeundae у Пусані: океан і хмарочоси",
+      alt: "Пляж Хеунде у Пусані: океан і хмарочоси",
     },
   },
   {
@@ -144,8 +144,8 @@ const TIMELINE: (CityRow | DayRow)[] = [
     day: 8,
     kr: "여덟째 날",
     title: "ARTE Museum і стежка над океаном",
-    text: "Пляжний поїзд Blueline Park уздовж узбережжя, цифрові зали ARTE Museum Busan і прибережна стежка Igidae на захід сонця.",
-    tags: ["Blueline Park", "ARTE Museum", "Igidae"],
+    text: "Пляжний поїзд Blueline Park уздовж узбережжя, цифрові зали ARTE Museum Busan і прибережна стежка Ігіде на захід сонця.",
+    tags: ["Blueline Park", "ARTE Museum", "Ігіде"],
     photo: {
       src: photoBusanArteMuseum,
       width: 640,
@@ -165,7 +165,7 @@ const TIMELINE: (CityRow | DayRow)[] = [
       src: photoSeoulShop,
       width: 560,
       height: 440,
-      alt: "Вулиця Мьондону вдень: магазини косметики й канцелярії ART BOX",
+      alt: "Мьондон удень: магазини косметики й канцелярії ART BOX",
     },
   },
   {
@@ -203,7 +203,7 @@ export function Program() {
             Плани на кожен день
           </h2>
           <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:text-[19px]">
-            Щодня нові локації, нова їжа, нові емоції.
+            Щодня нові локації, цікава їжа, яскраві емоції.
           </p>
         </div>
 
@@ -242,7 +242,7 @@ function CityHeader({ row }: { row: CityRow }) {
           <img
             className="pk-sticker w-[86px] lg:w-[153px]"
             src={stampUnesco}
-            alt="ЮНЕСКО"
+            alt="Штамп «ЮНЕСКО»: памʼятки Кьонджу входять до Світової спадщини"
             width={336}
             height={83}
             loading="lazy"

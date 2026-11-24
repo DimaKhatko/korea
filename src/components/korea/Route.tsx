@@ -12,8 +12,8 @@ type Leg =
 
 const LEGS: Leg[] = [
   { title: "Приліт до Сеула", detail: "день 1", marker: "plane", tilt: 90 },
-  { title: "Сеул → Кенджу", detail: "KTX, близько 2 год · день 6", marker: "ring" },
-  { title: "Кенджу → Пусан", detail: "KTX, близько 30 хв · день 6", marker: "ring" },
+  { title: "Сеул → Кьонджу", detail: "KTX, близько 2 год · день 6", marker: "ring" },
+  { title: "Кьонджу → Пусан", detail: "KTX, близько 30 хв · день 6", marker: "ring" },
   { title: "Пусан → Сеул", detail: "KTX, близько 2,5 год · день 9", marker: "ring" },
   { title: "Виліт до Європи", detail: "день 10", marker: "plane", tilt: 0 },
 ];
@@ -30,7 +30,7 @@ const CITY_LABELS: { kr: string; name: string; position: CSSProperties }[] = [
   },
   {
     kr: "경주",
-    name: "Кенджу",
+    name: "Кьонджу",
     position: { right: "calc(21.32% + 18px)", top: "calc(51.17% - 18px)" },
   },
   {
@@ -42,7 +42,7 @@ const CITY_LABELS: { kr: string; name: string; position: CSSProperties }[] = [
 
 /**
  * KTX tag: reference position, except that on narrow maps (figure under ~377 px wide,
- * i.e. phones) it is lifted just enough to keep 4 px above the «Кенджу» label
+ * i.e. phones) it is lifted just enough to keep 4 px above the «Кьонджу» label
  * (label top 51.17% − 18 px, tag 32 px tall). The reference overlaps there by 1–5 px.
  * Wider maps get the exact reference value.
  */
@@ -51,7 +51,7 @@ const KTX_POSITION: CSSProperties = {
   top: "min(calc(42.83% - 14px), calc(51.17% - 54px))",
 };
 
-const MAP_ALT = "Карта Південної Кореї з маршрутом Сеул – Кенджу – Пусан – Сеул";
+const MAP_ALT = "Карта Південної Кореї з маршрутом Сеул – Кьонджу – Пусан – Сеул";
 
 const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
 
@@ -77,7 +77,7 @@ export function Route() {
               Наш маршрут Кореєю
             </h2>
             <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:text-[19px]">
-              Сеул → Кенджу → Пусан → Сеул. Між містами — швидкісний потяг KTX, найдовший переїзд
+              Сеул → Кьонджу → Пусан → Сеул. Між містами — швидкісний потяг KTX, найдовший переїзд
               близько 2,5 години.
             </p>
           </div>

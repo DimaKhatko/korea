@@ -15,10 +15,10 @@ export const END_ISO = "2027-03-30";
 export const PARTICIPANT_AGE = "10–20 років";
 
 /**
- * Maximum group size: the number only. The About card renders «У групі до 20 учасників.»
+ * Maximum group size: the number only. The About card renders «У групі до 15 учасників.»
  * and the JSON-LD reads the number (eligibleQuantity.maxValue).
  */
-export const MAX_GROUP_SIZE = "20";
+export const MAX_GROUP_SIZE = "15";
 
 /** Trip price in euros. Shown as «3150 €», without «від». */
 export const PRICE_EUR = 3150;

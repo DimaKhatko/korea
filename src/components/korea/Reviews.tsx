@@ -1,7 +1,6 @@
-import type { CSSProperties } from "react";
 import smileySticker from "@/assets/korea/sticker-smiley.png";
-import starSticker from "@/assets/korea/sticker-star-holo.png";
 import { PaperDivider } from "./PaperDivider";
+import { PaperStar } from "./PaperStar";
 import { SnapRow } from "./SnapRow";
 
 /* ---------- Copy and data (edit here) */
@@ -11,8 +10,8 @@ type Rating = {
   text: string;
   /** Read by screen readers instead of the visual value + text. */
   ariaLabel: string;
-  /** Lime card with the holo star sticker after the value. */
-  star?: boolean;
+  /** Lime card showing five paper stars instead of the value. */
+  stars?: boolean;
 };
 
 const RATINGS: Rating[] = [
@@ -20,9 +19,9 @@ const RATINGS: Rating[] = [
   { value: "98%", text: "рекомендують у Facebook", ariaLabel: "98% — рекомендують у Facebook" },
   {
     value: "5",
-    text: "зірок у кожній анкеті батьків після поїздки",
-    ariaLabel: "5 зірок — зірок у кожній анкеті батьків після поїздки",
-    star: true,
+    text: "у кожній анкеті батьків після поїздки",
+    ariaLabel: "5 зірок з 5",
+    stars: true,
   },
 ];
 
@@ -49,6 +48,9 @@ const QUOTES: { text: string; author: string }[] = [
   },
 ];
 
+/** Fixed tilts of the five rating stars (deterministic for prerender + hydration). */
+const STAR_TILTS = [-8, 5, -3, 7, -5];
+
 const CHANGES_TITLE = "Що помітили батьки: після поїздки дитина…";
 
 const CHANGES: string[] = [
@@ -56,11 +58,9 @@ const CHANGES: string[] = [
   "стала впевненішою в собі",
   "знайшла нових друзів",
   "більше говорить англійською",
-  "має нові звички: порядок, ввічливість, їжа",
+  "має нові звички: порядок, ввічливість, нова їжа",
   "має нові мрії та цілі",
 ];
-
-const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
 
 /**
  * Reviews from 04-reviews (#reviews): divider with the smiley, ratings, quotes, sakura tags.
@@ -80,7 +80,7 @@ export function Reviews() {
             <span>Відгуки</span>
           </p>
           <h2 className="m-0 text-[30px] leading-[1.05] font-black tracking-[-0.01em] lg:text-[40px]">
-            Що кажуть після наших поїздок
+            Що кажуть батьки після наших поїздок
           </h2>
           <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:text-[19px]">
             Відгуки батьків і оцінки з анкет, які родини заповнюють після кожної поїздки.
@@ -92,24 +92,22 @@ export function Reviews() {
             <article
               key={rating.value}
               aria-label={rating.ariaLabel}
-              className={`pk-card flex items-center gap-4 px-[18px] py-4 lg:px-6 lg:py-5 ${rating.star ? "bg-lime" : ""}`}
+              className={`pk-card flex items-center gap-4 px-[18px] py-4 lg:px-6 lg:py-5 ${rating.stars ? "bg-lime" : ""}`}
             >
               <p
                 aria-hidden="true"
                 className="m-0 flex flex-none items-center text-[36px] leading-none font-black tracking-[-0.02em] lg:text-[48px]"
               >
-                {rating.value}
-                {rating.star && (
-                  <img
-                    className="pk-sticker -my-2.5 -mr-1.5 -ml-2.5 w-[41px] flex-none lg:w-[55px]"
-                    src={starSticker}
-                    alt=""
-                    width={258}
-                    height={258}
-                    loading="lazy"
-                    style={tilt(10)}
-                  />
-                )}
+                {rating.stars
+                  ? STAR_TILTS.map((deg, i) => (
+                      <PaperStar
+                        key={i}
+                        tilt={deg}
+                        delayMs={i * 90}
+                        className="-mr-0.5 size-[27px] lg:size-[34px]"
+                      />
+                    ))
+                  : rating.value}
               </p>
               <p className="m-0 text-[15px] leading-[1.35] font-bold">{rating.text}</p>
             </article>

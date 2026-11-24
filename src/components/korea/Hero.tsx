@@ -3,7 +3,7 @@ import photoHanbok from "@/assets/korea/photo-seoul-hanbok.webp";
 import photoHaeundae from "@/assets/korea/photo-busan-haeundae.webp";
 import stamp10Days from "@/assets/korea/stamp-10-days.png";
 import markerArrow from "@/assets/korea/marker-arrow-red.svg";
-import { PRICE_EUR, TRIP_DATES } from "@/lib/korea";
+import { MAX_GROUP_SIZE, PRICE_EUR, TRIP_DATES } from "@/lib/korea";
 
 /** Per-element tilt for pk-* collage pieces (they rotate by var(--tilt)). */
 const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
@@ -26,7 +26,7 @@ export function Hero() {
         <div className="flex flex-col gap-4 lg:gap-[22px]">
           <span className="pk-label self-start" style={tilt(-2)}>
             <span className="px-[14px] py-2 text-[15px] lg:px-5 lg:py-[10px] lg:text-[18px]">
-              Весняні канікули · березень 2027
+              Для підлітків та молоді · березень 2027
             </span>
           </span>
 
@@ -39,12 +39,12 @@ export function Hero() {
           </h1>
 
           <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:max-w-[36ch] lg:text-[19px]">
-            10 днів, 9 ночей: Сеул, Кенджу і Пусан. Поруч щонайменше троє дорослих, серед них — наша
-            людина в Кореї.
+            10 днів у Кореї: Сеул, Кьонджу і Пусан. Група до {MAX_GROUP_SIZE} учасників, з нею
+            щонайменше троє дорослих, серед них — наша людина в Кореї.
           </p>
 
           <div className="flex flex-wrap gap-2 lg:gap-2.5">
-            <span className="pk-tag">Сеул – Кенджу – Пусан – Сеул</span>
+            <span className="pk-tag">Сеул – Кьонджу – Пусан – Сеул</span>
             <span className="pk-tag">{TRIP_DATES}</span>
           </div>
 
@@ -53,8 +53,7 @@ export function Hero() {
               {PRICE_EUR}&nbsp;€
             </span>
             <span className="text-[15px] leading-[1.45] text-ink-soft">
-              проживання, харчування, вхідні квитки й транспорт у Кореї включено; переліт і віза
-              окремо
+              у Кореї все включено. Окремо: переліт, віза, трансфер.
             </span>
           </div>
 
@@ -83,7 +82,7 @@ export function Hero() {
             <span className="pk-photo__paper">
               <img
                 src={photoHanbok}
-                alt="Дівчата в ханбоках біля палацу Gyeongbokgung"
+                alt="Дівчата в ханбоках біля палацу Кьонбоккун"
                 width={700}
                 height={360}
                 loading="eager"
@@ -122,7 +121,7 @@ export function Hero() {
                 height={480}
                 loading="lazy"
               />
-              <span className="pk-photo__caption text-center">Пусан, пляж Хеунде.&nbsp;</span>
+              <span className="pk-photo__caption text-center">Пусан, пляж Хеунде</span>
             </span>
           </figure>
 
@@ -145,7 +144,7 @@ export function Hero() {
           <img
             className="pk-sticker absolute top-0 left-[236px] w-[112px] lg:left-[390px] lg:w-[150px]"
             src={stamp10Days}
-            alt="10 днів, 9 ночей, 2027"
+            alt=""
             width={260}
             height={260}
             style={tilt(10)}

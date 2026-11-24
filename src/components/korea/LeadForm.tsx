@@ -244,13 +244,12 @@ export function LeadForm() {
         </div>
 
         <div className="pk-field">
-          <label htmlFor={ID.participant}>Інформація про учасника</label>
+          <label htmlFor={ID.participant}>Імʼя та вік учасника</label>
           <input id={ID.participant} name="participant" placeholder="Імʼя та вік дитини" />
         </div>
 
         {/* Honeypot: invisible to people, left empty by them; bots tend to fill it. */}
         <div aria-hidden="true" className="absolute -left-[10000px] size-px overflow-hidden">
-          <label htmlFor={ID.website}>Website</label>
           <input id={ID.website} name="website" type="text" tabIndex={-1} autoComplete="off" />
         </div>
 

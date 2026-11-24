@@ -1,6 +1,8 @@
+import type { ReactNode } from "react";
 import starSticker from "@/assets/korea/sticker-star-holo.png";
 import { PRICE_EUR, TRIP_DATES } from "@/lib/korea";
 import { PaperDivider } from "./PaperDivider";
+import { PaperStar } from "./PaperStar";
 
 /* ---------- Copy and data (edit here) */
 
@@ -12,8 +14,15 @@ const COPY = {
     "Залиште заявку — ми зателефонуємо, розповімо про умови бронювання й відповімо на питання.",
 };
 
-const INCLUDED: string[] = [
-  "Проживання у 2–3-місних номерах, 3–4 готелі",
+const INCLUDED: ReactNode[] = [
+  <>
+    Проживання в готелях{" "}
+    <span role="img" aria-label="3–4 зірки" className="whitespace-nowrap">
+      3–4
+      <PaperStar tilt={-6} className="ml-0.5 size-[1em] align-[-0.12em]" />
+    </span>
+    , номери на 2–3 особи
+  </>,
   "Сніданки та ще один прийом їжі щодня",
   "Страхування",
   "Весь транспорт у Кореї, включно з KTX",
@@ -27,8 +36,11 @@ const INCLUDED: string[] = [
 const EXTRA: { text: string; note?: string }[] = [
   { text: "Переліт", note: "від 1200 €" },
   { text: "Оформлення візи", note: "100 €, послуги візового агента" },
-  { text: "Кишенькові", note: "близько 300 €, разом з одним прийомом їжі на день і сувенірами" },
-  { text: "Дорога до міста вильоту і назад", note: "Київ – Будапешт / Варшава, близько 310 €" },
+  { text: "Кишенькові", note: "близько 300 €, включно з одним прийомом їжі на день і сувенірами" },
+  {
+    text: "Дорога до міста вильоту і назад",
+    note: "Київ – Будапешт / Варшава, близько 310 €, з ночівлею в готелі й супроводом",
+  },
 ];
 
 /**
@@ -75,8 +87,11 @@ export function Price() {
           <div className="pk-card p-6">
             <h3 className="m-0 mb-[18px] text-[22px] font-black">Входить у вартість</h3>
             <ul className="pk-list">
-              {INCLUDED.map((item) => (
-                <li key={item}>{item}</li>
+              {INCLUDED.map((item, i) => (
+                // One span per item: .pk-list li is a 2-column grid (check box | text).
+                <li key={i}>
+                  <span>{item}</span>
+                </li>
               ))}
             </ul>
           </div>

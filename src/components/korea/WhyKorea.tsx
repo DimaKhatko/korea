@@ -21,7 +21,7 @@ type Card = {
 const CARDS: Card[] = [
   {
     kr: "케이팝",
-    title: "Дорами і K-pop",
+    title: "K-pop",
     text: "Знімаємо власний K-pop кліп у HiKR Ground, заходимо в KWANGYA від SM і гуляємо Гангнамом.",
     label: "Знімаємо кліп",
     labelTone: "lime",
@@ -35,19 +35,19 @@ const CARDS: Card[] = [
   {
     kr: "전통",
     title: "Стародавні традиції",
-    text: "Фотосесія в ханбоках біля палацу Gyeongbokgung, Bukchon Hanok Village і Кенджу — столиця королівства Сілла.",
+    text: "Фотосесія в ханбоках біля палацу Кьонбоккун, прогулянка ханоковим селом Пукчхон і день у Кьонджу — стародавній столиці королівства Сілла.",
     label: "Ханбоки",
     labelTone: "ink",
     photo: {
       src: photoSeoulGwanghwamun,
       width: 310,
       height: 205,
-      alt: "Брама Gwanghwamun палацу Gyeongbokgung",
+      alt: "Брама Кванхвамун палацу Кьонбоккун",
     },
   },
   {
     kr: "미래",
-    title: "Технології майбутнього",
+    title: "Місто майбутнього",
     text: "Бібліотека Starfield у COEX, 100-й поверх Busan X the Sky і цифрові зали ARTE Museum.",
     label: "100-й поверх",
     labelTone: "ink",
@@ -61,7 +61,7 @@ const CARDS: Card[] = [
   {
     kr: "음식",
     title: "Їжа і шопінг",
-    text: "K-BBQ, ттокпоккі, пунгеппан і десерти з матча. Канцелярія, косметика і K-pop альбоми.",
+    text: "K-BBQ, ттокпоккі, пуноппан — вафлі-рибки — і десерти з матчі. Канцелярія, косметика і K-pop альбоми.",
     label: "Стріт-фуд",
     labelTone: "ink",
     photo: {
@@ -93,7 +93,7 @@ export function WhyKorea() {
             <span>Чому Корея</span>
           </p>
           <h2 className="m-0 text-[30px] leading-[1.05] font-black tracking-[-0.01em] lg:text-[40px]">
-            Корея, яку підлітки знають з дорам і K-pop, — наживо
+            Корея, яку ваша дитина знає з дорам і K-pop
           </h2>
           {/* 917 px wide from lg, wider than its 760 px block, as in the desktop reference. */}
           <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:w-[917px] lg:text-[19px]">

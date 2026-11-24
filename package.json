@@ -4,7 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
+    "dev": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/write-seo.mjs && vite dev",
     "build": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/write-seo.mjs && vite build",
     "build:dev": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/write-seo.mjs && vite build --mode development",
     "preview": "vite preview",

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import starSticker from "@/assets/korea/sticker-star-holo.png";
-import { PRICE_EUR, TRIP_DATES } from "@/lib/korea";
+import { PRICE_EUR, PRICE_EXTRAS, TRIP_DATES } from "@/lib/korea";
 import { PaperDivider } from "./PaperDivider";
 import { PaperStar } from "./PaperStar";
 
@@ -33,16 +33,6 @@ const INCLUDED: ReactNode[] = [
 ];
 
 /** `note`: the smaller grey line under the item (amounts). */
-const EXTRA: { text: string; note?: string }[] = [
-  { text: "Переліт", note: "від 1200 €" },
-  { text: "Оформлення візи — 100 €" },
-  { text: "Кишенькові", note: "близько 300 €, включно з одним прийомом їжі на день і сувенірами" },
-  {
-    text: "Дорога до міста вильоту і назад",
-    note: "Київ – Будапешт / Варшава, близько 310 €, з ночівлею в готелі й супроводом",
-  },
-];
-
 /**
  * Price from 09-price (#price): star divider, price card and two clean list cards (no
  * collage). Below md: stacked. md–lg: price card full width, the two lists side by side.
@@ -99,7 +89,7 @@ export function Price() {
           <div className="pk-card p-6">
             <h3 className="m-0 mb-[18px] text-[22px] font-black">Оплачується окремо</h3>
             <ul className="pk-list pk-list--extra">
-              {EXTRA.map((item) => (
+              {PRICE_EXTRAS.map((item) => (
                 <li key={item.text}>
                   {item.text}
                   {item.note && <small>{item.note}</small>}

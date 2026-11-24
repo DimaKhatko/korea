@@ -45,3 +45,5 @@ firebase-debug.*.log
 
 # Generated before every build by scripts/write-seo.mjs
 public/sitemap.xml
+# Generated before every build / dev start by scripts/write-seo.mjs
+src/lib/buildDate.generated.ts

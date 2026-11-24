@@ -33,52 +33,59 @@ function Deferred({ children }: { children: ReactNode }) {
   return <Suspense fallback={null}>{children}</Suspense>;
 }
 
+import ogImagePath from "@/assets/korea/og-image.jpg";
+import { BUILD_DATE } from "@/lib/buildDate.generated";
 import {
+  CITIES,
+  END_ISO,
   MAX_GROUP_SIZE,
+  PAGE_DESCRIPTION,
+  PAGE_TITLE,
   PARTICIPANT_AGE,
   PRICE_EUR,
+  PRICE_EXTRAS,
   SEARCH_INDEXABLE,
+  START_ISO,
+  TRIP_SUMMARY,
+  TRIP_TITLE,
   ageRange,
   groupSize,
-  tripDates,
 } from "@/lib/korea";
 
 const SITE_URL = "https://korea.pointcamp.com.ua/";
 const ORG_ID = "https://pointcamp.com.ua/#organization";
 const PAGE_ID = `${SITE_URL}#webpage`;
-const TRIP_ID = `${SITE_URL}#trip`;
+const EVENT_ID = `${SITE_URL}#event`;
 const FAQ_ID = `${SITE_URL}#faq`;
 
-const TITLE = "Весняні канікули в Кореї для підлітків 2027 | PointCamp";
-/** ≤ 160 characters; every fact is on the page (hero, About, Partner, Price). */
-const DESCRIPTION = `Весняні канікули 2027 у Південній Кореї для підлітків та молоді: 10 днів у Сеулі, Кьонджу й Пусані, група до ${MAX_GROUP_SIZE} учасників, 3150 €. 21–30 березня.`;
-
-/** 1200×630, rendered from the desktop hero (logo, 한국, h1, collage). */
+/**
+ * OG image: 1200×630 screenshot of the desktop hero (see CLAUDE.md, «Re-shoot»). Imported
+ * so Vite puts a content hash in the file name: a changed image gets a new URL, and
+ * Facebook / Telegram fetch it again instead of showing their cached copy.
+ */
 const OG_IMAGE = {
-  url: `${SITE_URL}og-image.jpg`,
+  url: new URL(ogImagePath, SITE_URL).href,
   width: 1200,
   height: 630,
-  alt: "PointCamp Korea 2027: весняні канікули в Південній Кореї. Дівчата в ханбоках біля палацу Кьонбоккун",
+  alt: "PointCamp Korea 2027: весняні канікули в Південній Кореї для підлітків та молоді. Дівчата в ханбоках біля палацу Кьонбоккун",
 };
 
-/** Route as shown on the page: Сеул → Кьонджу → Пусан → Сеул. */
-const ITINERARY = [
-  { name: "Сеул", alternateName: "Seoul" },
-  { name: "Кьонджу", alternateName: "Gyeongju" },
-  { name: "Пусан", alternateName: "Busan" },
-  { name: "Сеул", alternateName: "Seoul" },
-];
+/** «Переліт (від 1200 €); оформлення візи — 100 €; …» from the Price list. */
+const extrasText = PRICE_EXTRAS.map(
+  (item) =>
+    item.text.charAt(0).toLowerCase() + item.text.slice(1) + (item.note ? ` (${item.note})` : ""),
+).join("; ");
 
 /**
- * JSON-LD @graph: the brand (same @id on every Point Camp landing, so crawlers and AI
- * search merge them into one entity), this page, the trip (one group, 21–30.03.2027)
- * with its offer, and the FAQ (built from the same FAQ array as the visible section). Dates, age and group size are added only once src/lib/korea.ts holds
- * real values, never as placeholders. Everything here must match the visible page.
+ * JSON-LD @graph: the brand (same node and @id as on every PointCamp landing, so crawlers
+ * and AI search merge them into one entity), this page, the trip as an Event with its
+ * public Offer, and the FAQ (built from the same FAQ array as the visible section). All
+ * trip values come from src/lib/korea.ts; age and group size only when they are real
+ * values. Everything here must match the visible page.
  */
 function structuredData() {
   const age = ageRange(PARTICIPANT_AGE);
   const capacity = groupSize(MAX_GROUP_SIZE);
-  const dates = tripDates();
 
   return {
     "@context": "https://schema.org",
@@ -91,72 +98,52 @@ function structuredData() {
         url: "https://pointcamp.com.ua/",
         logo: `${SITE_URL}favicon-512x512.png`,
         foundingDate: "2011",
-        telephone: "+380662217373",
-        email: "contact@pointcamp.com.ua",
         sameAs: [
+          "https://www.facebook.com/pointcamp",
           "https://www.instagram.com/point_camp",
-          "https://facebook.com/pointcamp",
           "https://t.me/pointcamp",
         ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+380662217373",
+          contactType: "customer service",
+          email: "contact@pointcamp.com.ua",
+          availableLanguage: ["uk"],
+        },
       },
       {
         "@type": "WebPage",
         "@id": PAGE_ID,
         url: SITE_URL,
-        name: TITLE,
-        description: DESCRIPTION,
+        name: PAGE_TITLE,
+        description: PAGE_DESCRIPTION,
         inLanguage: "uk",
+        dateModified: BUILD_DATE,
         primaryImageOfPage: {
           "@type": "ImageObject",
           url: OG_IMAGE.url,
           width: OG_IMAGE.width,
           height: OG_IMAGE.height,
         },
-        about: { "@id": TRIP_ID },
+        about: { "@id": EVENT_ID },
         hasPart: { "@id": FAQ_ID },
         publisher: { "@id": ORG_ID },
       },
       {
-        "@type": "TouristTrip",
-        "@id": TRIP_ID,
-        name: "Весняні канікули в Південній Кореї 2027",
-        description: `10 днів у Кореї: Сеул, Кьонджу і Пусан. Група до ${MAX_GROUP_SIZE} учасників, з нею щонайменше троє дорослих, серед них — наша людина в Кореї.`,
-        url: SITE_URL,
+        "@type": "Event",
+        "@id": EVENT_ID,
+        name: TRIP_TITLE,
+        description: TRIP_SUMMARY,
         image: OG_IMAGE.url,
+        url: SITE_URL,
         inLanguage: "uk",
-        touristType: "Підлітки",
-        provider: { "@id": ORG_ID },
-        itinerary: {
-          "@type": "ItemList",
-          numberOfItems: ITINERARY.length,
-          itemListElement: ITINERARY.map((city, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            item: {
-              "@type": "City",
-              ...city,
-              containedInPlace: { "@type": "Country", name: "Південна Корея" },
-            },
-          })),
-        },
-        offers: {
-          "@type": "Offer",
-          price: String(PRICE_EUR),
-          priceCurrency: "EUR",
-          url: `${SITE_URL}#price`,
-          offeredBy: { "@id": ORG_ID },
-          ...(capacity
-            ? {
-                eligibleQuantity: {
-                  "@type": "QuantitativeValue",
-                  maxValue: capacity,
-                  unitText: "учасників у групі",
-                },
-              }
-            : {}),
-        },
+        startDate: START_ISO,
+        endDate: END_ISO,
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         ...(age
           ? {
+              typicalAgeRange: `${age.min}-${age.max}`,
               audience: {
                 "@type": "PeopleAudience",
                 suggestedMinAge: age.min,
@@ -164,7 +151,27 @@ function structuredData() {
               },
             }
           : {}),
-        ...(dates ? { departureTime: dates.start, arrivalTime: dates.end } : {}),
+        ...(capacity ? { maximumAttendeeCapacity: capacity } : {}),
+        location: CITIES.map((city) => ({
+          "@type": "Place",
+          name: city.name,
+          alternateName: city.alternateName,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: city.name,
+            addressCountry: "KR",
+          },
+        })),
+        organizer: { "@id": ORG_ID },
+        offers: {
+          "@type": "Offer",
+          price: String(PRICE_EUR),
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          url: `${SITE_URL}#form`,
+          validFrom: BUILD_DATE,
+          description: `${PRICE_EUR} € за 10 днів у Кореї. Окремо оплачуються: ${extrasText}.`,
+        },
       },
       {
         "@type": "FAQPage",
@@ -185,22 +192,24 @@ function structuredData() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      // Temporary: while src/lib/korea.ts still has «[…]» placeholders (see scripts/write-seo.mjs).
+      { title: PAGE_TITLE },
+      { name: "description", content: PAGE_DESCRIPTION },
+      // Until launch: LAUNCHED = false or placeholders left (NOINDEX_REASONS in korea.ts).
       ...(SEARCH_INDEXABLE ? [] : [{ name: "robots", content: "noindex, follow" }]),
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "PointCamp" },
+      { property: "og:locale", content: "uk_UA" },
       { property: "og:url", content: SITE_URL },
+      { property: "og:title", content: PAGE_TITLE },
+      { property: "og:description", content: PAGE_DESCRIPTION },
       { property: "og:image", content: OG_IMAGE.url },
       { property: "og:image:type", content: "image/jpeg" },
       { property: "og:image:width", content: String(OG_IMAGE.width) },
       { property: "og:image:height", content: String(OG_IMAGE.height) },
       { property: "og:image:alt", content: OG_IMAGE.alt },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:title", content: PAGE_TITLE },
+      { name: "twitter:description", content: PAGE_DESCRIPTION },
       { name: "twitter:image", content: OG_IMAGE.url },
       { name: "twitter:image:alt", content: OG_IMAGE.alt },
     ],

@@ -3,7 +3,14 @@ import photoHanbok from "@/assets/korea/photo-seoul-hanbok.webp";
 import photoHaeundae from "@/assets/korea/photo-busan-haeundae.webp";
 import stamp10Days from "@/assets/korea/stamp-10-days.png";
 import markerArrow from "@/assets/korea/marker-arrow-red.svg";
-import { MAX_GROUP_SIZE, PRICE_EUR, TRIP_DATES } from "@/lib/korea";
+import { PRICE_EUR, TRIP_DATES, TRIP_SUMMARY, TRIP_TITLE } from "@/lib/korea";
+
+/**
+ * No orphans in the wrapped h1: a one-letter preposition stays with the next word and the
+ * last two words stay together (no-break spaces; the source text keeps plain spaces).
+ */
+const keepTogether = (text: string) =>
+  text.replace(/ ([ввзуаіо]) /gi, " $1\u00a0").replace(/ (\S+)$/, "\u00a0$1");
 
 /** Per-element tilt for pk-* collage pieces (they rotate by var(--tilt)). */
 const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
@@ -26,7 +33,7 @@ export function Hero() {
         <div className="flex flex-col gap-4 lg:gap-[22px]">
           <span className="pk-label self-start" style={tilt(-2)}>
             <span className="px-[14px] py-2 text-[15px] lg:px-5 lg:py-[10px] lg:text-[18px]">
-              Для підлітків та молоді · березень 2027
+              Березень 2027
             </span>
           </span>
 
@@ -35,12 +42,11 @@ export function Hero() {
           </p>
 
           <h1 className="m-0 text-[36px] leading-[1.05] font-black tracking-[-0.02em] lg:text-[56px] lg:leading-[1.02]">
-            Весняні канікули в Південній Кореї
+            {keepTogether(TRIP_TITLE)}
           </h1>
 
           <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:max-w-[36ch] lg:text-[19px]">
-            10 днів у Кореї: Сеул, Кьонджу і Пусан. Група до {MAX_GROUP_SIZE} учасників, з нею
-            щонайменше троє дорослих, серед них — наша людина в Кореї.
+            {TRIP_SUMMARY}
           </p>
 
           <div className="flex flex-wrap gap-2 lg:gap-2.5">

@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import kyivTypeSansUrl from "../assets/fonts/KyivTypeSans-Sub.woff2?url";
 import paperTileUrl from "../assets/korea/paper-tile.jpg?url";
 import { GTM_ID } from "@/lib/analytics";
+import { PAGE_TITLE } from "@/lib/korea";
 
 /**
  * Deferred Google Tag Manager (same loader as pointcamp-winter). `window.dataLayer` is
@@ -85,11 +86,8 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "PointCamp Korea 2027 — весняні канікули в Південній Кореї" },
-      { name: "author", content: "Point Camp" },
-      { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Point Camp" },
-      { property: "og:locale", content: "uk_UA" },
+      { title: PAGE_TITLE },
+      { name: "author", content: "PointCamp" },
       { name: "theme-color", content: "#eae5d8" },
     ],
     links: [

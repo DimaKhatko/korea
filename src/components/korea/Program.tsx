@@ -72,8 +72,8 @@ const TIMELINE: (CityRow | DayRow)[] = [
     day: 3,
     kr: "셋째 날",
     title: "K-pop вайб і панорама",
-    text: "Кампус-тур Korea University, знімаємо власний K-pop кліп у HiKR Ground, гуляємо ханоковими провулками Іксондону, а на захід сонця піднімаємося на N Seoul Tower.",
-    tags: ["Korea University", "K-pop кліп", "N Seoul Tower"],
+    text: "Кампус-тур Korea University, пробуємо себе в K-pop в AR-залах HiKR Ground, гуляємо ханоковими провулками Іксондону, а на захід сонця піднімаємося на N Seoul Tower.",
+    tags: ["Korea University", "HiKR Ground", "N Seoul Tower"],
     photo: {
       src: photoSeoulKoreaUniversity,
       width: 680,

@@ -35,7 +35,7 @@ const INCLUDED: ReactNode[] = [
 /** `note`: the smaller grey line under the item (amounts). */
 const EXTRA: { text: string; note?: string }[] = [
   { text: "Переліт", note: "від 1200 €" },
-  { text: "Оформлення візи", note: "100 €, послуги візового агента" },
+  { text: "Оформлення візи — 100 €" },
   { text: "Кишенькові", note: "близько 300 €, включно з одним прийомом їжі на день і сувенірами" },
   {
     text: "Дорога до міста вильоту і назад",

@@ -22,8 +22,8 @@ const CARDS: Card[] = [
   {
     kr: "케이팝",
     title: "K-pop",
-    text: "Знімаємо власний K-pop кліп у HiKR Ground, заходимо в KWANGYA від SM і гуляємо Гангнамом.",
-    label: "Знімаємо кліп",
+    text: "Пробуємо себе в K-pop в AR-залах HiKR Ground, заходимо в KWANGYA від SM і гуляємо Гангнамом.",
+    label: "K-pop в AR",
     labelTone: "lime",
     photo: {
       src: photoSeoulNeonStreet,

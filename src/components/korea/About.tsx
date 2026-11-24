@@ -130,7 +130,7 @@ export function About() {
               Маршрут
             </p>
             <p className="m-0 mb-4 text-[14px] text-ink-soft lg:mb-0 lg:text-[15px]">
-              Між містами — швидкісний потяг KTX
+              Між Сеулом і Пусаном — швидкісний потяг KTX
             </p>
           </div>
           <ol className="m-0 flex list-none flex-col gap-1.5 bg-[linear-gradient(#121212,#121212)] bg-[size:3px_calc(100%_-_56px)] bg-[position:26.5px_28px] bg-no-repeat p-0 lg:grid lg:grid-cols-6 lg:gap-4 lg:bg-[size:calc(83.333%_+_13px)_3px] lg:bg-[position:28px_26.5px]">

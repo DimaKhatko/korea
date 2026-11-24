@@ -65,7 +65,7 @@ const CONTACTS: IconLink[] = [
     ),
   },
   {
-    href: "https://wa.me/+380662217373",
+    href: "https://wa.me/380662217373",
     text: "WhatsApp",
     bg: "#ffffff",
     tilt: 9,

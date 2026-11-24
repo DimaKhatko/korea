@@ -5,7 +5,10 @@ import planeHolo from "@/assets/korea/plane-holo.png";
 
 /* ---------- Copy and data (edit here) */
 
-/** `plane`: plane sticker rotated by `tilt`; `ring`: 14 px ring dot. KTX times are checked. */
+/**
+ * `plane`: plane sticker rotated by `tilt`; `ring`: 14 px ring dot. Transport (confirmed):
+ * Сеул → Кьонджу KTX ≈2 год, Кьонджу → Пусан автобус ≈1,5–2 год, Пусан → Сеул KTX ≈2,5 год.
+ */
 type Leg =
   | { title: string; detail: string; marker: "plane"; tilt: number }
   | { title: string; detail: string; marker: "ring" };
@@ -13,7 +16,7 @@ type Leg =
 const LEGS: Leg[] = [
   { title: "Приліт до Сеула", detail: "день 1", marker: "plane", tilt: 90 },
   { title: "Сеул → Кьонджу", detail: "KTX, близько 2 год · день 6", marker: "ring" },
-  { title: "Кьонджу → Пусан", detail: "KTX, близько 30 хв · день 6", marker: "ring" },
+  { title: "Кьонджу → Пусан", detail: "автобус, близько 1,5–2 год · день 6", marker: "ring" },
   { title: "Пусан → Сеул", detail: "KTX, близько 2,5 год · день 9", marker: "ring" },
   { title: "Виліт до Європи", detail: "день 10", marker: "plane", tilt: 0 },
 ];
@@ -77,8 +80,8 @@ export function Route() {
               Наш маршрут Кореєю
             </h2>
             <p className="m-0 text-[17px] leading-[1.55] text-ink-soft lg:text-[19px]">
-              Сеул → Кьонджу → Пусан → Сеул. Між містами — швидкісний потяг KTX, найдовший переїзд
-              близько 2,5 години.
+              Сеул → Кьонджу → Пусан → Сеул. Сеул → Кьонджу і Пусан → Сеул — швидкісним потягом KTX,
+              з Кьонджу до Пусана — автобусом. Найдовший переїзд — близько 2,5 години.
             </p>
           </div>
 

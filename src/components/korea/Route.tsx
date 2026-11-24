@@ -57,7 +57,7 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
 
 /**
  * Route from 07-route (#route): intro, map card with overlays, legs list.
- * Below lg: text, map, list stacked (the left-column wrapper is `display: contents`, so the
+ * Below lg: text, list, map stacked (the left-column wrapper is `display: contents`, so the
  * map can sit between intro and list). From lg: text + list left, map right (max 520 px,
  * centred), both vertically centred. The map overlays repeat the list and are aria-hidden.
  */
@@ -82,7 +82,7 @@ export function Route() {
             </p>
           </div>
 
-          <ol className="order-3 m-0 list-none border-t-2 border-ink p-0 lg:order-none lg:mt-2">
+          <ol className="order-2 m-0 list-none border-t-2 border-ink p-0 lg:order-none lg:mt-2">
             {LEGS.map((leg) => (
               <li
                 key={leg.title}
@@ -115,7 +115,7 @@ export function Route() {
           </ol>
         </div>
 
-        <div className="order-2 lg:order-none lg:w-full lg:max-w-[520px] lg:justify-self-center">
+        <div className="order-3 lg:order-none lg:w-full lg:max-w-[520px] lg:justify-self-center">
           <div
             className="rounded-sm border-2 border-ink bg-paper-light bg-[size:26px_26px] bg-[position:0_0] bg-repeat px-3.5 pt-[18px] pb-1 shadow-hard"
             style={{ backgroundImage: `url(${lattice})` }}

@@ -8,9 +8,9 @@ const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
 
 /**
  * Final CTA from 10-form (#contact) with the lead form (#form).
- * Below lg (md–lg centred at 640 px): text, collage (350 × 340 px box), form.
- * From lg: two columns, text + collage (420 px box) left, form right.
- * Collage pieces keep the reference px positions. The lime spray carries the page's only
+ * Below lg (md–lg centred at 640 px): text, collage (350 × 370 px box), form.
+ * From lg: two columns, text + collage (400 px box) left, form right.
+ * Collage: top row spray + SEOUL polaroid side by side, bottom row note + arrow towards the form. The lime spray carries the page's only
  * «KOREA '27». The section clips its overflow, as in the reference.
  */
 export function FinalCTA() {
@@ -32,9 +32,9 @@ export function FinalCTA() {
             квитків до візи.
           </p>
 
-          <div className="relative my-1 h-[340px] md:w-[350px] lg:mt-2 lg:mb-0 lg:h-[420px] lg:w-auto">
-            <div className="pk-spray absolute top-[10px] left-[-10px] box-border h-[210px] w-[300px] px-9 py-[30px] lg:top-5 lg:left-[-20px] lg:h-[300px] lg:w-[460px] lg:px-[72px] lg:py-14">
-              <p className="pk-slogan text-center text-[64px] lg:text-[96px]">
+          <div className="relative my-1 h-[370px] md:w-[350px] lg:mt-4 lg:mb-0 lg:h-[400px] lg:w-auto">
+            <div className="pk-spray absolute top-[6px] left-[-10px] box-border h-[190px] w-[250px] px-7 py-[26px] lg:top-0 lg:left-[-20px] lg:h-[250px] lg:w-[360px] lg:px-12 lg:py-10">
+              <p className="pk-slogan text-center text-[54px] lg:text-[80px]">
                 KOREA
                 <br />
                 &apos;27
@@ -42,16 +42,16 @@ export function FinalCTA() {
             </div>
 
             <figure
-              className="pk-photo absolute top-[150px] right-[-6px] m-0 w-[120px] lg:top-[170px] lg:right-auto lg:left-[490px] lg:w-[140px]"
-              style={tilt(5)}
+              className="pk-photo absolute top-[112px] right-[-4px] m-0 w-[200px] lg:top-[24px] lg:right-auto lg:left-[330px] lg:w-[250px]"
+              style={tilt(4)}
             >
               <span className="pk-photo__tape" />
               <span className="pk-photo__paper">
                 <img
                   src={photoSignRooftop}
                   alt="Напис SEOUL на даху на тлі хмарочосів"
-                  width={320}
-                  height={270}
+                  width={900}
+                  height={759}
                   loading="lazy"
                   className="block w-full"
                 />
@@ -59,7 +59,7 @@ export function FinalCTA() {
             </figure>
 
             <img
-              className="pk-sticker absolute top-[118px] right-[70px] w-[60px] lg:top-24 lg:right-auto lg:left-[520px] lg:w-20"
+              className="pk-sticker absolute top-[88px] right-[-6px] w-[54px] lg:top-[4px] lg:right-auto lg:left-[540px] lg:w-[72px]"
               src={sakuraSticker}
               alt=""
               width={226}
@@ -69,14 +69,14 @@ export function FinalCTA() {
             />
 
             <span
-              className="pk-note absolute top-[262px] left-5 lg:top-[330px] lg:left-[260px] lg:text-[44px] lg:leading-[1.05]"
+              className="pk-note absolute top-[296px] left-2 lg:top-[300px] lg:left-[60px] lg:text-[44px] lg:leading-[1.05]"
               style={tilt(-5)}
             >
               до зустрічі!
             </span>
 
             <img
-              className="pk-mark top-[262px] left-[170px] w-[76px] rotate-[60deg] lg:top-[300px] lg:left-[470px] lg:w-[110px] lg:-rotate-[8deg]"
+              className="pk-mark top-[300px] left-[176px] w-[64px] rotate-[20deg] lg:top-[262px] lg:left-[300px] lg:w-[100px] lg:-rotate-[8deg]"
               src={markerArrow}
               alt=""
               width={240}

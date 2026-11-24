@@ -7,7 +7,7 @@
 | photo-seoul-hanbok.webp | Ханбоки біля брами Gwanghwamun | https://unsplash.com/photos/nRUl54RIPeE (Hsinkai Tai) |
 | photo-seoul-han-river.webp | Річка Хан, Lotte World Tower | https://unsplash.com/photos/2csH9SjutAM (Jiwon Kang) |
 | photo-seoul-neon-street.webp | Вечірня вулиця з неоном | https://unsplash.com/photos/… (photo-1517154421773) |
-| photo-seoul-shop.webp | Мьондон, вивіски ARITAUM, ART BOX | https://unsplash.com/photos/voS-uCTrRvE (Chrishaun Byrom) |
+| photo-seoul-shop.webp | Мьондон удень, ART BOX | https://unsplash.com/photos/-sUFxh7wQqY (uchiha) |
 | photo-seoul-korea-university.webp | Головний корпус Korea University, колір виправлено | https://unsplash.com/photos/bsAIWt5T4aY (Ryoo Geon Uk) |
 | photo-busan-coast.webp | Трамвайчики Blueline Park, Haeundae | https://unsplash.com/photos/SHAyPdfOUP0 (Jaythen Bag-ayan) |
 | photo-busan-haeundae.webp | Хеунде, вежа LCT | busan-2.jpg (Drive) |

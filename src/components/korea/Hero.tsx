@@ -74,7 +74,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative mt-4 h-[330px] lg:mt-0 lg:h-[640px]">
+        <div className="relative mt-4 h-[430px] lg:mt-0 lg:h-[640px]">
           <figure
             className="pk-photo absolute top-[24px] left-[4px] m-0 w-[300px] lg:top-[30px] lg:left-[10px] lg:w-[400px]"
             style={tilt(-3)}
@@ -88,6 +88,23 @@ export function Hero() {
                 height={360}
                 loading="eager"
                 fetchPriority="high"
+              />
+            </span>
+          </figure>
+
+          <figure
+            className="pk-photo pk-photo--b absolute top-[196px] right-0 m-0 w-[236px] lg:hidden"
+            style={tilt(4)}
+          >
+            <span className="pk-photo__tape" />
+            <span className="pk-photo__paper">
+              <img
+                src={photoHaeundae}
+                alt="Пляж Хеунде в Пусані і хмарочоси над ним"
+                width={440}
+                height={330}
+                loading="lazy"
+                className="aspect-[4/3] object-cover object-[50%_35%]"
               />
             </span>
           </figure>
@@ -110,7 +127,7 @@ export function Hero() {
           </figure>
 
           <img
-            className="pk-mark top-[169px] left-[65px] w-[100px] lg:top-[232px] lg:left-[87px] lg:w-[140px]"
+            className="pk-mark top-[214px] left-[10px] w-[90px] lg:top-[232px] lg:left-[87px] lg:w-[140px]"
             src={markerArrow}
             alt=""
             width={240}
@@ -119,7 +136,7 @@ export function Hero() {
           />
 
           <span
-            className="pk-note absolute top-[268px] left-[85px] lg:top-[372px] lg:left-[130px]"
+            className="pk-note absolute top-[300px] left-0 lg:top-[372px] lg:left-[130px]"
             style={tilt(-6)}
           >
             ханбоки!

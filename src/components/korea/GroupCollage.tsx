@@ -6,7 +6,7 @@ import pcNara from "@/assets/korea/pointcamp/pc-nara.webp";
 import pcAdriatic from "@/assets/korea/pointcamp/pc-adriatic.webp";
 import pcShibuya from "@/assets/korea/pointcamp/pc-shibuya.webp";
 
-/* ---------- Data (edit here). Own PointCamp photos from past trips and camps, all square. */
+/* ---------- Data (edit here). Own PointCamp photos from past trips and camps, square, the winter one 4:3. */
 
 type Box = { top: string; left: string; width: string };
 
@@ -15,6 +15,8 @@ type CollagePhoto = {
   alt: string;
   label: string;
   tilt: number;
+  /** Photo ratio; default square. */
+  landscape?: boolean;
   /** Position in % of the collage box. `mobile: false` hides the photo below lg. */
   mobile: false | Box;
   desktop: Box;
@@ -27,7 +29,7 @@ const PHOTOS: CollagePhoto[] = [
     label: "Токіо",
     tilt: -4,
     mobile: { top: "0%", left: "0%", width: "56%" },
-    desktop: { top: "0%", left: "0%", width: "37%" },
+    desktop: { top: "0%", left: "0%", width: "33%" },
   },
   {
     src: pcCroatiaKayak,
@@ -35,15 +37,16 @@ const PHOTOS: CollagePhoto[] = [
     label: "Хорватія",
     tilt: 4,
     mobile: { top: "3%", left: "44%", width: "56%" },
-    desktop: { top: "3%", left: "32%", width: "36%" },
+    desktop: { top: "4%", left: "28%", width: "32%" },
   },
   {
     src: pcWinter,
     alt: "Зимовий табір PointCamp: група обіймається на засніженому полі",
     label: "Зимовий табір",
     tilt: -2,
-    mobile: { top: "52%", left: "22%", width: "56%" },
-    desktop: { top: "0%", left: "63%", width: "37%" },
+    landscape: true,
+    mobile: { top: "50%", left: "12%", width: "76%" },
+    desktop: { top: "1%", left: "56%", width: "44%" },
   },
   {
     src: pcNara,
@@ -74,7 +77,9 @@ const PHOTOS: CollagePhoto[] = [
 const vars = (p: CollagePhoto) =>
   ({
     "--tilt": `${p.tilt}deg`,
-    ...(p.mobile ? { "--m-top": p.mobile.top, "--m-left": p.mobile.left, "--m-w": p.mobile.width } : {}),
+    ...(p.mobile
+      ? { "--m-top": p.mobile.top, "--m-left": p.mobile.left, "--m-w": p.mobile.width }
+      : {}),
     "--d-top": p.desktop.top,
     "--d-left": p.desktop.left,
     "--d-w": p.desktop.width,
@@ -100,10 +105,10 @@ export function GroupCollage({ caption }: { caption: string }) {
               <img
                 src={p.src}
                 alt={p.alt}
-                width={640}
-                height={640}
+                width={p.landscape ? 800 : 640}
+                height={p.landscape ? 600 : 640}
                 loading="lazy"
-                className="block aspect-square w-full object-cover"
+                className={`block w-full object-cover ${p.landscape ? "aspect-[4/3]" : "aspect-square"}`}
               />
               <span className="pk-polaroid__caption">{p.label}</span>
             </span>

@@ -23,14 +23,24 @@ export const MAX_GROUP_SIZE = "15";
 /** Trip price in euros. Shown as «3150 €», without «від». */
 export const PRICE_EUR = 3150;
 
+/** Amounts paid separately and the payment split, in euros (Price, FAQ, JSON-LD read these). */
+export const FLIGHT_FROM_EUR = 1200;
+export const VISA_EUR = 100;
+export const POCKET_MONEY_EUR = 300;
+export const DEPARTURE_TRANSFER_EUR = 310;
+export const ADVANCE_EUR = 1500;
+
 /** Paid separately (Price «Оплачується окремо»; also the JSON-LD Offer description). */
 export const PRICE_EXTRAS: { text: string; note?: string }[] = [
-  { text: "Переліт", note: "від 1200 €" },
-  { text: "Оформлення візи — 100 €" },
-  { text: "Кишенькові", note: "близько 300 €, включно з одним прийомом їжі на день і сувенірами" },
+  { text: "Переліт", note: `від ${FLIGHT_FROM_EUR} €` },
+  { text: `Оформлення візи — ${VISA_EUR} €` },
+  {
+    text: "Кишенькові",
+    note: `близько ${POCKET_MONEY_EUR} €, включно з одним прийомом їжі на день і сувенірами`,
+  },
   {
     text: "Дорога до міста вильоту і назад",
-    note: "Київ – Будапешт / Варшава, близько 310 €, з ночівлею в готелі й супроводом",
+    note: `Київ – Будапешт / Варшава, близько ${DEPARTURE_TRANSFER_EUR} €, з ночівлею в готелі й супроводом`,
   },
 ];
 

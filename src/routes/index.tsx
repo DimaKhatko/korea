@@ -163,6 +163,7 @@ function structuredData() {
           },
         })),
         organizer: { "@id": ORG_ID },
+        performer: { "@id": ORG_ID },
         offers: {
           "@type": "Offer",
           price: String(PRICE_EUR),
@@ -197,7 +198,7 @@ export const Route = createFileRoute("/")({
       // Until launch: LAUNCHED = false or placeholders left (NOINDEX_REASONS in korea.ts).
       ...(SEARCH_INDEXABLE ? [] : [{ name: "robots", content: "noindex, follow" }]),
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "PointCamp" },
+      { property: "og:site_name", content: "Point Camp" },
       { property: "og:locale", content: "uk_UA" },
       { property: "og:url", content: SITE_URL },
       { property: "og:title", content: PAGE_TITLE },

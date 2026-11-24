@@ -7,15 +7,17 @@ import { useReplayWhenHydrated } from "@/lib/prehydration";
 /** Personal-data document (same link as in the footer reference). */
 const PRIVACY_URL = "https://drive.google.com/file/d/16D4I7OvCw2L4-G1QejjEtVx3G4P448ob/preview";
 
-/** Telegram chat offered when sending fails (same as «Telegram» in the footer). */
+/** Fallbacks offered when sending fails (same contacts as in the footer). */
 const TELEGRAM_URL = "https://t.me/point_camp";
+const PHONE = { href: "tel:+380662217373", text: "+38 066 221 73 73" };
 
 const COPY = {
   submit: "Залишити заявку",
   submitting: "Надсилаємо…",
   sendError: {
     title: "Не вдалося надіслати заявку",
-    text: "Спробуйте ще раз або напишіть нам у Telegram — відповімо швидко.",
+    text: "Спробуйте ще раз, зателефонуйте або напишіть нам у Telegram — відповімо швидко.",
+    call: "Подзвонити:",
     telegram: "Написати в Telegram",
     retry: "Спробувати ще раз",
   },
@@ -91,6 +93,9 @@ export function LeadForm() {
   const successRef = useRef<HTMLDivElement>(null);
   const errorRef = useRef<HTMLDivElement>(null);
   const submitRef = useRef<HTMLButtonElement>(null);
+  // Set synchronously on submit: two submits in the same frame (before React re-renders the
+  // disabled button) must still send one request.
+  const sendingRef = useRef(false);
   // A submit made before hydration was held by the inline guard; it is replayed here.
   useReplayWhenHydrated(formRef);
 
@@ -103,7 +108,7 @@ export function LeadForm() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    if (status === "submitting") return;
+    if (sendingRef.current) return;
 
     const next: Errors = {};
     for (const field of FIELD_ORDER) {
@@ -131,8 +136,10 @@ export function LeadForm() {
       participant: String(data.get("participant") ?? "").trim(),
     };
 
+    sendingRef.current = true;
     setStatus("submitting");
     const result = await submitLead(lead);
+    sendingRef.current = false;
     setStatus(result.ok ? "success" : "error");
     requestAnimationFrame(() => (result.ok ? successRef : errorRef).current?.focus());
   }
@@ -179,6 +186,14 @@ export function LeadForm() {
           <p className="m-0 text-[17px] leading-[1.55] text-ink-soft">{COPY.sendError.text}</p>
           <a
             className="pk-btn pk-btn--ink box-border min-h-14 w-full px-4 text-center"
+            href={PHONE.href}
+          >
+            <span>
+              {COPY.sendError.call} <span className="whitespace-nowrap">{PHONE.text}</span>
+            </span>
+          </a>
+          <a
+            className="pk-btn pk-btn--ghost box-border min-h-14 w-full px-4 text-center"
             href={TELEGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -249,7 +264,12 @@ export function LeadForm() {
 
         <div className="pk-field">
           <label htmlFor={ID.participant}>Імʼя та вік учасника</label>
-          <input id={ID.participant} name="participant" placeholder="Імʼя та вік дитини" />
+          <input
+            id={ID.participant}
+            name="participant"
+            placeholder="Імʼя та вік дитини"
+            autoComplete="off"
+          />
         </div>
 
         {/* Honeypot: invisible to people, left empty by them; bots tend to fill it. */}
@@ -258,7 +278,7 @@ export function LeadForm() {
         </div>
 
         <div className="grid gap-1.5">
-          <label className="pk-check">
+          <label className="pk-check" htmlFor={ID.consent}>
             <input
               id={ID.consent}
               name="consent"

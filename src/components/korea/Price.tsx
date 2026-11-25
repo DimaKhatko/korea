@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import starSticker from "@/assets/korea/sticker-star-holo.webp";
 import { PRICE_EUR, PRICE_EXTRAS, TRIP_DATES } from "@/lib/korea";
 import { PaperDivider } from "./PaperDivider";
-import { PaperStar } from "./PaperStar";
 
 /* ---------- Copy and data (edit here) */
 
@@ -15,14 +14,8 @@ const COPY = {
 };
 
 const INCLUDED: ReactNode[] = [
-  <>
-    Проживання в готелях{" "}
-    <span role="img" aria-label="3–4 зірки" className="whitespace-nowrap">
-      3–4
-      <PaperStar tilt={-6} className="ml-0.5 size-[1em] align-[-0.12em]" />
-    </span>
-    , номери на 2–3 особи
-  </>,
+  // Words, not the U+2605 star glyph: Apple systems draw it as a red emoji.
+  "Проживання в готелях 3–4 зірки, номери на 2–3 особи",
   "Сніданки та ще один прийом їжі щодня",
   "Страхування",
   "Весь транспорт у Кореї, включно з KTX",
@@ -92,7 +85,7 @@ export function Price() {
               {PRICE_EXTRAS.map((item) => (
                 <li key={item.text}>
                   {item.text}
-                  {item.note && <small>{item.note}</small>}
+                  <small>{item.note}</small>
                 </li>
               ))}
             </ul>

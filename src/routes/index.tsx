@@ -77,8 +77,7 @@ const OG_IMAGE = {
 
 /** «Переліт (від 1200 €); оформлення візи — 100 €; …» from the Price list. */
 const extrasText = PRICE_EXTRAS.map(
-  (item) =>
-    item.text.charAt(0).toLowerCase() + item.text.slice(1) + (item.note ? ` (${item.note})` : ""),
+  (item) => `${item.text.charAt(0).toLowerCase()}${item.text.slice(1)} (${item.note})`,
 ).join("; ");
 
 /**

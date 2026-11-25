@@ -54,7 +54,7 @@ const KTX_POSITION: CSSProperties = {
   top: "min(calc(42.83% - 14px), calc(51.17% - 54px))",
 };
 
-const MAP_ALT = "Карта Південної Кореї з маршрутом Сеул – Кьонджу – Пусан – Сеул";
+const MAP_ALT = "Карта Південної Кореї з маршрутом Сеул — Кьонджу — Пусан — Сеул";
 
 const tilt = (deg: number) => ({ "--tilt": `${deg}deg` }) as CSSProperties;
 

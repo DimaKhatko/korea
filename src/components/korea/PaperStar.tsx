@@ -16,7 +16,7 @@ type PaperStarProps = {
 /**
  * Paper-cutout star sticker: marker-red star with a white paper edge and the sticker drop
  * shadow, like the other collage pieces. Decorative (aria-hidden): give the surrounding
- * element the accessible text («5 зірок з 5», «3–4 зірки»).
+ * element the accessible text («5 зірок з 5»).
  *
  * Pops in once when it scrolls into view, reusing the stop-motion `pk-pop` entrance from
  * pk.css (`.pk-in` is added on enter); pk.css switches the animation off under

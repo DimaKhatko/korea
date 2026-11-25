@@ -30,17 +30,21 @@ export const POCKET_MONEY_EUR = 300;
 export const DEPARTURE_TRANSFER_EUR = 310;
 export const ADVANCE_EUR = 1500;
 
-/** Paid separately (Price «Оплачується окремо»; also the JSON-LD Offer description). */
-export const PRICE_EXTRAS: { text: string; note?: string }[] = [
-  { text: "Переліт", note: `від ${FLIGHT_FROM_EUR} €` },
-  { text: `Оформлення візи — ${VISA_EUR} €` },
+/**
+ * Paid separately (Price «Оплачується окремо»; also the JSON-LD Offer description). Every
+ * item has the same shape: `text` is the title line, `note` the small grey line with the
+ * amount and, after « — », the detail.
+ */
+export const PRICE_EXTRAS: { text: string; note: string }[] = [
+  { text: "Переліт", note: `від ${FLIGHT_FROM_EUR} € — купуємо після отримання віз` },
+  { text: "Оформлення візи", note: `${VISA_EUR} €` },
   {
     text: "Кишенькові",
-    note: `близько ${POCKET_MONEY_EUR} €, включно з одним прийомом їжі на день і сувенірами`,
+    note: `близько ${POCKET_MONEY_EUR} € — один прийом їжі на день і сувеніри`,
   },
   {
     text: "Дорога до міста вильоту і назад",
-    note: `Київ – Будапешт / Варшава, близько ${DEPARTURE_TRANSFER_EUR} €, з ночівлею в готелі й супроводом`,
+    note: `близько ${DEPARTURE_TRANSFER_EUR} € — Київ ↔ Будапешт / Варшава, ночівля в готелі й супровід`,
   },
 ];
 

@@ -52,7 +52,7 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-2 lg:gap-2.5">
-            <span className="pk-tag">Сеул – Кьонджу – Пусан – Сеул</span>
+            <span className="pk-tag">Сеул — Кьонджу — Пусан — Сеул</span>
             <span className="pk-tag">{TRIP_DATES}</span>
           </div>
 

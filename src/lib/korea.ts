@@ -69,7 +69,7 @@ export const CITIES: { name: string; alternateName: string }[] = [
  * Manual launch switch. While false, the page is noindex and left out of sitemap.xml even
  * when every value above is real. Flip it to true only on launch day, then rebuild.
  */
-export const LAUNCHED = false;
+export const LAUNCHED = true;
 
 /* ---------- Derived (do not edit) */
 

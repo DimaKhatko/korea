@@ -1,4 +1,5 @@
 import { useRef, useState, type FormEvent } from "react";
+import { TG_CONFIRM_READY, TG_CONFIRM_URL } from "@/lib/korea";
 import { submitLead, type LeadData } from "@/lib/lead";
 import { useReplayWhenHydrated } from "@/lib/prehydration";
 
@@ -21,8 +22,13 @@ const COPY = {
     telegram: "Написати в Telegram",
     retry: "Спробувати ще раз",
   },
-  successTitle: "Дякуємо!",
-  successText: "Ми звʼяжемося з вами найближчим часом.",
+  success: {
+    title: "Дякуємо! Заявку отримали.",
+    telegramText: "Отримайте підтвердження заявки й деталі поїздки до Кореї в Telegram.",
+    telegram: "Підтвердити в Telegram",
+    text: "Ми звʼяжемося з вами впродовж робочого дня, щоб відповісти на питання й уточнити деталі.",
+    another: "Залишити ще одну заявку",
+  },
   errors: {
     name: "Вкажіть імʼя.",
     phoneEmpty: "Вкажіть номер телефону.",
@@ -146,6 +152,15 @@ export function LeadForm() {
     requestAnimationFrame(() => (result.ok ? successRef : errorRef).current?.focus());
   }
 
+  /** Success → an empty form for one more lead (e.g. a second child). */
+  function another() {
+    setErrors({});
+    setStatus("idle");
+    requestAnimationFrame(() =>
+      formRef.current?.querySelector<HTMLElement>(`#${ID.name}`)?.focus(),
+    );
+  }
+
   function retry() {
     setStatus("idle");
     requestAnimationFrame(() => submitRef.current?.focus());
@@ -158,10 +173,32 @@ export function LeadForm() {
         ref={successRef}
         tabIndex={-1}
         role="status"
-        className="pk-card grid gap-2 px-6 py-7"
+        className="pk-card grid gap-4 px-6 py-7"
       >
-        <p className="m-0 text-[22px] leading-[1.25] font-black">{COPY.successTitle}</p>
-        <p className="m-0 text-[17px] leading-[1.55] text-ink-soft">{COPY.successText}</p>
+        <p className="m-0 text-[22px] leading-[1.25] font-black">{COPY.success.title}</p>
+        {TG_CONFIRM_READY && (
+          <>
+            <p className="m-0 text-[17px] leading-[1.55] text-ink-soft">
+              {COPY.success.telegramText}
+            </p>
+            <a
+              className="pk-btn pk-btn--ink box-border min-h-14 w-full px-4 text-center"
+              href={TG_CONFIRM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {COPY.success.telegram}
+            </a>
+          </>
+        )}
+        <p className="m-0 text-[17px] leading-[1.55] text-ink-soft">{COPY.success.text}</p>
+        <button
+          type="button"
+          className="pk-btn pk-btn--ghost min-h-14 w-full px-4 text-center"
+          onClick={another}
+        >
+          {COPY.success.another}
+        </button>
       </div>
     );
   }

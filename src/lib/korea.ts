@@ -97,6 +97,20 @@ export const NOINDEX_REASONS: string[] = [
 
 export const SEARCH_INDEXABLE = NOINDEX_REASONS.length === 0;
 
+/* ---------- Telegram confirmation (success screen of the lead form) */
+
+/**
+ * «Підтвердити в Telegram» after a successful lead, as on the winter landing: a static link
+ * to the PointCamp SendPulse bot that starts the landing's own flow (`?start=<flow id>`; no
+ * lead data in the URL). Winter uses its own flow id, so Korea needs its own: paste the
+ * Korea flow link from SendPulse here. While it contains a «[…]» placeholder the button is
+ * not rendered and every build prints a warning (scripts/write-seo.mjs).
+ */
+export const TG_CONFIRM_URL = "https://t.me/PointCampAdmin_Bot?start=[KOREA_SENDPULSE_FLOW_ID]";
+
+/** False while TG_CONFIRM_URL is still the placeholder. */
+export const TG_CONFIRM_READY = !isPlaceholder(TG_CONFIRM_URL);
+
 /** «13–17 років» → { min: 13, max: 17 }; null while it is a placeholder or has no range. */
 export function ageRange(value: string): { min: number; max: number } | null {
   if (isPlaceholder(value)) return null;

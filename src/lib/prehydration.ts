@@ -29,7 +29,11 @@ export const PREHYDRATION_GUARD =
 
 export type PrehydrationAction = { el: Element; type: "submit" | "click" };
 
-/** Marks the element as hydrated and replays the action queued on it before hydration. */
+/**
+ * Marks the element as hydrated and replays the action queued on it before hydration.
+ * Runs after every render (cheap), so an element that is unmounted and mounted again (the
+ * lead form after «Залишити ще одну заявку») is marked ready too.
+ */
 export function useReplayWhenHydrated(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const el = ref.current;
@@ -42,5 +46,5 @@ export function useReplayWhenHydrated(ref: RefObject<HTMLElement | null>) {
     el.removeAttribute("data-pending");
     if (action.type === "submit" && el instanceof HTMLFormElement) el.requestSubmit();
     else el.click();
-  }, [ref]);
+  });
 }

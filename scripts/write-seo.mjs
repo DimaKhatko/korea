@@ -10,7 +10,12 @@
 // robots.txt is not touched: it keeps allowing crawling, otherwise crawlers could not see
 // the noindex.
 import { writeFileSync } from "node:fs";
-import { NOINDEX_REASONS, SEARCH_INDEXABLE } from "../src/lib/korea.ts";
+import {
+  NOINDEX_REASONS,
+  SEARCH_INDEXABLE,
+  TG_CONFIRM_READY,
+  TG_CONFIRM_URL,
+} from "../src/lib/korea.ts";
 
 const SITE_URL = "https://korea.pointcamp.com.ua/";
 
@@ -63,5 +68,14 @@ if (SEARCH_INDEXABLE) {
       NOINDEX_REASONS.map((r) => `!!   - ${r}\n`).join("") +
       `!! Fix them and rebuild: indexing and the sitemap entry switch back automatically.\n` +
       `${line}\n`,
+  );
+}
+
+// The Telegram confirmation button is hidden until the Korea SendPulse flow link is set.
+if (!TG_CONFIRM_READY) {
+  console.warn(
+    `!! TELEGRAM: the success screen has no «Підтвердити в Telegram» button yet.\n` +
+      `!!   TG_CONFIRM_URL in src/lib/korea.ts is a placeholder: ${TG_CONFIRM_URL}\n` +
+      `!!   Paste the Korea flow link from SendPulse (https://t.me/PointCampAdmin_Bot?start=<flow id>).`,
   );
 }

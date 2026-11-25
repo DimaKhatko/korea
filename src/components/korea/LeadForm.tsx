@@ -27,6 +27,7 @@ const COPY = {
     name: "Вкажіть імʼя.",
     phoneEmpty: "Вкажіть номер телефону.",
     phoneInvalid: "Перевірте номер телефону, наприклад +380\u00a066\u00a0221\u00a073\u00a073.",
+    emailEmpty: "Вкажіть e-mail — надішлемо на нього підтвердження заявки.",
     email: "Перевірте e-mail, наприклад olena@gmail.com.",
     consent: "Потрібна ваша згода на обробку персональних даних.",
   },
@@ -69,7 +70,8 @@ function validateField(field: FieldName, form: HTMLFormElement): string | undefi
       if (!value) return COPY.errors.phoneEmpty;
       return isValidPhone(value) ? undefined : COPY.errors.phoneInvalid;
     case "email":
-      return !value || isValidEmail(value) ? undefined : COPY.errors.email;
+      if (!value) return COPY.errors.emailEmpty;
+      return isValidEmail(value) ? undefined : COPY.errors.email;
     case "consent":
       return data.get("consent") ? undefined : COPY.errors.consent;
   }
@@ -225,6 +227,7 @@ export function LeadForm() {
             placeholder="Олена"
             autoComplete="name"
             required
+            aria-required="true"
             onInput={() => revalidate("name")}
             {...a11y("name")}
           />
@@ -241,6 +244,7 @@ export function LeadForm() {
             inputMode="tel"
             autoComplete="tel"
             required
+            aria-required="true"
             onInput={() => revalidate("phone")}
             {...a11y("phone")}
           />
@@ -256,6 +260,8 @@ export function LeadForm() {
             placeholder="olena@gmail.com"
             inputMode="email"
             autoComplete="email"
+            required
+            aria-required="true"
             onInput={() => revalidate("email")}
             {...a11y("email")}
           />

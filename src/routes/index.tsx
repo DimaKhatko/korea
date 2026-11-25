@@ -200,6 +200,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: PAGE_TITLE },
       { name: "description", content: PAGE_DESCRIPTION },
+      // Bing Webmaster Tools site verification: keep permanently (removing it unverifies the site).
+      { name: "msvalidate.01", content: "BF4250F50D78E77F8D1A4C8F71BA2B54" },
       // Until launch: LAUNCHED = false or placeholders left (NOINDEX_REASONS in korea.ts).
       ...(SEARCH_INDEXABLE ? [] : [{ name: "robots", content: "noindex, follow" }]),
       { property: "og:type", content: "website" },

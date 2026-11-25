@@ -106,7 +106,7 @@ export const SEARCH_INDEXABLE = NOINDEX_REASONS.length === 0;
  * Korea flow link from SendPulse here. While it contains a «[…]» placeholder the button is
  * not rendered and every build prints a warning (scripts/write-seo.mjs).
  */
-export const TG_CONFIRM_URL = "https://t.me/PointCampAdmin_Bot?start=[KOREA_SENDPULSE_FLOW_ID]";
+export const TG_CONFIRM_URL = "https://t.me/PointCampAdmin_Bot?start=6b06a737726ea9f03709b84a";
 
 /** False while TG_CONFIRM_URL is still the placeholder. */
 export const TG_CONFIRM_READY = !isPlaceholder(TG_CONFIRM_URL);
